@@ -4,6 +4,13 @@ module.exports = {
   watchDirs: [
     './lib', './components'
   ],
+  js: [{
+    source: "./lib/polyfills.js",
+    target: "./assets/polyfills.js"
+  },{
+    source: "./lib/index.js",
+    target: "./assets/bundle.js"
+  }],
   sass: [
     {
       source: './lib/index.scss',

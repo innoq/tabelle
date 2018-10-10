@@ -19,6 +19,10 @@
   clip: rect(1px, 1px, 1px, 1px);
 }
 
+.hide {
+  @include visually-hidden();
+}
+
 $light-gray: #acacac;
 $gray: #535353;
 $blue: #6882cb;
