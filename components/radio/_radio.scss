@@ -1,0 +1,28 @@
+@mixin icon-before() {
+  &::before {
+    display: block;
+    content: 'x';
+    //background-image: asset-url('angle-up-solid.svg');
+    background-size: 28px 28px;
+    height: 28px;
+    width: 28px;
+  }
+}
+
+@mixin visually-hidden() { /* https://snook.ca/archives/html_and_css/hiding-content-for-accessibility */
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.asc {
+  @include visually-hidden();
+  @include icon-before();
+}
+
+.desc {
+  @include visually-hidden();
+  //@include icon-before('angle-down-solid.svg')
+}

@@ -1,0 +1,20 @@
+{
+  "name": "tabelle",
+  "version": "0.0.1",
+  "description": ":D",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm-run-all --parallel server compile-watch",
+    "compile-watch": "npm run compile -- --watch",
+    "compile": "faucet --no-fingerprint",
+    "server": "fractal start --watch"
+  },
+  "author": "joy.heron@innoq.com",
+  "license": "ISC",
+  "dependencies": {
+    "@frctl/fractal": "^1.1.7",
+    "faucet-pipeline-sass": "^1.0.0",
+    "faucet-pipeline-static": "^1.0.0",
+    "npm-run-all": "^4.1.3"
+  }
+}
