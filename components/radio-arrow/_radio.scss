@@ -1,0 +1,23 @@
+.arrow {
+  @include visually-hidden();
+}
+
+.asc {
+  @include icon-before('angle-up-solid.svg', $light-gray);
+}
+
+.desc {
+  @include icon-before('angle-down-solid.svg', $light-gray);
+}
+
+.arrow:checked + .asc::before, .arrow:checked + .desc::before {
+  background-color: $gray;
+}
+
+.asc + :checked, .desc + :checked {
+  &::before {
+    background-color: $gray;
+  }
+}
+
+

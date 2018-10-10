@@ -17,6 +17,8 @@ module.exports = {
     }
   ],
   manifest: {
-    target: './assets/manifest.json'
+    target: './assets/manifest.json',
+    key: 'short',
+    webRoot: './assets'
   }
 }
