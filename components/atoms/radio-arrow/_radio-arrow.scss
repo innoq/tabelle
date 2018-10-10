@@ -5,10 +5,16 @@
 
   &--asc {
     @include icon-before('angle-up-solid.svg', $light-gray);
+    cursor: pointer;
+    display: block;
+    width: 1rem;
   }
 
   &--desc {
     @include icon-before('angle-down-solid.svg', $light-gray);
+    cursor: pointer;
+    display: block;
+    width: 1rem;
   }
 
   &:checked + &--asc::before, &:checked + &--desc::before {
