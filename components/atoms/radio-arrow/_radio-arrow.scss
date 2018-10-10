@@ -1,0 +1,21 @@
+.tabelle-arrow {
+  & {
+    @include visually-hidden();
+  }
+
+  &--asc {
+    @include icon-before('angle-up-solid.svg', $light-gray);
+  }
+
+  &--desc {
+    @include icon-before('angle-down-solid.svg', $light-gray);
+  }
+
+  &:checked + &--asc::before, &:checked + &--desc::before {
+    background-color: $gray;
+  }
+
+  &:focus + &--asc::before, &:focus + &--desc::before {
+    background-color: $blue;
+  }
+}

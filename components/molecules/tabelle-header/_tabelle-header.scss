@@ -1,0 +1,26 @@
+.tabelle-header {
+  display: grid;
+  margin: 0.25rem;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "header arrow-asc"
+    "header arrow-desc"
+    "search search";
+
+  .header {
+    grid-area: header;
+    align-self: center;
+  }
+
+  .tabelle-arrow--asc {
+    grid-area: arrow-asc;
+  }
+
+  .tabelle-arrow--desc {
+    grid-area: arrow-desc;
+  }
+
+  input, .search-field {
+    grid-area: search;
+  }
+}

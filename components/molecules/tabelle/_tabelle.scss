@@ -1,0 +1,14 @@
+.tabelle {
+  border-spacing: 0;
+
+  &--sticky {
+    thead {
+      tr:nth-child(1) th {
+        position: sticky;
+        top: 0;
+        background-color: $background-color;
+        border-bottom: 1px solid $gray;
+      }
+    }
+  }
+}
