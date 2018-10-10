@@ -15,5 +15,8 @@ module.exports = {
       source: './lib/images',
       target: './assets/images'
     }
-  ]
+  ],
+  manifest: {
+    target: './assets/manifest.json'
+  }
 }
