@@ -68,12 +68,7 @@ class Tabelle extends HTMLElement {
     })
 
     if (this.changeUri) {
-      window.onpopstate = function(event) {
-        const state = event.state
-        if (state.tbody) {
-          this.tableBody = state.tbody
-        }
-      }
+      window.onpopstate = ev => this.restoreState(ev.state)
     }
   }
 
@@ -110,11 +105,21 @@ class Tabelle extends HTMLElement {
       }).then(({ html, uri }) => {
         let tabelle = template2dom(html, '.tabelle tbody')
         replaceNode(this.tableBody, tabelle)
-        if (this.changeUri) {
-          let state = { tbody: tabelle.innerHTML }
-          history.pushState(state, document.title, uri)
-        }
+        this.updateState(uri, tabelle)
       })
+  }
+
+  updateState(uri, tbody) {
+    if (this.changeUri) {
+      let state = { tbody: tbody.innerHTML }
+      history.pushState(state, document.title, uri)
+    }
+  }
+
+  restoreState(state) {
+    if (state.tbody) {
+      this.tableBody = state.tbody
+    }
   }
 
   get headers () {
