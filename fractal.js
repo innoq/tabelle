@@ -8,7 +8,7 @@ fractal.set('project.title', 'Tabelle Component Library');
 
 /* Tell Fractal where the components will live */
 fractal.components.set('path', __dirname + '/components');
-fractal.web.set('static.path', __dirname + '/assets');
+fractal.web.set('static.path', __dirname + '/dist');
 
 /* Tell Fractal where the documentation pages will live */
 fractal.docs.set('path', __dirname + '/docs');

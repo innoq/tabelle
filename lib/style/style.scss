@@ -1,0 +1,12 @@
+@import './base';
+
+body {
+  font-family: 'helvetica neue', helvetica, arial;
+  color: $tabelle-gray;
+}
+
+.tabelle {
+  td {
+    padding: 0 0.5rem;
+  }
+}

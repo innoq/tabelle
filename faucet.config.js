@@ -6,26 +6,26 @@ module.exports = {
   ],
   js: [{
     source: "./lib/polyfills.js",
-    target: "./assets/polyfills.js"
+    target: "./dist/polyfills.js"
   },{
     source: "./lib/index.js",
-    target: "./assets/bundle.js"
+    target: "./dist/tabelle.js"
   }],
   sass: [
     {
       source: './lib/style/style.scss',
-      target: './assets/bundle.css'
+      target: './dist/tabelle.css'
     }
   ],
   static: [
     {
       source: './lib/images',
-      target: './assets/images'
+      target: './dist/images'
     }
   ],
   manifest: {
-    target: './assets/manifest.json',
+    target: './dist/manifest.json',
     key: 'short',
-    webRoot: './assets'
+    webRoot: './dist'
   }
 }
