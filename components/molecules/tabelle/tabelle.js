@@ -15,7 +15,7 @@ function arrowLabel (id, direction) {
   return createElement('label', { for: id, class: 'tabelle-arrow--' + direction })
 }
 
-function createHeader (name, tdContent, filter) {
+function createHeader ({ name, input }, tdContent) {
   const header = createElement('span', { class: 'header' }, tdContent)
   const idUp = idGen()
   const upRadio = arrowRadio(idUp, name, 'asc')
@@ -25,10 +25,10 @@ function createHeader (name, tdContent, filter) {
   const downRadio = arrowRadio(idDown, name, 'desc')
   const downLabel = arrowLabel(idDown, 'desc')
 
-  const input = filter || createElement('input', { type: 'text', name: name, class: 'tabelle-input' })
+  const filter = input || createElement('input', { type: 'text', name: name, class: 'tabelle-input' })
 
   return createElement('div', { class: 'tabelle-header' },
-    header, upRadio, upLabel, downRadio, downLabel, input)
+    header, upRadio, upLabel, downRadio, downLabel, filter)
 }
 
 function createForm (uri) {
@@ -37,8 +37,8 @@ function createForm (uri) {
 }
 
 function extractContent (el) {
-  if (el.childElementCount) {
-    return el.children
+  if (el.childNodes.length) {
+    return el.childNodes[0]
   }
   return el.textContent
 }
@@ -61,7 +61,12 @@ class Tabelle extends HTMLElement {
       .forEach ( th => {
         const name = th.getAttribute('name')
         const headerContent = extractContent(th)
-        const newContent = createHeader(name, headerContent)
+        const properties = {
+          name: name,
+          input: th.querySelector('.tabelle-input')
+        }
+
+        const newContent = createHeader(properties, headerContent)
         replaceNode(th, createElement('th', {}, newContent))
       })
   }
