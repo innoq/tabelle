@@ -206,7 +206,7 @@ function idGen () {
 }
 
 function arrowRadio (id, name, direction) {
-  return createElement('input', { id: id, class: 'tabelle-arrow', type: 'radio', name: name + 'Sort', value: direction })
+  return createElement('input', { id: id, class: 'tabelle-arrow', type: 'radio', name: "sort", value: name + "-" + direction })
 }
 
 function arrowLabel (id, direction) {

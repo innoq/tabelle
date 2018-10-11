@@ -32,7 +32,7 @@ What Tabelle does is encapsulate your table in an HTML form and then generate a 
 
 By default, Tabelle will generate a text input field with the name specified by the `<th>` element (e.g. `foo`). This means that when you input text in the field and the form submits, a query will be generated with the query parameter `?foo={your text}`.
 
-By default, Tabelle will also generate a sort option for sorting ascending or decending in that column. This is also an input field which will have the name you specified + `Sort` (e.g. for `<th name="bar">` the name `barSort` will be generated.) This means that when you select an arrow and the form submits, a query will be generated with the query paramter `?barSort={asc or desc}`. By default, Tabelle generates the value `asc` for ascending and `desc` for decending sort order.
+By default, Tabelle will also generate a sort option for sorting ascending or decending. This is also an input field which will have the name `sort`. The value for the input will be the name of your column plus the direction (e.g. for `<th name="bar">` the inputs with values `bar-asc` and `bar-desc` will be generated.) This means that when you select an arrow and the form submits, a query will be generated with the query paramter `?sort={{name}-asc or {name}-desc}`. By default, Tabelle generates the value `asc` for ascending and `desc` for decending sort order.
 
 By default, Tabelle will autosubmit the wrapping form whenever the user inputs a filter or clicks on the arrows in order to sort the column. Tabelle will take the result from submitting the form and replace the `<tbody>` from the `<tbody>` that is retrieved from the server.
 
