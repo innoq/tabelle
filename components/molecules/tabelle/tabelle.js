@@ -1,7 +1,14 @@
 import { find, replaceNode, prependChild } from 'uitil/dom'
 import { createElement } from 'uitil/dom/create'
+import { submit } from 'uitil/dom/forms'
 
 let id = 0
+
+function template2dom (htmlString, selector) {
+  let tmp = document.createElement('template')
+  tmp.innerHTML = htmlString.trim()
+  return selector ? tmp.content.querySelector(selector) : tmp.content.firstChild
+}
 
 function idGen () {
   return 'arrowId' + id++
@@ -47,6 +54,27 @@ class Tabelle extends HTMLElement {
   connectedCallback () {
     this.createForm()
     this.transformHeaders()
+
+    // find(this, '.tabelle-arrow').forEach(el => {
+    //   console.log(el, el.form)
+    // })
+    // find(this, '.tabelle-input').forEach(el => {
+    //   console.log(el, el.form)
+    // })
+
+    this.form.addEventListener('submit', ev => {
+      ev.preventDefault()
+      this.submitForm()
+    })
+
+    if (this.changeUri) {
+      window.onpopstate = function(event) {
+        const state = event.state
+        if (state.tbody) {
+          this.tableBody = state.tbody
+        }
+      }
+    }
   }
 
   createForm () {
@@ -71,6 +99,24 @@ class Tabelle extends HTMLElement {
       })
   }
 
+  submitForm() {
+    submit(this.form)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Submit not successful')
+        }
+        return response.text()
+          .then(html => ({html: html, uri: response.url}))
+      }).then(({ html, uri }) => {
+        let tabelle = template2dom(html, '.tabelle tbody')
+        replaceNode(this.tableBody, tabelle)
+        if (this.changeUri) {
+          let state = { tbody: tabelle.innerHTML }
+          history.pushState(state, document.title, uri)
+        }
+      })
+  }
+
   get headers () {
     return find(this, 'thead th')
   }
@@ -79,8 +125,24 @@ class Tabelle extends HTMLElement {
     return this.getAttribute('search-src')
   }
 
+  get form () {
+    return this.querySelector('form')
+  }
+
   get table () {
-    return this.querySelector('table')
+    return this.querySelector('.tabelle')
+  }
+
+  get tableBody () {
+    return this.querySelector('.tabelle tbody')
+  }
+
+  set tableBody (htmlString) {
+    this.tableBody.innerHTML = htmlString
+  }
+
+  get changeUri () {
+    return this.hasAttribute('change-uri')
   }
 }
 

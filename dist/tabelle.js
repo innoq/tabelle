@@ -64,7 +64,117 @@ function createElement(tag, params, ...children) {
 	return node;
 }
 
+/* eslint-env browser */
+function httpRequest(method, uri, headers, body,
+		{ cors, strict } = {}) {
+	let options = {
+		method,
+		credentials: cors ? "include" : "same-origin"
+	};
+	if(headers) {
+		options.headers = headers;
+	}
+	if(body) {
+		options.body = body;
+	}
+
+	let res = fetch(uri, options);
+	return !strict ? res : res.then(res => {
+		if(!res.ok) {
+			throw new Error(`unexpected ${res.status} response at ${uri}`);
+		}
+		return res;
+	});
+}
+
+/* eslint-env browser */
+
+function submit(form, { headers, cors, strict } = {}) {
+	let { method } = form;
+	method = method ? method.toUpperCase() : "GET";
+	let uri = form.getAttribute("action");
+	let payload = serializeForm(form);
+
+	if(method === "GET") {
+		if(uri.indexOf("?") !== -1) {
+			throw new Error("query strings are invalid within `GET` forms' action");
+		}
+		uri = [uri, payload].join("?");
+	} else {
+		headers = headers || {};
+		headers["Content-Type"] = "application/x-www-form-urlencoded";
+		var body = payload; // eslint-disable-line no-var
+	}
+	return httpRequest(method, uri, headers, body, { cors, strict });
+}
+
+// stringify form data as `application/x-www-form-urlencoded`
+// required due to insufficient browser support for `FormData`
+// NB: only supports a subset of form fields, notably excluding buttons and file inputs
+function serializeForm(form) {
+	let selector = ["input", "textarea", "select"].
+		map(tag => `${tag}[name]:not(:disabled)`).join(", ");
+	let radios = {};
+	return find(form, selector).reduce((params, node) => {
+		let { name } = node;
+		let value;
+		switch(node.nodeName.toLowerCase()) {
+		case "textarea":
+			value = node.value;
+			break;
+		case "select":
+			value = node.multiple ?
+				find(node, "option:checked").map(opt => opt.value) :
+				node.value;
+			break;
+		case "input":
+			switch(node.type) {
+			case "file":
+				console.warn("ignoring unsupported file-input field");
+				break;
+			case "checkbox":
+				if(node.checked) {
+					value = node.value;
+				}
+				break;
+			case "radio":
+				if(!radios[name]) {
+					let field = form.
+						querySelector(`input[type=radio][name=${name}]:checked`);
+					value = field ? field.value : undefined;
+					if(value) {
+						radios[name] = true;
+					}
+				}
+				break;
+			default:
+				value = node.value;
+				break;
+			}
+			break;
+		}
+
+		if(value !== undefined) {
+			let values = value || [""];
+			if(!values.pop) {
+				values = [values];
+			}
+			values.forEach(value => {
+				let param = [name, value].map(encodeURIComponent).join("=");
+				params.push(param);
+			});
+		}
+		return params;
+	}, []).join("&");
+}
+
 let id = 0;
+
+function template2dom (htmlString, selector) {
+  let tmp = document.createElement('template');
+  tmp.innerHTML = htmlString.trim();
+  return selector ? tmp.content.querySelector(selector) : tmp.content.firstChild
+}
 
 function idGen () {
   return 'arrowId' + id++
@@ -110,6 +220,27 @@ class Tabelle extends HTMLElement {
   connectedCallback () {
     this.createForm();
     this.transformHeaders();
+
+    // find(this, '.tabelle-arrow').forEach(el => {
+    //   console.log(el, el.form)
+    // })
+    // find(this, '.tabelle-input').forEach(el => {
+    //   console.log(el, el.form)
+    // })
+
+    this.form.addEventListener('submit', ev => {
+      ev.preventDefault();
+      this.submitForm();
+    });
+
+    if (this.changeUri) {
+      window.onpopstate = function(event) {
+        const state = event.state;
+        if (state.tbody) {
+          this.tableBody = state.tbody;
+        }
+      };
+    }
   }
 
   createForm () {
@@ -134,6 +265,24 @@ class Tabelle extends HTMLElement {
       });
   }
 
+  submitForm() {
+    submit(this.form)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Submit not successful')
+        }
+        return response.text()
+          .then(html => ({html: html, uri: response.url}))
+      }).then(({ html, uri }) => {
+        let tabelle = template2dom(html, '.tabelle tbody');
+        replaceNode(this.tableBody, tabelle);
+        if (this.changeUri) {
+          let state = { tbody: tabelle.innerHTML };
+          history.pushState(state, document.title, uri);
+        }
+      });
+  }
+
   get headers () {
     return find(this, 'thead th')
   }
@@ -142,8 +291,24 @@ class Tabelle extends HTMLElement {
     return this.getAttribute('search-src')
   }
 
+  get form () {
+    return this.querySelector('form')
+  }
+
   get table () {
-    return this.querySelector('table')
+    return this.querySelector('.tabelle')
+  }
+
+  get tableBody () {
+    return this.querySelector('.tabelle tbody')
+  }
+
+  set tableBody (htmlString) {
+    this.tableBody.innerHTML = htmlString;
+  }
+
+  get changeUri () {
+    return this.hasAttribute('change-uri')
   }
 }
 
