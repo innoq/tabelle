@@ -25,7 +25,7 @@ function createHeader (name, tdContent, filter) {
   const downRadio = arrowRadio(idDown, name, 'desc')
   const downLabel = arrowLabel(idDown, 'desc')
 
-  const input = filter || createElement('input', { type: 'text', name: name + 'Search', class: 'tabelle-input' })
+  const input = filter || createElement('input', { type: 'text', name: name, class: 'tabelle-input' })
 
   return createElement('div', { class: 'tabelle-header' },
     header, upRadio, upLabel, downRadio, downLabel, input)
@@ -45,7 +45,6 @@ function extractContent (el) {
 
 class Tabelle extends HTMLElement {
   connectedCallback () {
-    console.log(this.headers)
     this.createForm()
     this.transformHeaders()
   }
