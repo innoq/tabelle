@@ -23,7 +23,7 @@ function arrowLabel (id, direction) {
   return createElement('label', { for: id, class: 'tabelle-arrow--' + direction })
 }
 
-function createHeader ({ name, input }, tdContent) {
+function createHeader ({ name, input, value }, tdContent) {
   const header = createElement('span', { class: 'header' }, tdContent)
   const idUp = idGen()
   const upRadio = arrowRadio(idUp, name, 'asc')
@@ -33,7 +33,7 @@ function createHeader ({ name, input }, tdContent) {
   const downRadio = arrowRadio(idDown, name, 'desc')
   const downLabel = arrowLabel(idDown, 'desc')
 
-  const filter = input || createElement('input', { type: 'text', name: name, class: 'tabelle-input' })
+  const filter = input || createElement('input', { type: 'text', name: name, class: 'tabelle-input', value: value || '' })
 
   return createElement('div', { class: 'tabelle-header' },
     header, upRadio, upLabel, downRadio, downLabel, filter)
@@ -53,6 +53,7 @@ function extractContent (el) {
 
 class Tabelle extends HTMLElement {
   connectedCallback () {
+    this.table.classList.add('tabelle')
     this.createForm()
     this.transformHeaders()
 
@@ -81,9 +82,11 @@ class Tabelle extends HTMLElement {
       .filter ( th => th.getAttribute('name') )
       .forEach ( th => {
         const name = th.getAttribute('name')
+        const value = th.getAttribute('value')
         const headerContent = extractContent(th)
         const properties = {
           name: name,
+          value: value,
           input: th.querySelector('.tabelle-input')
         }
 

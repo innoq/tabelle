@@ -49,6 +49,10 @@ It is also currently possible to add a select field to filter a column instead o
         </select>
     </th>
 
+When you want to set an existing filter for a column when rendering a column, you can do this by setting a value attribute in the column. Then this value will appear in the value of the filter field.
+
+    <th name="foo" value="Faa">Foo</th>
+
 # Options
 
 In `<ta-belle>` you can add the following properties to activate the following behavior
