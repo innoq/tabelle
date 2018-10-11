@@ -13,7 +13,7 @@ module.exports = {
   }],
   sass: [
     {
-      source: './lib/index.scss',
+      source: './lib/style/style.scss',
       target: './assets/bundle.css'
     }
   ],

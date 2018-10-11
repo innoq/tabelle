@@ -6,8 +6,8 @@
       tr:nth-child(1) th {
         position: sticky;
         top: 0;
-        background-color: $background-color;
-        border-bottom: 1px solid $gray;
+        background-color: $tabelle-background-color;
+        border-bottom: 1px solid $tabelle-gray;
       }
     }
   }
