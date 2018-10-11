@@ -168,6 +168,31 @@ function serializeForm(form) {
 	}, []).join("&");
 }
 
+// limits the rate of `fn` invocations
+// `delay` is the rate limit in milliseconds
+// `ctx` (optional) is the function's execution context (i.e. `this`)
+// `fn` is the respective function
+// adapted from StuffJS <https://github.com/bengillies/stuff-js>
+function debounce(delay, ctx, fn) {
+	if(fn === undefined) { // shift arguments
+		fn = ctx;
+		ctx = null;
+	}
+
+	let timer;
+	return function() {
+		let args = arguments;
+		if(timer) {
+			clearTimeout(timer);
+			timer = null;
+		}
+		timer = setTimeout(_ => {
+			fn.apply(ctx, args);
+			timer = null;
+		}, delay);
+	};
+}
+
 let id = 0;
 
 function template2dom (htmlString, selector) {
@@ -221,12 +246,9 @@ class Tabelle extends HTMLElement {
     this.createForm();
     this.transformHeaders();
 
-    // find(this, '.tabelle-arrow').forEach(el => {
-    //   console.log(el, el.form)
-    // })
-    // find(this, '.tabelle-input').forEach(el => {
-    //   console.log(el, el.form)
-    // })
+    this.arrows.forEach(el => this.submitOnChange(el));
+    this.textFilters.forEach(el => this.submitOnKeyup(el));
+    this.selectFilters.forEach(el => this.submitOnChange(el));
 
     this.form.addEventListener('submit', ev => {
       ev.preventDefault();
@@ -260,6 +282,16 @@ class Tabelle extends HTMLElement {
       });
   }
 
+  submitOnChange(input) {
+    input.addEventListener('change', () => {
+      this.submitForm();
+    });
+  }
+
+  submitOnKeyup(input) {
+    input.addEventListener('keyup', debounce(300, () => this.submitForm()));
+  }
+
   submitForm() {
     submit(this.form)
       .then(response => {
@@ -286,6 +318,18 @@ class Tabelle extends HTMLElement {
     if (state.tbody) {
       this.tableBody = state.tbody;
     }
+  }
+
+  get arrows () {
+    return find(this, '.tabelle-arrow')
+  }
+
+  get textFilters () {
+    return find(this, '[type=text].tabelle-input')
+  }
+
+  get selectFilters () {
+    return find(this, 'select.tabelle-input')
   }
 
   get headers () {

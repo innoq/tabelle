@@ -1,6 +1,7 @@
 import { find, replaceNode, prependChild } from 'uitil/dom'
 import { createElement } from 'uitil/dom/create'
 import { submit } from 'uitil/dom/forms'
+import debounce from 'uitil/debounce'
 
 let id = 0
 
@@ -55,12 +56,9 @@ class Tabelle extends HTMLElement {
     this.createForm()
     this.transformHeaders()
 
-    // find(this, '.tabelle-arrow').forEach(el => {
-    //   console.log(el, el.form)
-    // })
-    // find(this, '.tabelle-input').forEach(el => {
-    //   console.log(el, el.form)
-    // })
+    this.arrows.forEach(el => this.submitOnChange(el))
+    this.textFilters.forEach(el => this.submitOnKeyup(el))
+    this.selectFilters.forEach(el => this.submitOnChange(el))
 
     this.form.addEventListener('submit', ev => {
       ev.preventDefault()
@@ -94,6 +92,16 @@ class Tabelle extends HTMLElement {
       })
   }
 
+  submitOnChange(input) {
+    input.addEventListener('change', () => {
+      this.submitForm()
+    })
+  }
+
+  submitOnKeyup(input) {
+    input.addEventListener('keyup', debounce(300, () => this.submitForm()))
+  }
+
   submitForm() {
     submit(this.form)
       .then(response => {
@@ -120,6 +128,18 @@ class Tabelle extends HTMLElement {
     if (state.tbody) {
       this.tableBody = state.tbody
     }
+  }
+
+  get arrows () {
+    return find(this, '.tabelle-arrow')
+  }
+
+  get textFilters () {
+    return find(this, '[type=text].tabelle-input')
+  }
+
+  get selectFilters () {
+    return find(this, 'select.tabelle-input')
   }
 
   get headers () {
