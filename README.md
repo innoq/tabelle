@@ -7,6 +7,17 @@ This library uses custom elements. In order for this to work, you need to use a 
 
     npm install tabelle
 
+OR you can install tabelle from the unpkg cdn
+
+The CSS styles are available from:
+
+- https://unpkg.com/tabelle@{VERSION}dist/tabelle.css (with minimal styling for the table element)
+- https://unpkg.com/tabelle@{VERSION}/dist/tabelle-base.css (provides only base css for the structure of the components)
+
+The JavaScript is available from:
+
+- https://unpkg.com/tabelle@{VERSION}/dist/tabelle.js
+
 # How to Use Tabelle
 
 Tabelle expects that you have an HTTP Resource which renders an HTML Table. In order to activate Tabelle, we can encapsulate our HTML Table in the `<ta-belle>` custom element which contains a link to the HTTP Resource:

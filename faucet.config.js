@@ -13,6 +13,9 @@ module.exports = {
   }],
   sass: [
     {
+      source: './lib/style/base.scss',
+      target: './dist/tabelle-base.css'
+    },{
       source: './lib/style/style.scss',
       target: './dist/tabelle.css'
     }
