@@ -213,17 +213,24 @@ function arrowLabel (id, direction) {
   return createElement('label', { for: id, class: 'tabelle-arrow--' + direction })
 }
 
-function createHeader ({ name, input, value }, tdContent) {
+function createFilter(disabled, name, value, input) {
+  if (disabled) {
+    return ''
+  }
+  return input || createElement('input', { type: 'text', name: name, class: 'tabelle-input', value: value || ''}, ' ')
+}
+
+function createHeader ({ name, input, value, nosort, nofilter }, tdContent) {
   const header = createElement('span', { class: 'header' }, tdContent);
   const idUp = idGen();
-  const upRadio = arrowRadio(idUp, name, 'asc');
-  const upLabel = arrowLabel(idUp, 'asc');
+  const upRadio = nosort ? '' : arrowRadio(idUp, name, 'asc');
+  const upLabel = nosort ? '' : arrowLabel(idUp, 'asc');
 
   const idDown = idGen();
-  const downRadio = arrowRadio(idDown, name, 'desc');
-  const downLabel = arrowLabel(idDown, 'desc');
+  const downRadio = nosort ? '' : arrowRadio(idDown, name, 'desc');
+  const downLabel = nosort ? '' : arrowLabel(idDown, 'desc');
 
-  const filter = input || createElement('input', { type: 'text', name: name, class: 'tabelle-input', value: value || '' });
+  const filter = createFilter(nofilter, name, value, input);
 
   return createElement('div', { class: 'tabelle-header' },
     header, upRadio, upLabel, downRadio, downLabel, filter)
@@ -244,7 +251,9 @@ function extractContent (el) {
 class Tabelle extends HTMLElement {
   connectedCallback () {
     this.table.classList.add('tabelle');
-    this.createForm();
+    if (this.action) {
+      this.createForm();
+    }
     this.transformHeaders();
 
     this.arrows.forEach(el => this.submitOnChange(el));
@@ -277,7 +286,9 @@ class Tabelle extends HTMLElement {
         const properties = {
           name: name,
           value: value,
-          input: th.querySelector('.tabelle-input')
+          input: th.querySelector('.tabelle-input'),
+          nosort: th.hasAttribute('nosort'),
+          nofilter: th.hasAttribute('nofilter')
         };
 
         const newContent = createHeader(properties, headerContent);

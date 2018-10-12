@@ -69,9 +69,12 @@ select.tabelle-input {
 .tabelle-header {
   display: grid;
   margin: 0.25rem;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: 1rem 1rem auto;
   grid-template-columns: 1fr auto;
   grid-template-areas: "header arrow-asc" "header arrow-desc" "search search";
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
 }
 .tabelle-header .header {
   grid-area: header;
@@ -90,6 +93,9 @@ select.tabelle-input {
 
 .tabelle {
   border-spacing: 0;
+}
+.tabelle th {
+  vertical-align: top;
 }
 .tabelle--sticky thead tr:nth-child(1) th {
   position: -webkit-sticky;

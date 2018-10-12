@@ -61,6 +61,15 @@ In `<ta-belle>` you can add the following properties to activate the following b
 |----------|--------|
 |change-uri|Modifies the browser history so that by forward/back you can restore the searches that have been made|
 
+In the `<th>` headers, you can add the following properties to activate the following behavior
+
+|Property  |Behavior|
+|----------|--------|
+|name      |The name of the query parameter which is used for searching. If no `name` is specified, no filter column will be generated|
+|value     |specifies value which will be set for the generated input field|
+|nosort    |if no sorting functions should be generated for the column|
+|nofilter  |if not filtering functions are generated for the column|
+
 # Styling
 
 We have made the styling as minimal as possible in order to allow you to customize the table as much as possible!

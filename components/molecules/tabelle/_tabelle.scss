@@ -1,6 +1,10 @@
 .tabelle {
   border-spacing: 0;
 
+  th {
+    vertical-align: top;
+  }
+
   &--sticky {
     thead {
       tr:nth-child(1) th {
