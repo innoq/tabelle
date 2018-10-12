@@ -193,6 +193,8 @@ function debounce(delay, ctx, fn) {
 	};
 }
 
+/* globals customElements, HTMLElement, history */
+
 let id = 0;
 
 function template2dom (htmlString, selector) {
@@ -206,18 +208,18 @@ function idGen () {
 }
 
 function arrowRadio (id, name, direction) {
-  return createElement('input', { id: id, class: 'tabelle-arrow', type: 'radio', name: "sort", value: name + "-" + direction })
+  return createElement('input', { id: id, class: 'tabelle-arrow', type: 'radio', name: 'sort', value: name + '-' + direction })
 }
 
 function arrowLabel (id, direction) {
   return createElement('label', { for: id, class: 'tabelle-arrow--' + direction })
 }
 
-function createFilter(disabled, name, value, input) {
+function createFilter (disabled, name, value, input) {
   if (disabled) {
     return ''
   }
-  return input || createElement('input', { type: 'text', name: name, class: 'tabelle-input', value: value || ''}, ' ')
+  return input || createElement('input', { type: 'text', name: name, class: 'tabelle-input', value: value || '' }, ' ')
 }
 
 function createHeader ({ name, input, value, nosort, nofilter }, tdContent) {
@@ -278,8 +280,8 @@ class Tabelle extends HTMLElement {
 
   transformHeaders () {
     this.headers
-      .filter ( th => th.getAttribute('name') )
-      .forEach ( th => {
+      .filter(th => th.getAttribute('name'))
+      .forEach(th => {
         const name = th.getAttribute('name');
         const value = th.getAttribute('value');
         const headerContent = extractContent(th);
@@ -296,24 +298,24 @@ class Tabelle extends HTMLElement {
       });
   }
 
-  submitOnChange(input) {
+  submitOnChange (input) {
     input.addEventListener('change', () => {
       this.submitForm();
     });
   }
 
-  submitOnKeyup(input) {
+  submitOnKeyup (input) {
     input.addEventListener('keyup', debounce(300, () => this.submitForm()));
   }
 
-  submitForm() {
+  submitForm () {
     submit(this.form)
       .then(response => {
         if (!response.ok) {
           throw new Error('Submit not successful')
         }
         return response.text()
-          .then(html => ({html: html, uri: response.url}))
+          .then(html => ({ html: html, uri: response.url }))
       }).then(({ html, uri }) => {
         let tabelle = template2dom(html, '.tabelle tbody');
         replaceNode(this.tableBody, tabelle);
@@ -321,14 +323,14 @@ class Tabelle extends HTMLElement {
       });
   }
 
-  updateState(uri, tbody) {
+  updateState (uri, tbody) {
     if (this.changeUri) {
       let state = { tbody: tbody.innerHTML };
       history.pushState(state, document.title, uri);
     }
   }
 
-  restoreState(state) {
+  restoreState (state) {
     if (state.tbody) {
       this.tableBody = state.tbody;
     }

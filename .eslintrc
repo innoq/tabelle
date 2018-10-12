@@ -1,0 +1,12 @@
+root: true
+
+plugins:
+- compat
+- jsx-a11y
+
+extends:
+- plugin:jsx-a11y/strict
+- standard
+
+rules:
+    compat/compat: error
