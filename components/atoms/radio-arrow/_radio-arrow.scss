@@ -4,14 +4,14 @@
   }
 
   &--asc {
-    @include icon-before('angle-up-solid.svg', $tabelle-light-gray);
+    @include icon-before('images/angle-up-solid.svg', $tabelle-light-gray);
     cursor: pointer;
     display: block;
     width: 1rem;
   }
 
   &--desc {
-    @include icon-before('angle-down-solid.svg', $tabelle-light-gray);
+    @include icon-before('images/angle-down-solid.svg', $tabelle-light-gray);
     cursor: pointer;
     display: block;
     width: 1rem;

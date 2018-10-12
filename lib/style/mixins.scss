@@ -5,7 +5,7 @@
     background-color: $color;
     display: block;
     content: ' ';
-    mask-image: asset-url($svg-path);
+    mask-image: url($svg-path);
     mask-repeat: no-repeat;
     mask-position: center;
   }

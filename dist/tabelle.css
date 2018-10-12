@@ -30,8 +30,8 @@
   background-color: #acacac;
   display: block;
   content: " ";
-  -webkit-mask-image: url("/images/angle-up-solid.svg");
-          mask-image: url("/images/angle-up-solid.svg");
+  -webkit-mask-image: url("images/angle-up-solid.svg");
+          mask-image: url("images/angle-up-solid.svg");
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
   -webkit-mask-position: center;
@@ -48,8 +48,8 @@
   background-color: #acacac;
   display: block;
   content: " ";
-  -webkit-mask-image: url("/images/angle-down-solid.svg");
-          mask-image: url("/images/angle-down-solid.svg");
+  -webkit-mask-image: url("images/angle-down-solid.svg");
+          mask-image: url("images/angle-down-solid.svg");
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
   -webkit-mask-position: center;
