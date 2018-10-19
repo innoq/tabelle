@@ -252,6 +252,11 @@ function extractContent (el) {
 
 class Tabelle extends HTMLElement {
   connectedCallback () {
+    if (!this.id) {
+      console.error('Tabelle needs an id attribute in order to be created.');
+      return
+    }
+
     this.table.classList.add('tabelle');
     if (this.action) {
       this.createForm();
@@ -268,7 +273,8 @@ class Tabelle extends HTMLElement {
     });
 
     if (this.changeUri) {
-      window.onpopstate = ev => this.restoreState(ev.state);
+      history.replaceState({ tabelle: this.outerHTML}, document.title, window.location.href);
+      window.onpopstate = ev => this.restoreState(ev);
     }
   }
 
@@ -317,22 +323,29 @@ class Tabelle extends HTMLElement {
         return response.text()
           .then(html => ({ html: html, uri: response.url }))
       }).then(({ html, uri }) => {
-        let tabelle = template2dom(html, '.tabelle tbody');
-        replaceNode(this.tableBody, tabelle);
+        let tabelle = template2dom(html, '#' + this.id);
+
+        let newTableBody = tabelle.querySelector('.tabelle tbody');
+        if (tabelle.querySelector('.tabelle tbody') && this.tableBody) {
+          replaceNode(this.tableBody, newTableBody);
+        } else {
+          replaceNode(this, tabelle);
+        }
+
         this.updateState(uri, tabelle);
       });
   }
 
-  updateState (uri, tbody) {
+  updateState (uri, tabelle) {
     if (this.changeUri) {
-      let state = { tbody: tbody.innerHTML };
+      let state = { tabelle: tabelle.outerHTML };
       history.pushState(state, document.title, uri);
     }
   }
 
-  restoreState (state) {
-    if (state.tbody) {
-      this.tableBody = state.tbody;
+  restoreState (event) {
+    if (event.state && event.state.tabelle) {
+      this.outerHTML = event.state.tabelle;
     }
   }
 

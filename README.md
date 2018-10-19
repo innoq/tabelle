@@ -22,7 +22,7 @@ The JavaScript is available from:
 
 Tabelle expects that you have an HTTP Resource which renders an HTML Table. In order to activate Tabelle, we can encapsulate our HTML Table in the `<ta-belle>` custom element which contains a link to the HTTP Resource:
 
-    <ta-belle search-src="/components/preview/tabelle--custom-element-state">
+    <ta-belle id="tabelleId" search-src="/components/preview/tabelle--custom-element-state">
         <table class="tabelle">
             <thead>
                 <tr>
@@ -36,6 +36,8 @@ Tabelle expects that you have an HTTP Resource which renders an HTML Table. In o
             </tbody>
         </table>
     </ta-belle>
+
+The `id` attribute is required for the `ta-belle`.
 
 The contract is that the `<th>` elements receive a `name` attribute which corresponds to the query parameter which will perform filtering for this column. If you leave the `name` column away, the column will remain unchanged. 
 
@@ -63,6 +65,25 @@ It is also currently possible to add a select field to filter a column instead o
 When you want to set an existing filter for a column when rendering a column, you can do this by setting a value attribute in the column. Then this value will appear in the value of the filter field.
 
     <th name="foo" value="Faa">Foo</th>
+
+# Handling empty result sets
+
+When you have made a search query and no results are found, it may be likely that you want to add some helpful message for the user letting them know that no search results are found. We want to allow maximum flexibility and allow you to translate and style your message however you would like.
+
+To help you do this, if you return a `<ta-belle>` element from the server which does not have a `<tbody>`, the whole `<ta-belle>` element will be replaced in the DOM instead of just the `<tbody>`. Here is an example of what a response could look like:
+
+    <ta-belle id="tabelle" search-src="...">
+        <table>
+            <thead>
+                <tr>
+                    <th name="foo" value="NON-MATCHING-STRING">Foo</th>
+                    <th name="bar">Bar</th>
+                    <th name="baz">Baz</th>
+                </tr>
+            </thead>
+        </table>
+        <p>We did not find any search results for the filters you specified!</p>
+    </ta-belle>
 
 # Options
 
