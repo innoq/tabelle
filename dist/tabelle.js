@@ -281,7 +281,10 @@ class Tabelle extends HTMLElement {
       const activeName = this.getAttribute('data-active');
       const active = this.querySelector(`.tabelle-input[name="${activeName}"]`);
       if (active) {
+        const tmpVal = active.value;
         active.focus();
+        active.value = '';
+        active.value = tmpVal;
       }
     }
 
