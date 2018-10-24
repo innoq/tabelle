@@ -88,8 +88,8 @@ class Tabelle extends HTMLElement {
     this.selectFilters.forEach(el => this.submitOnChange(el))
 
     this.form.addEventListener('submit', ev => {
-      ev.preventDefault()
       this.submitForm()
+      ev.preventDefault()
     })
 
     if (this.changeUri) {
