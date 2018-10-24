@@ -89,15 +89,16 @@ function httpRequest(method, uri, headers, body,
 
 /* eslint-env browser */
 
-function submit(form, { headers, cors, strict } = {}) {
-	let { method } = form;
+function submitForm(form, { headers, cors, strict } = {}) {
+	let method = form.getAttribute("method");
 	method = method ? method.toUpperCase() : "GET";
 	let uri = form.getAttribute("action");
 	let payload = serializeForm(form);
 
 	if(method === "GET") {
 		if(uri.indexOf("?") !== -1) {
-			throw new Error("query strings are invalid within `GET` forms' action");
+			throw new Error("query strings are invalid within `GET` forms' " +
+					"`action` URI; please use hidden fields instead");
 		}
 		uri = [uri, payload].join("?");
 	} else {
@@ -105,12 +106,26 @@ function submit(form, { headers, cors, strict } = {}) {
 		headers["Content-Type"] = "application/x-www-form-urlencoded";
 		var body = payload; // eslint-disable-line no-var
 	}
-	return httpRequest(method, uri, headers, body, { cors, strict });
+
+	form.setAttribute("aria-busy", "true");
+	let reset = () => {
+		form.removeAttribute("aria-busy");
+	};
+	return httpRequest(method, uri, headers, body, { cors, strict }).
+		then(res => {
+			reset();
+			return res;
+		}).
+		catch(err => {
+			reset();
+			throw err;
+		});
 }
 
 // stringify form data as `application/x-www-form-urlencoded`
 // required due to insufficient browser support for `FormData`
-// NB: only supports a subset of form fields, notably excluding buttons and file inputs
+// NB: only supports a subset of form fields, notably excluding named buttons
+//     and file inputs
 function serializeForm(form) {
 	let selector = ["input", "textarea", "select"].
 		map(tag => `${tag}[name]:not(:disabled)`).join(", ");
@@ -130,8 +145,7 @@ function serializeForm(form) {
 		case "input":
 			switch(node.type) {
 			case "file":
-				console.warn("ignoring unsupported file-input field");
-				break;
+				throw new Error("`input[type=file]` fields are unsupported");
 			case "checkbox":
 				if(node.checked) {
 					value = node.value;
@@ -315,7 +329,7 @@ class Tabelle extends HTMLElement {
   }
 
   submitForm () {
-    submit(this.form)
+    submitForm(this.form)
       .then(response => {
         if (!response.ok) {
           throw new Error('Submit not successful')
