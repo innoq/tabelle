@@ -277,6 +277,14 @@ class Tabelle extends HTMLElement {
     }
     this.transformHeaders();
 
+    if (this.getAttribute('data-active')) {
+      const activeName = this.getAttribute('data-active');
+      const active = this.querySelector(`.tabelle-input[name="${activeName}"]`);
+      if (active) {
+        active.focus();
+      }
+    }
+
     this.arrows.forEach(el => this.submitOnChange(el));
     this.textFilters.forEach(el => this.submitOnKeyup(el));
     this.selectFilters.forEach(el => this.submitOnChange(el));
@@ -340,6 +348,12 @@ class Tabelle extends HTMLElement {
         let tabelle = template2dom(html, '#' + this.id);
 
         let newTableBody = tabelle.querySelector('.tabelle tbody');
+        const active = document.activeElement;
+        let activeName;
+        if (active && this.contains(active)) {
+          activeName = active.getAttribute('name');
+          tabelle.setAttribute('data-active', activeName);
+        }
         if (tabelle.querySelector('.tabelle tbody') && this.tableBody) {
           replaceNode(this.tableBody, newTableBody);
         } else {
