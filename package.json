@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "document-register-element": "^1.11.1",
+    "hijax-form": "^1.0.0",
     "uitil": "^2.4.2"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 /* globals customElements, HTMLElement, history */
 import { find, replaceNode, prependChild } from 'uitil/dom'
 import { createElement } from 'uitil/dom/create'
-import { submit } from 'uitil/dom/forms'
+import { submitForm as submit } from 'hijax-form/util'
 import debounce from 'uitil/debounce'
 
 let id = 0
