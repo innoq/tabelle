@@ -287,7 +287,7 @@ class Tabelle extends HTMLElement {
     });
 
     if (this.changeUri) {
-      history.replaceState({ tabelle: this.outerHTML}, document.title, window.location.href);
+      history.replaceState({ tabelle: this.outerHTML }, document.title, window.location.href);
       window.onpopstate = ev => this.restoreState(ev);
     }
   }
