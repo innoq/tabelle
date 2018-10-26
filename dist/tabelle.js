@@ -345,7 +345,7 @@ class Tabelle extends HTMLElement {
   addListeners () {
     this.form.addEventListener('change', listenFor('tabelle-input', () => this.submitForm()));
     this.form.addEventListener('change', listenFor('tabelle-arrow', () => this.submitForm()));
-    this.form.addEventListener('keyup', listenFor('tabelle-input', debounce(300, () => this.submitForm())));
+    this.form.addEventListener('keyup', debounce(300, listenFor('tabelle-input', () => this.submitForm())));
 
     this.form.addEventListener('submit', ev => {
       this.submitForm();
