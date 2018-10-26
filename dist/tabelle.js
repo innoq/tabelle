@@ -264,6 +264,43 @@ function extractContent (el) {
   return el.textContent
 }
 
+function transformHeaders (headers) {
+  headers
+    .filter(th => th.getAttribute('name'))
+    .forEach(th => {
+      const name = th.getAttribute('name');
+      const value = th.getAttribute('value');
+      const headerContent = extractContent(th);
+      const properties = {
+        name: name,
+        value: value,
+        input: th.querySelector('.tabelle-input'),
+        nosort: th.hasAttribute('nosort'),
+        nofilter: th.hasAttribute('nofilter')
+      };
+
+      const newContent = createHeader(properties, headerContent);
+      replaceNode(th, createElement('th', {}, newContent));
+    });
+}
+
+function transformTabelle (tabelle) {
+  const table = tabelle.querySelector('table');
+  if (table) {
+    table.classList.add('tabelle');
+  }
+
+  const action = tabelle.getAttribute('search-src');
+  if (action) {
+    const form = createForm(action);
+    prependChild(form, tabelle);
+    prependChild(table, form);
+  }
+
+  transformHeaders(find(tabelle, 'thead th'));
+  return tabelle
+}
+
 class Tabelle extends HTMLElement {
   connectedCallback () {
     if (!this.id) {
@@ -271,62 +308,48 @@ class Tabelle extends HTMLElement {
       return
     }
 
-    this.table.classList.add('tabelle');
-    if (this.action) {
-      this.createForm();
-    }
-    this.transformHeaders();
-
-    if (this.getAttribute('data-active')) {
-      const activeName = this.getAttribute('data-active');
-      const active = this.querySelector(`.tabelle-input[name="${activeName}"]`);
-      if (active) {
-        const tmpVal = active.value;
-        active.focus();
-        active.value = '';
-        active.value = tmpVal;
-      }
-    }
-
-    this.arrows.forEach(el => this.submitOnChange(el));
-    this.textFilters.forEach(el => this.submitOnKeyup(el));
-    this.selectFilters.forEach(el => this.submitOnChange(el));
-
-    this.form.addEventListener('submit', ev => {
-      this.submitForm();
-      ev.preventDefault();
-    });
+    transformTabelle(this);
+    this.initialize();
 
     if (this.changeUri) {
-      history.replaceState({ tabelle: this.outerHTML }, document.title, window.location.href);
+      history.replaceState({ tabelle: this.innerHTML }, document.title, window.location.href);
       window.onpopstate = ev => this.restoreState(ev);
     }
   }
 
-  createForm () {
-    const form = createForm(this.action);
-    prependChild(form, this);
-    prependChild(this.table, form);
+  initialize () {
+    this.setFocus();
+    this.addListeners();
   }
 
-  transformHeaders () {
-    this.headers
-      .filter(th => th.getAttribute('name'))
-      .forEach(th => {
-        const name = th.getAttribute('name');
-        const value = th.getAttribute('value');
-        const headerContent = extractContent(th);
-        const properties = {
-          name: name,
-          value: value,
-          input: th.querySelector('.tabelle-input'),
-          nosort: th.hasAttribute('nosort'),
-          nofilter: th.hasAttribute('nofilter')
-        };
+  setFocus () {
+    if (this.focused) {
+      const toFocus = this.querySelector(`.tabelle-input[name="${this.focused}"]`);
+      if (toFocus) {
+        const tmpVal = toFocus.value;
+        toFocus.focus();
+        toFocus.value = '';
+        toFocus.value = tmpVal;
+      }
+    }
+  }
 
-        const newContent = createHeader(properties, headerContent);
-        replaceNode(th, createElement('th', {}, newContent));
-      });
+  addListeners () {
+    this.form.addEventListener('change', ev => {
+      if (ev.target.classList.contains('tabelle-input') ||
+      ev.target.classList.contains('tabelle-arrow')) {
+        this.submitForm();
+      }
+    });
+    this.form.addEventListener('keyup', debounce(300, ev => {
+      if (ev.target.classList.contains('tabelle-input')) {
+        this.submitForm();
+      }
+    }));
+    this.form.addEventListener('submit', ev => {
+      this.submitForm();
+      ev.preventDefault();
+    });
   }
 
   submitOnChange (input) {
@@ -350,70 +373,38 @@ class Tabelle extends HTMLElement {
       }).then(({ html, uri }) => {
         let tabelle = template2dom(html, '#' + this.id);
 
-        let newTableBody = tabelle.querySelector('.tabelle tbody');
         const active = document.activeElement;
-        let activeName;
+        this.focused = null;
         if (active && this.contains(active)) {
-          activeName = active.getAttribute('name');
-          tabelle.setAttribute('data-active', activeName);
-        }
-        if (tabelle.querySelector('.tabelle tbody') && this.tableBody) {
-          replaceNode(this.tableBody, newTableBody);
-        } else {
-          replaceNode(this, tabelle);
+          this.focused = active.getAttribute('name');
         }
 
-        this.updateState(uri, tabelle);
+        const transformedTabelle = transformTabelle(tabelle);
+        const markup = transformedTabelle.innerHTML;
+
+        this.innerHTML = markup;
+        this.initialize();
+
+        this.updateState(uri, markup);
       });
   }
 
-  updateState (uri, tabelle) {
+  updateState (uri, tabelleMarkup) {
     if (this.changeUri) {
-      let state = { tabelle: tabelle.outerHTML };
+      let state = { tabelle: tabelleMarkup };
       history.pushState(state, document.title, uri);
     }
   }
 
   restoreState (event) {
     if (event.state && event.state.tabelle) {
-      this.outerHTML = event.state.tabelle;
+      this.innerHTML = event.state.tabelle;
+      this.initialize();
     }
-  }
-
-  get arrows () {
-    return find(this, '.tabelle-arrow')
-  }
-
-  get textFilters () {
-    return find(this, '[type=text].tabelle-input')
-  }
-
-  get selectFilters () {
-    return find(this, 'select.tabelle-input')
-  }
-
-  get headers () {
-    return find(this, 'thead th')
-  }
-
-  get action () {
-    return this.getAttribute('search-src')
   }
 
   get form () {
     return this.querySelector('form')
-  }
-
-  get table () {
-    return this.querySelector('.tabelle')
-  }
-
-  get tableBody () {
-    return this.querySelector('.tabelle tbody')
-  }
-
-  set tableBody (htmlString) {
-    this.tableBody.innerHTML = htmlString;
   }
 
   get changeUri () {
