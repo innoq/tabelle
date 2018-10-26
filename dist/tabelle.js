@@ -217,6 +217,14 @@ function template2dom (htmlString, selector) {
   return selector ? tmp.content.querySelector(selector) : tmp.content.firstChild
 }
 
+function addEventListener(element, eventName, className, handler) {
+  element.addEventListener(eventName, event => {
+    if (event.target.classList.contains(className)) {
+      handler(event);
+    }
+  });
+}
+
 function idGen () {
   return 'arrowId' + id++
 }
@@ -335,17 +343,10 @@ class Tabelle extends HTMLElement {
   }
 
   addListeners () {
-    this.form.addEventListener('change', ev => {
-      if (ev.target.classList.contains('tabelle-input') ||
-      ev.target.classList.contains('tabelle-arrow')) {
-        this.submitForm();
-      }
-    });
-    this.form.addEventListener('keyup', debounce(300, ev => {
-      if (ev.target.classList.contains('tabelle-input')) {
-        this.submitForm();
-      }
-    }));
+    addEventListener(this.form, 'change', 'tabelle-input', () => this.submitForm());
+    addEventListener(this.form, 'change', 'tabelle-arrow', () => this.submitForm());
+    addEventListener(this.form, 'keyup', 'tabelle-input', debounce(300, () => this.submitForm()));
+
     this.form.addEventListener('submit', ev => {
       this.submitForm();
       ev.preventDefault();
