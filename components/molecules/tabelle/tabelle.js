@@ -24,8 +24,12 @@ function idGen () {
   return 'arrowId' + id++
 }
 
-function arrowRadio (id, name, direction) {
-  return createElement('input', { id: id, class: 'tabelle-arrow', type: 'radio', name: 'sort', value: name + '-' + direction })
+function arrowRadio (id, name, direction, checked) {
+  const attrs = { id: id, class: 'tabelle-arrow', type: 'radio', name: 'sort', value: name + '-' + direction }
+  if (checked) {
+    attrs.checked = 'checked'
+  }
+  return createElement('input', attrs)
 }
 
 function arrowLabel (id, direction) {
@@ -39,14 +43,14 @@ function createFilter (disabled, name, value, input) {
   return input || createElement('input', { type: 'text', name: name, class: 'tabelle-input', value: value || '' }, ' ')
 }
 
-function createHeader ({ name, input, value, nosort, nofilter }, tdContent) {
+function createHeader ({ name, input, value, nosort, nofilter, currentSort }, tdContent) {
   const header = createElement('span', { class: 'header' }, tdContent)
   const idUp = idGen()
-  const upRadio = nosort ? '' : arrowRadio(idUp, name, 'asc')
+  const upRadio = nosort ? '' : arrowRadio(idUp, name, 'asc', currentSort === name + '-asc')
   const upLabel = nosort ? '' : arrowLabel(idUp, 'asc')
 
   const idDown = idGen()
-  const downRadio = nosort ? '' : arrowRadio(idDown, name, 'desc')
+  const downRadio = nosort ? '' : arrowRadio(idDown, name, 'desc', currentSort === name + '-desc')
   const downLabel = nosort ? '' : arrowLabel(idDown, 'desc')
 
   const filter = createFilter(nofilter, name, value, input)
@@ -67,7 +71,7 @@ function extractContent (el) {
   return el.textContent
 }
 
-function transformHeaders (headers) {
+function transformHeaders (headers, currentSort) {
   headers
     .filter(th => th.getAttribute('name'))
     .forEach(th => {
@@ -78,6 +82,7 @@ function transformHeaders (headers) {
         name: name,
         value: value,
         input: th.querySelector('.tabelle-input'),
+        currentSort: currentSort,
         nosort: th.hasAttribute('nosort'),
         nofilter: th.hasAttribute('nofilter')
       }
@@ -100,7 +105,7 @@ function transformTabelle (tabelle) {
     prependChild(table, form)
   }
 
-  transformHeaders(find(tabelle, 'thead th'))
+  transformHeaders(find(tabelle, 'thead th'), tabelle.getAttribute('sort') || '')
   return tabelle
 }
 

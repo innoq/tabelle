@@ -47,7 +47,7 @@ By default, Tabelle will generate a text input field with the name specified by 
 
 By default, Tabelle will also generate a sort option for sorting ascending or decending. This is also an input field which will have the name `sort`. The value for the input will be the name of your column plus the direction (e.g. for `<th name="bar">` the inputs with values `bar-asc` and `bar-desc` will be generated.) This means that when you select an arrow and the form submits, a query will be generated with the query paramter `?sort={{name}-asc or {name}-desc}`. By default, Tabelle generates the value `asc` for ascending and `desc` for decending sort order.
 
-By default, Tabelle will autosubmit the wrapping form whenever the user inputs a filter or clicks on the arrows in order to sort the column. Tabelle will take the result from submitting the form and replace the `<tbody>` from the `<tbody>` that is retrieved from the server.
+By default, Tabelle will autosubmit the wrapping form whenever the user inputs a filter or clicks on the arrows in order to sort the column. Tabelle will take the result from submitting the form and replace the `<ta-belle>` element with the `<ta-belle>` element with the same `id` that is retrieved from the server.
 
 **The sorting and filtering logic need to be implemented in the backend.**
 
@@ -62,15 +62,19 @@ It is also currently possible to add a select field to filter a column instead o
         </select>
     </th>
 
-When you want to set an existing filter for a column when rendering a column, you can do this by setting a value attribute in the column. Then this value will appear in the value of the filter field.
+Since Tabelle replace the entire HTML of the `<ta-belle>` element, you also need to ensure that the filters and sort direction that you sent to the server are rendered in the DOM that you return. You can set the filter when rendering a column via the `value` attribute of the `th` element.
 
     <th name="foo" value="Faa">Foo</th>
+
+To set the sort direction for a `<ta-belle>` you can set the `sort` attribute of the `ta-belle` to the `name-direction` where the `name` is the name of the column and `direction` is the direction for the sort (either `asc` or `desc`). This is also the value of the `sort` query parameter which is sent to the server whenever you change the sort direction.
+
+    <ta-belle sort="foo-asc">...</ta-belle>
 
 # Handling empty result sets
 
 When you have made a search query and no results are found, it may be likely that you want to add some helpful message for the user letting them know that no search results are found. We want to allow maximum flexibility and allow you to translate and style your message however you would like.
 
-To help you do this, if you return a `<ta-belle>` element from the server which does not have a `<tbody>`, the whole `<ta-belle>` element will be replaced in the DOM instead of just the `<tbody>`. Here is an example of what a response could look like:
+To help you do this, just add the extra information in the `<ta-belle>` component. This will then appear when `<ta-belle>` replaces the content of the `<ta-belle>` component.
 
     <ta-belle id="tabelle" search-src="...">
         <table>
@@ -84,6 +88,8 @@ To help you do this, if you return a `<ta-belle>` element from the server which 
         </table>
         <p>We did not find any search results for the filters you specified!</p>
     </ta-belle>
+
+You can also use this feature in order to embed a pagination component in your `<ta-belle>` which will be replaced after each round-trip with the server.
 
 # Options
 
@@ -99,6 +105,7 @@ In the `<th>` headers, you can add the following properties to activate the foll
 |----------|--------|
 |name      |The name of the query parameter which is used for searching. If no `name` is specified, no filter column will be generated|
 |value     |specifies value which will be set for the generated input field|
+|sort      |Value of the current sort direction. If either 'asc' or 'desc' is set, the ascending or descending arrow will be automatically selected'
 |nosort    |if no sorting functions should be generated for the column|
 |nofilter  |if not filtering functions are generated for the column|
 
