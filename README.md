@@ -39,7 +39,7 @@ Tabelle expects that you have an HTTP Resource which renders an HTML Table. In o
 
 The `id` attribute is required for the `ta-belle`.
 
-The contract is that the `<th>` elements receive a `name` attribute which corresponds to the query parameter which will perform filtering for this column. If you leave the `name` column away, the column will remain unchanged. 
+The contract is that the `<th>` elements receive a `name` attribute which corresponds to the query parameter which will perform filtering for this column. If you leave the `name` column away, the column will remain unchanged.
 
 What Tabelle does is encapsulate your table in an HTML form and then generate a different header for each column which has the input fields you need in order to perform querying against your backend.
 
