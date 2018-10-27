@@ -126,12 +126,13 @@ export default class Tabelle extends HTMLElement {
   }
 
   addListeners () {
+    let { form } = this;
     let submitForm = this.submitForm.bind(this)
-    this.form.addEventListener('change', listenFor('tabelle-input', submitForm))
-    this.form.addEventListener('change', listenFor('tabelle-arrow', submitForm))
-    this.form.addEventListener('keyup', debounce(300, listenFor('tabelle-input', submitForm)))
+    form.addEventListener('change', listenFor('tabelle-input', submitForm))
+    form.addEventListener('change', listenFor('tabelle-arrow', submitForm))
+    form.addEventListener('keyup', debounce(300, listenFor('tabelle-input', submitForm)))
 
-    this.form.addEventListener('submit', ev => {
+    form.addEventListener('submit', ev => {
       this.submitForm()
       ev.preventDefault()
     })
@@ -172,8 +173,9 @@ export default class Tabelle extends HTMLElement {
   }
 
   restoreState (event) {
-    if (event.state && event.state.tabelle) {
-      this.innerHTML = event.state.tabelle
+    let state = event.state && event.state.tabelle
+    if (state) {
+      this.innerHTML = state
       this.initialize()
     }
   }
