@@ -230,11 +230,14 @@ function idGen () {
 }
 
 function arrowRadio (id, name, direction, checked) {
-  const attrs = { id: id, class: 'tabelle-arrow', type: 'radio', name: 'sort', value: name + '-' + direction };
-  if (checked) {
-    attrs.checked = 'checked';
-  }
-  return createElement('input', attrs)
+  return createElement('input', {
+    id: id,
+    class: 'tabelle-arrow',
+    type: 'radio',
+    name: 'sort',
+    value: name + '-' + direction,
+    checked: checked ? 'checked' : false
+  })
 }
 
 function arrowLabel (id, direction) {
