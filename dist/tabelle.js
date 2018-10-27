@@ -353,24 +353,15 @@ class Tabelle extends HTMLElement {
   }
 
   addListeners () {
-    this.form.addEventListener('change', listenFor('tabelle-input', () => this.submitForm()));
-    this.form.addEventListener('change', listenFor('tabelle-arrow', () => this.submitForm()));
-    this.form.addEventListener('keyup', debounce(300, listenFor('tabelle-input', () => this.submitForm())));
+    let submitForm$$1 = this.submitForm.bind(this);
+    this.form.addEventListener('change', listenFor('tabelle-input', submitForm$$1));
+    this.form.addEventListener('change', listenFor('tabelle-arrow', submitForm$$1));
+    this.form.addEventListener('keyup', debounce(300, listenFor('tabelle-input', submitForm$$1)));
 
     this.form.addEventListener('submit', ev => {
       this.submitForm();
       ev.preventDefault();
     });
-  }
-
-  submitOnChange (input) {
-    input.addEventListener('change', () => {
-      this.submitForm();
-    });
-  }
-
-  submitOnKeyup (input) {
-    input.addEventListener('keyup', debounce(300, () => this.submitForm()));
   }
 
   submitForm () {
