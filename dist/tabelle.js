@@ -207,7 +207,7 @@ function debounce(delay, ctx, fn) {
 	};
 }
 
-/* globals customElements, HTMLElement, history */
+/* eslint-env browser */
 
 let id = 0;
 
@@ -217,7 +217,7 @@ function template2dom (htmlString, selector) {
   return selector ? tmp.content.querySelector(selector) : tmp.content.firstChild
 }
 
-function listenFor(className, thenDo) {
+function listenFor (className, thenDo) {
   return event => {
     if (event.target.classList.contains(className)) {
       thenDo(event);
