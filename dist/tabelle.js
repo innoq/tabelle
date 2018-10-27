@@ -5,6 +5,29 @@ if(typeof global === "undefined" && typeof window !== "undefined") {
 	window.global = window;
 }
 
+/* eslint-env browser */
+
+function listenFor (className, thenDo) {
+  return event => {
+    if (event.target.classList.contains(className)) {
+      thenDo(event);
+    }
+  }
+}
+
+function template2dom (htmlString, selector) {
+  let tmp = document.createElement('template');
+  tmp.innerHTML = htmlString.trim();
+  return selector ? tmp.content.querySelector(selector) : tmp.content.firstChild
+}
+
+function extractContent (el) {
+  if (el.childNodes.length) {
+    return el.childNodes[0]
+  }
+  return el.textContent
+}
+
 // NB: not necessary when using ES6 spread syntax: `[...nodes].map(…)`
 function find(node, selector) {
 	let nodes = node.querySelectorAll(selector);
@@ -211,20 +234,6 @@ function debounce(delay, ctx, fn) {
 
 let id = 0;
 
-function template2dom (htmlString, selector) {
-  let tmp = document.createElement('template');
-  tmp.innerHTML = htmlString.trim();
-  return selector ? tmp.content.querySelector(selector) : tmp.content.firstChild
-}
-
-function listenFor (className, thenDo) {
-  return event => {
-    if (event.target.classList.contains(className)) {
-      thenDo(event);
-    }
-  }
-}
-
 function idGen () {
   return 'arrowId' + id++
 }
@@ -270,13 +279,6 @@ function createHeader ({ name, input, value, nosort, nofilter, currentSort }, td
 function createForm (uri) {
   const submitButton = createElement('input', { type: 'submit', class: 'hide' });
   return createElement('form', { action: uri }, submitButton)
-}
-
-function extractContent (el) {
-  if (el.childNodes.length) {
-    return el.childNodes[0]
-  }
-  return el.textContent
 }
 
 function transformHeaders (headers, currentSort) {
@@ -420,6 +422,8 @@ class Tabelle extends HTMLElement {
     return this.hasAttribute('change-uri')
   }
 }
+
+/* eslint-env browser */
 
 customElements.define('ta-belle', Tabelle);
 

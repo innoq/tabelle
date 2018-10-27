@@ -1,24 +1,11 @@
 /* eslint-env browser */
+import { listenFor, template2dom, extractContent } from './util'
 import { find, replaceNode, prependChild } from 'uitil/dom'
 import { createElement } from 'uitil/dom/create'
 import { submitForm as submit } from 'hijax-form/util'
 import debounce from 'uitil/debounce'
 
 let id = 0
-
-function template2dom (htmlString, selector) {
-  let tmp = document.createElement('template')
-  tmp.innerHTML = htmlString.trim()
-  return selector ? tmp.content.querySelector(selector) : tmp.content.firstChild
-}
-
-function listenFor (className, thenDo) {
-  return event => {
-    if (event.target.classList.contains(className)) {
-      thenDo(event)
-    }
-  }
-}
 
 function idGen () {
   return 'arrowId' + id++
@@ -67,13 +54,6 @@ function createForm (uri) {
   return createElement('form', { action: uri }, submitButton)
 }
 
-function extractContent (el) {
-  if (el.childNodes.length) {
-    return el.childNodes[0]
-  }
-  return el.textContent
-}
-
 function transformHeaders (headers, currentSort) {
   headers
     .filter(th => th.getAttribute('name'))
@@ -112,7 +92,7 @@ function transformTabelle (tabelle) {
   return tabelle
 }
 
-class Tabelle extends HTMLElement {
+export default class Tabelle extends HTMLElement {
   connectedCallback () {
     if (!this.id) {
       console.error('Tabelle needs an id attribute in order to be created.')
@@ -215,5 +195,3 @@ class Tabelle extends HTMLElement {
     return this.hasAttribute('change-uri')
   }
 }
-
-customElements.define('ta-belle', Tabelle)
