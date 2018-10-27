@@ -2,11 +2,8 @@ root: true
 
 plugins:
 - compat
-- jsx-a11y
 
-extends:
-- plugin:jsx-a11y/strict
-- standard
+extends: standard
 
 rules:
-    compat/compat: error
+  compat/compat: error

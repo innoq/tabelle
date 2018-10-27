@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all --parallel server compile-watch",
-    "test": "eslint --cache --ext .js --ext .jsx *.js components lib --ignore-path fractal.js && echo ✓",
+    "test": "eslint --cache --ext .js *.js components lib && echo ✓",
     "compile-watch": "npm run compile -- --watch",
     "compile": "faucet --no-fingerprint",
     "server": "fractal start --watch"
@@ -23,7 +23,6 @@
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-compat": "^2.5.1",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
