@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '10'
 script:
-- npm compile
+- npm run compile
 deploy:
   provider: npm
   email: joy.heron@innoq.com
