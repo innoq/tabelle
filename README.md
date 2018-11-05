@@ -11,7 +11,7 @@ OR you can install tabelle from the unpkg cdn
 
 The CSS styles are available from:
 
-- https://unpkg.com/tabelle@{VERSION}dist/tabelle.css (with minimal styling for the table element)
+- https://unpkg.com/tabelle@{VERSION}/dist/tabelle.css (with minimal styling for the table element)
 - https://unpkg.com/tabelle@{VERSION}/dist/tabelle-base.css (provides only base css for the structure of the components)
 
 The JavaScript is available from:
