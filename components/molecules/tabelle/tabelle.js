@@ -1,5 +1,5 @@
 /* eslint-env browser */
-import { listenFor, template2dom, extractContent } from './util'
+import { listenFor, template2dom, extractContent } from '../../../lib/util'
 import { find, replaceNode, prependChild } from 'uitil/dom'
 import { createElement } from 'uitil/dom/create'
 import { submitForm as submit } from 'hijax-form/util'
@@ -126,7 +126,7 @@ export default class Tabelle extends HTMLElement {
   }
 
   addListeners () {
-    let { form } = this;
+    let { form } = this
     let submitForm = this.submitForm.bind(this)
     form.addEventListener('change', listenFor('tabelle-input', submitForm))
     form.addEventListener('change', listenFor('tabelle-arrow', submitForm))
