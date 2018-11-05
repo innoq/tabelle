@@ -1,7 +1,7 @@
 {
   "name": "tabelle",
   "version": "0.0.16",
-  "description": ":D",
+  "description": "A library for generating pretty filterable and sortable tables that use your backend of choice",
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all --parallel server compile-watch",
@@ -11,7 +11,7 @@
     "server": "fractal start --watch"
   },
   "author": "joy.heron@innoq.com",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "dependencies": {
     "document-register-element": "^1.12.0",
     "hijax-form": "^1.0.0",
