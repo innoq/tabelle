@@ -127,10 +127,9 @@ export default class Tabelle extends HTMLElement {
 
   addListeners () {
     let { form } = this
-    let submitForm = this.submitForm.bind(this)
-    form.addEventListener('change', listenFor('tabelle-input', submitForm))
-    form.addEventListener('change', listenFor('tabelle-arrow', submitForm))
-    form.addEventListener('keyup', debounce(300, listenFor('tabelle-input', submitForm)))
+    form.addEventListener('change', listenFor('tabelle-input', () => this.submitForm()))
+    form.addEventListener('change', listenFor('tabelle-arrow', () => this.submitForm()))
+    form.addEventListener('keyup', debounce(300, listenFor('tabelle-input', () => this.submitForm())))
 
     form.addEventListener('submit', ev => {
       this.submitForm()
