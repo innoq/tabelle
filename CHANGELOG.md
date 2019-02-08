@@ -13,8 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Restructured files so components are included in lib and made component hierarchy flatter
 - tabelle-input now has an `aria-label` for a11y
 - tabelle-arrow moved to tabelle-arrows
-- tabelle-arrows checked for a11y, added focus color, removed unused CSS
+- tabelle-arrows added focus color
 - tabelle-header with `role="group"` and `aria-labelledby` for a11y
+- tabelle examples in Pattern Library use component partials
 
 ### Deprecated
 - `.hide` CSS class. Use `.visually-hidden` instead.

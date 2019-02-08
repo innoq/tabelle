@@ -4,34 +4,13 @@
     <thead>
       <tr>
         <th>
-          <div class="tabelle-header">
-            <span class="header">Foo</span>
-            <input class="tabelle-arrow" id="sortFooAsc" type="radio" name="sortFoo" value="asc" />
-            <label for="sortFooAsc" class="tabelle-arrow--asc"></label>
-            <input class="tabelle-arrow" id="sortFooDesc" type="radio" name="sortFoo" value="desc" />
-            <label for="sortFooDesc" class="tabelle-arrow--desc"></label>
-            <input class="tabelle-input" name="foo" type="text" />
-          </div>
+          {{> @tabelle-header name="foo" label="Foo"}}
         </th>
         <th>
-          <div class="tabelle-header">
-            <span class="header">Bar</span>
-            <input class="tabelle-arrow" id="sortBarAsc" type="radio" name="sortBar" value="asc" />
-            <label for="sortBarAsc" class="tabelle-arrow--asc"></label>
-            <input class="tabelle-arrow" id="sortBarDesc" type="radio" name="sortBar" value="desc" />
-            <label for="sortBarDesc" class="tabelle-arrow--desc"></label>
-            <input class="tabelle-input" name="bar" type="text" />
-          </div>
+          {{> @tabelle-header name="bar" label="Bar"}}
         </th>
         <th>
-          <div class="tabelle-header">
-            <span class="header">Baz</span>
-            <input class="tabelle-arrow" id="sortBazAsc" type="radio" name="sortBaz" value="asc" />
-            <label for="sortBazAsc" class="tabelle-arrow--asc"></label>
-            <input class="tabelle-arrow" id="sortBazDesc" type="radio" name="sortBaz" value="desc" />
-            <label for="sortBazDesc" class="tabelle-arrow--desc"></label>
-            <input class="tabelle-input" name="baz" type="text" />
-          </div>
+          {{> @tabelle-header name="baz" label="Baz"}}
         </th>
       </tr>
     </thead>
