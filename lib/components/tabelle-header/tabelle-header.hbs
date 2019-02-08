@@ -1,9 +1,9 @@
-<div class="tabelle-header" style="width: 200px">
-  <span class="header">Foo</span>
-    <input class="tabelle-arrow" id="sortFooAsc" type="radio" name="column" value="asc" />
-    <label for="sortFooAsc" class="tabelle-arrow--asc"></label>
-
-    <input class="tabelle-arrow" id="sortFooDesc" type="radio" name="column" value="desc" />
-    <label for="sortFooDesc" class="tabelle-arrow--desc"></label>
-  <input class="tabelle-input" name="foo" type="text" />
+<div class="tabelle-header" role="group" aria-labelledby="{{name}}_group">
+  <span class="header" id="{{name}}_group">{{label}}</span>
+  {{> @tabelle-arrows }}
+  {{#if select}}
+    {{> @select}}
+  {{else}}
+    {{> @input}}
+  {{/if}}
 </div>

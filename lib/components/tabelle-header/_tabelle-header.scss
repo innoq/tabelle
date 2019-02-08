@@ -1,7 +1,5 @@
 .tabelle-header {
   display: grid;
-  margin: 0.25rem;
-  grid-template-rows: 1rem 1rem auto;
   grid-template-columns: 1fr auto;
   grid-template-areas: "header arrow-asc"
     "header arrow-desc"

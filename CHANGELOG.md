@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - tabelle-input now has an `aria-label` for a11y
 - tabelle-arrow moved to tabelle-arrows
 - tabelle-arrows checked for a11y, added focus color, removed unused CSS
+- tabelle-header with `role="group"` and `aria-labelledby` for a11y
 
 ### Deprecated
 - `.hide` CSS class. Use `.visually-hidden` instead.
