@@ -19,6 +19,11 @@
   clip: rect(1px, 1px, 1px, 1px);
 }
 
+// Deprecated: use .visually-hidden instead
 .hide {
+  @include visually-hidden();
+}
+
+.visually-hidden {
   @include visually-hidden();
 }
