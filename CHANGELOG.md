@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - tabelle-arrows added focus color
 - tabelle-header with `role="group"` and `aria-labelledby` for a11y
 - tabelle examples in Pattern Library use component partials
+- add improved a11y elements in custom element
 
 ### Deprecated
 - `.hide` CSS class. Use `.visually-hidden` instead.
