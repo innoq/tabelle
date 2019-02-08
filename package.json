@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "npm-run-all --parallel server compile-watch",
-    "test": "eslint --cache --ext .js *.js components lib && echo ✓",
+    "test": "eslint --cache --ext .js *.js lib && echo ✓",
     "compile-watch": "npm run compile -- --watch",
     "compile": "faucet --no-fingerprint",
     "server": "fractal start --watch"

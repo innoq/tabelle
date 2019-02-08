@@ -2,7 +2,7 @@
 
 module.exports = {
   watchDirs: [
-    './lib', './components'
+    './lib'
   ],
   js: [{
     source: './lib/polyfills.js',

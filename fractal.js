@@ -7,7 +7,7 @@ const fractal = module.exports = require('@frctl/fractal').create()
 fractal.set('project.title', 'Tabelle Component Library')
 
 /* Tell Fractal where the components will live */
-fractal.components.set('path', __dirname + '/components') // eslint-disable-line no-path-concat
+fractal.components.set('path', __dirname + '/lib/components') // eslint-disable-line no-path-concat
 fractal.web.set('static.path', __dirname + '/dist') // eslint-disable-line no-path-concat
 
 /* Tell Fractal where the documentation pages will live */

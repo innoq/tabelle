@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - CHANGELOG
 
+### Changed
+- Restructured files so components are included in lib and made component hierarchy flatter
+
 ## [0.1.17] - 2019-02-08
 ### Changed
 - Update dependencies
