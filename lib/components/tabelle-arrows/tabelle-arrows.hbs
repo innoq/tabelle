@@ -1,5 +1,9 @@
-<input class="tabelle-arrow" id="sortAsc" type="radio" name="column" value="asc" />
-<label for="sortAsc" class="tabelle-arrow--asc"></label>
+<input class="tabelle-arrow" id="{{name}}_asc" type="radio" name="sort" value="{{name}}-asc"/>
+<label class="tabelle-arrow--asc" for="{{name}}_asc">
+  <span class="visually-hidden">Sort {{label}} Ascending</span>
+</label>
 
-<input class="tabelle-arrow" id="sortDesc" type="radio" name="column" value="desc" />
-<label for="sortDesc" class="tabelle-arrow--desc"></label>
+<input class="tabelle-arrow" id="{{name}}_desc" type="radio" name="sort" value="{{name}}-desc" />
+<label class="tabelle-arrow--desc" for="{{name}}_desc">
+  <span class="visually-hidden">Sort {{label}} Descending</span>
+</label>
