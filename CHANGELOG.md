@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Restructured files so components are included in lib and made component hierarchy flatter
+- tabelle-input now has an `aria-label` for a11y
+- tabelle-arrow moved to tabelle-arrows
 
 ## [0.1.17] - 2019-02-08
 ### Changed
