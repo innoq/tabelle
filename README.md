@@ -101,6 +101,8 @@ In `<ta-belle>` you can add the following properties to activate the following b
 |Property  |Behavior|
 |----------|--------|
 |change-uri|Modifies the browser history so that by forward/back you can restore the searches that have been made|
+|sort      |Value of the current sort direction. If either 'asc' or 'desc' is set, the ascending or descending arrow will be automatically selected'
+|debounce  |Number in milliseconds to debounce before sending an input field to the server (Default 300)|
 
 In the `<th>` headers, you can add the following properties to activate the following behavior
 
@@ -108,7 +110,6 @@ In the `<th>` headers, you can add the following properties to activate the foll
 |----------|--------|
 |name      |The name of the query parameter which is used for searching. If no `name` is specified, no filter column will be generated|
 |value     |specifies value which will be set for the generated input field|
-|sort      |Value of the current sort direction. If either 'asc' or 'desc' is set, the ascending or descending arrow will be automatically selected'
 |nosort    |if no sorting functions should be generated for the column|
 |nofilter  |if not filtering functions are generated for the column|
 
