@@ -6,7 +6,9 @@ A library for generating pretty filterable and sortable tables that use your bac
 
 This library uses custom elements. In order for this to work, you need to use a browser which support it or use a polyfill.
 
-# Install
+![Animated Tabelle Example](/example.gif)
+
+## Install
 
     npm install tabelle
 
@@ -21,7 +23,7 @@ The JavaScript is available from:
 
 - https://unpkg.com/tabelle@{VERSION}/dist/tabelle.js
 
-# How to Use Tabelle
+## How to Use Tabelle
 
 Tabelle expects that you have an HTTP Resource which renders an HTML Table. In order to activate Tabelle, we can encapsulate our HTML Table in the `<ta-belle>` custom element which contains a link to the HTTP Resource:
 
@@ -73,7 +75,7 @@ To set the sort direction for a `<ta-belle>` you can set the `sort` attribute of
 
     <ta-belle sort="foo-asc">...</ta-belle>
 
-# Handling empty result sets
+## Handling empty result sets
 
 When you have made a search query and no results are found, it may be likely that you want to add some helpful message for the user letting them know that no search results are found. We want to allow maximum flexibility and allow you to translate and style your message however you would like.
 
@@ -94,7 +96,7 @@ To help you do this, just add the extra information in the `<ta-belle>` componen
 
 You can also use this feature in order to embed a pagination component in your `<ta-belle>` which will be replaced after each round-trip with the server.
 
-# Options
+## Options
 
 In `<ta-belle>` you can add the following properties to activate the following behavior
 
@@ -113,6 +115,10 @@ In the `<th>` headers, you can add the following properties to activate the foll
 |nosort    |if no sorting functions should be generated for the column|
 |nofilter  |if not filtering functions are generated for the column|
 
-# Styling
+## Styling
 
 We have made the styling as minimal as possible in order to allow you to customize the table as much as possible!
+
+## Resources
+
+* [Example Rails App](https://tabelle-rails-example.herokuapp.com/)
