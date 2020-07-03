@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- '10'
+script:
+- npm run compile
+deploy:
+  provider: npm
+  email: joy.heron@innoq.com
+  skip_cleanup: true
+  api_key:
+    secure: Nq9bRidmLTbw8OKzG8nBeMWuKuv5kCu3L620vX8gDTZnb4TBPwj4RkNqK7Pt1Q5dUeHF5dVNC36hWcpgsz0kRs3Onta6ODYuCGITOHhZCcra89n+1GDxFBukRTH5frh3LSQsBBk8a7fvmxMLWwT1QnxQ+ii5WUIEYFwL9qnvKlZaPosSd/tFDZ6W6K/wHJP8Zayf/x+vT36kk5z2nkjGw8g1eh0LNJS0QbZWXcSzvJYwZ2UJ06S/cyhKrlaEcNgS7r0xn9Qoby0okkk0yQlb1GL7x9qxrD8jt7N2/GkoQtvqRtr/BW1b0GdN/aXlk0+OMhC4mgyzWWmVS5pZzu7JNKhUO7XGMZE3JreJ7dUlE4LDacO+KuYRNAzOZG9b5h1corgUdPkO2Q8CT6D2+ZSn0xg7pUcaL6cPcw57vwmEKtZLmC1iB6fFWF5l8VCJGb6WjZt6fmLuGO46R7Z/sRGP0nX7dT4WYcgXfGCwPWGPVts+0/CaHsOZTdOI8VK/vTmHKUnDb5RHpwULR+Iooz9TKQOPEOKORd/wjN7ggwOyBCEUBGzBKzPQWQUFx9Y99U/b4z/DNd9db4dsMxFMbRM6tYjj6kYBVAaD5/34qljOO51et5+6hC7MCpNR6r1XoESODQzkLM+Vs7d4SSCzV/FWWJH+1d3aSfHvJvFrbaOGD7U=
+  on:
+    tags: true
+    repo: innoq/tabelle
