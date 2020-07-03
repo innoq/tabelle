@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 `form` attribute of the input fields. This is backwards compatible to previous
 versions because if developers have taken care to wrap the table in a form
 themselves, then this is still supported by Tabelle.
+- Added valueCache to prevent form submits when the value of the input field
+hasn't changed. This also fixes a bug with Firefox which fires events both on
+'keyup' and 'change' and deduplicates them.
 
 ## [0.1.2] - 2019-02-13
 ### Added
