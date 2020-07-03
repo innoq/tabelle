@@ -3,7 +3,13 @@
     <thead>
       <tr>
         <th name="foo">Foo</th>
-        <th name="bar">Bar</th>
+        <th name="bar">
+          Bar
+          {{#> @select name="bar" column="Bar"}}
+            <option>Boo</option>
+            <option>Boroaoroaoa</option>
+          {{/@select}}
+        </th>
         <th name="baz">Baz</th>
       </tr>
     </thead>

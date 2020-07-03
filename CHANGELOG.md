@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Tabelle generates a form next to the HTML table and connects it with the
+`form` attribute of the input fields. This is backwards compatible to previous
+versions because if developers have taken care to wrap the table in a form
+themselves, then this is still supported by Tabelle.
+
 ## [0.1.2] - 2019-02-13
 ### Added
 - Animated GIF

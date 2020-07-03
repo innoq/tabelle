@@ -46,7 +46,9 @@ The `id` attribute is required for the `ta-belle`.
 
 The contract is that the `<th>` elements receive a `name` attribute which corresponds to the query parameter which will perform filtering for this column. If you leave the `name` column away, the column will remain unchanged.
 
-What Tabelle does is encapsulate your table in an HTML form and then generate a different header for each column which has the input fields you need in order to perform querying against your backend.
+What Tabelle does is generate a form for your table in an HTML form and then generate a different header for each column which has the input fields you need in order to perform querying against your backend.
+In order to be able to handle tables which contain other form elements,
+Tabelle connects the input fields to the generated table via the `form` attribute so that it is also possible to embed other forms inside of your table.
 
 By default, Tabelle will generate a text input field with the name specified by the `<th>` element (e.g. `foo`). This means that when you input text in the field and the form submits, a query will be generated with the query parameter `?foo={your text}`.
 

@@ -1,10 +1,18 @@
 <ta-belle id="tabelle" change-uri>
-  <form action="/components/preview/tabelle--custom-element">
-    <table class="tabelle">
+  <form id="tabelle-id" action="/components/preview/tabelle--custom-element-internal-form">
+    <button class="hide" type="submit">Submit</button>
+  </form>
+  <table class="tabelle">
     <thead>
       <tr>
         <th name="foo">Foo</th>
-        <th name="bar">Bar</th>
+        <th name="bar">
+          Bar
+          {{#> @select name="bar" column="Bar"}}
+            <option>Boo</option>
+            <option>Boroaoroaoa</option>
+          {{/@select}}
+        </th>
         <th name="baz">Baz</th>
       </tr>
     </thead>
@@ -35,5 +43,4 @@
       <tr><td>9</td><td>1</td><td>2</td></tr>
     </tbody>
   </table>
-  </form>
 </ta-belle>

@@ -14,7 +14,6 @@
   "license": "Apache-2.0",
   "dependencies": {
     "document-register-element": "^1.14.3",
-    "hijax-form": "^1.1.0",
     "uitil": "^2.7.1"
   },
   "devDependencies": {
