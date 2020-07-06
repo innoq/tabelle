@@ -47,14 +47,14 @@ The `id` attribute is required for the `ta-belle`.
 The contract is that the `<th>` elements receive a `name` attribute which corresponds to the query parameter which will perform filtering for this column. If you leave the `name` column away, the column will remain unchanged.
 
 What Tabelle does is generate a form for your table in an HTML form and then generate a different header for each column which has the input fields you need in order to perform querying against your backend.
-In order to be able to handle tables which contain other form elements,
-Tabelle connects the input fields to the generated table via the `form` attribute so that it is also possible to embed other forms inside of your table.
+The HTML form for Tabelle is rendered next to your table and connected to the filter inputs in your table via the [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input#htmlattrdefform) attribute.
+This means that you can also have other HTML forms embedded inside of your HTML table if you want to.
 
 By default, Tabelle will generate a text input field with the name specified by the `<th>` element (e.g. `foo`). This means that when you input text in the field and the form submits, a query will be generated with the query parameter `?foo={your text}`.
 
 By default, Tabelle will also generate a sort option for sorting ascending or decending. This is also an input field which will have the name `sort`. The value for the input will be the name of your column plus the direction (e.g. for `<th name="bar">` the inputs with values `bar-asc` and `bar-desc` will be generated.) This means that when you select an arrow and the form submits, a query will be generated with the query paramter `?sort={{name}-asc or {name}-desc}`. By default, Tabelle generates the value `asc` for ascending and `desc` for decending sort order.
 
-By default, Tabelle will autosubmit the wrapping form whenever the user inputs a filter or clicks on the arrows in order to sort the column. Tabelle will take the result from submitting the form and replace the `<ta-belle>` element with the `<ta-belle>` element with the same `id` that is retrieved from the server.
+By default, Tabelle will autosubmit its form whenever the user inputs a filter or clicks on the arrows in order to sort the column. Tabelle will take the result from submitting the form and replace the `<ta-belle>` element with the `<ta-belle>` element with the same `id` that is retrieved from the server.
 
 **The sorting and filtering logic need to be implemented in the backend.**
 
@@ -69,7 +69,7 @@ It is also currently possible to add a select field to filter a column instead o
         </select>
     </th>
 
-Since Tabelle replace the entire HTML of the `<ta-belle>` element, you also need to ensure that the filters and sort direction that you sent to the server are rendered in the DOM that you return. You can set the filter when rendering a column via the `value` attribute of the `th` element.
+Since Tabelle replaces the entire HTML of the `<ta-belle>` element, you also need to ensure that the filters and sort direction that you sent to the server are rendered in the DOM that you return. You can set the filter when rendering a column via the `value` attribute of the `th` element.
 
     <th name="foo" value="Faa">Foo</th>
 
