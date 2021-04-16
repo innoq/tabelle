@@ -6,7 +6,7 @@ A library for generating pretty filterable and sortable tables that use your bac
 
 This library uses custom elements. In order for this to work, you need to use a browser which support it or use a polyfill.
 
-![Animated Tabelle Example](/example.gif)
+![Animated Tabelle Example](https://res.cloudinary.com/innoq-deutschland-gmbh/image/upload/v1618567226/tabelle_been0x.gif)
 
 ## Install
 
