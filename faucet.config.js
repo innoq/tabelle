@@ -20,12 +20,6 @@ module.exports = {
       target: './dist/tabelle.css'
     }
   ],
-  static: [
-    {
-      source: './lib/images',
-      target: './dist/images'
-    }
-  ],
   manifest: {
     target: './dist/manifest.json',
     key: 'short',
