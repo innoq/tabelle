@@ -7,6 +7,7 @@
 
 3. Publish
 
+    rm -rf dist/
     npm test
     npm run compile
     npm publish
