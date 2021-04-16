@@ -1,9 +1,7 @@
 root: true
 
-plugins:
-- compat
-
-extends: standard
+extends: fnd
 
 rules:
-  compat/compat: error
+    space-before-function-paren: off
+    keyword-spacing: off

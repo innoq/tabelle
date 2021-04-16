@@ -1,29 +1,29 @@
 @mixin icon-before($svg-path, $color) {
-  &::before {
-    width: 1rem;
-    height: 1rem;
-    background-color: $color;
-    display: block;
-    content: ' ';
-    mask-image: url($svg-path);
-    mask-repeat: no-repeat;
-    mask-position: center;
-  }
+	&::before {
+		width: 1rem;
+		height: 1rem;
+		background-color: $color;
+		display: block;
+		content: ' ';
+		mask-image: url($svg-path);
+		mask-repeat: no-repeat;
+		mask-position: center;
+	}
 }
 
 @mixin visually-hidden() { /* https://snook.ca/archives/html_and_css/hiding-content-for-accessibility */
-  position: absolute !important;
-  height: 1px; width: 1px;
-  overflow: hidden;
-  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-  clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px; width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
 }
 
 // Deprecated: use .visually-hidden instead
 .hide {
-  @include visually-hidden();
+	@include visually-hidden();
 }
 
 .visually-hidden {
-  @include visually-hidden();
+	@include visually-hidden();
 }

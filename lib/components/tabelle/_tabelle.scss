@@ -1,18 +1,18 @@
 .tabelle {
-  border-spacing: 0;
+	border-spacing: 0;
 
-  th {
-    vertical-align: top;
-  }
+	th {
+		vertical-align: top;
+	}
 
-  &--sticky {
-    thead {
-      tr:nth-child(1) th {
-        position: sticky;
-        top: 0;
-        background-color: $tabelle-background-color;
-        border-bottom: 1px solid $tabelle-gray;
-      }
-    }
-  }
+	&--sticky {
+		thead {
+			tr:nth-child(1) th {
+				position: sticky;
+				top: 0;
+				background-color: $tabelle-background-color;
+				border-bottom: 1px solid $tabelle-gray;
+			}
+		}
+	}
 }

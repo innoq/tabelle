@@ -5,6 +5,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Now possible to customize `.tabelle-header` via CSS Properties
+- Moved from image URLs for the icons to inline SVG data URLs
+- Restructured project internals
+
+## [0.2.2] - 2021-04-16
+### Changed
+- Updated Dependencies
+
+## [0.2.1] - 2021-01-05
+### Changed
+- Updated Dependencies
 
 ## [0.2.0] - 2020-07-03
 ### Changed
@@ -128,7 +140,9 @@ hasn't changed. This also fixes a bug with Firefox which fires events both on
 ### Added
 - Initial CSS & JavaScript for Tabelle
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/innoq/tabelle/compare/v0.2.1...v0.2.2
+[0.2.1]: https://github.com/innoq/tabelle/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/innoq/tabelle/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/innoq/tabelle/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/innoq/tabelle/compare/v0.1.0...v0.1.1

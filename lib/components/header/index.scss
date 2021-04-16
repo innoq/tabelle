@@ -1,0 +1,31 @@
+.tabelle-header {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	grid-template-rows:
+		var(--tabelle-arrow-height, 1rem)
+		var(--tabelle-arrow-height, 1rem)
+		var(--tabelle-filter-height, auto);
+	column-gap: var(--tabelle-column-gap, 0.125rem);
+	grid-template-areas:
+		"header arrow-asc"
+		"header arrow-desc"
+		"search search";
+	align-items: start;
+
+	.header {
+		grid-area: header;
+		align-self: center;
+	}
+
+	.tabelle-arrow--asc {
+		grid-area: arrow-asc;
+	}
+
+	.tabelle-arrow--desc {
+		grid-area: arrow-desc;
+	}
+
+	input, select, .tabelle-input {
+		grid-area: search;
+	}
+}
