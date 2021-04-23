@@ -10,6 +10,9 @@ module.exports = {
 	}, {
 		source: "./lib/index.js",
 		target: "./dist/tabelle.js"
+	}, {
+		source: "./lib/index-cljs.js",
+		target: "./dist/tabelle-cljs.js"
 	}],
 	sass: [
 		{
