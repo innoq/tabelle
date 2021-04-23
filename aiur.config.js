@@ -24,6 +24,10 @@ module.exports = {
 		tabelle: {
 			file: "./lib/components/tabelle/doc.md",
 			data: "./lib/components/tabelle/tabelle.data.js"
+		},
+		tabelle_cljs: {
+			file: "./lib/components/tabelle-cljs/doc.md",
+			data: "./lib/components/tabelle-cljs/tabelle-cljs.data.js"
 		}
 	},
 
@@ -32,6 +36,10 @@ module.exports = {
 			{
 				source: "./lib/index.js",
 				target: "./application.js"
+			},
+			{
+				source: "./lib/index-cljs.js",
+				target: "./application-cljs.js"
 			}
 		],
 		sass: [
