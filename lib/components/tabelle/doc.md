@@ -15,7 +15,7 @@ The HTML itself provides the contract that the Tabelle then expects.
 	<table class="tabelle">
 		<thead>
 			<tr>
-				<th>
+				<th scope="col">
 					{{#with col1}}
 						<div class="tabelle-header" role="group" aria-labelledby="{{name}}_group">
 							<span class="header" id="{{name}}_group">{{label}}</span>
@@ -37,7 +37,7 @@ The HTML itself provides the contract that the Tabelle then expects.
 						</div>
 					{{/with}}
 				</th>
-				<th>
+				<th scope="col">
 					{{#with col2}}
 						<div class="tabelle-header" role="group" aria-labelledby="{{name}}_group">
 							<span class="header" id="{{name}}_group">{{label}}</span>
@@ -59,7 +59,7 @@ The HTML itself provides the contract that the Tabelle then expects.
 						</div>
 					{{/with}}
 				</th>
-				<th>
+				<th scope="col">
 					{{#with col3}}
 						<div class="tabelle-header" role="group" aria-labelledby="{{name}}_group">
 							<span class="header" id="{{name}}_group">{{label}}</span>
