@@ -17,6 +17,17 @@ has sorted the table.
 
 [aria-sort]: https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#aria-sort
 
+You can customize the styles with the following CSS Properties.
+
+```
+--tabelle-arrow-height: ; /* Default: 1rem */
+--tabelle-arrow-color: ; /* Default: #acacac */
+--tabelle-arrow-color-checked: ; /* Default: #535353 */
+--tabelle-arrow-color-hover: ; /* Default: #6882cb */
+--tabelle-arrow-color-focus: ; /* Default: #6882cb or --tabelle-arrow-color-hover if set */
+```
+
+
 ## Sort Ascending
 
 ```handlebars

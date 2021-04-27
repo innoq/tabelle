@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - `tabelle-cljs` component for client-side filtering and sorting
+- Added custom CSS properties for customizing `.tabelle-arrow`
 
 ## [0.3.1] - 2021-04-16
 ### Changed
