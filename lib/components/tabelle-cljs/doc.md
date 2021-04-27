@@ -36,3 +36,28 @@ up client-side filtering and sorting with JavaScript!
 	</table>
 </tabelle-cljs>
 ```
+
+## When cells do not only contain text
+
+```handlebars
+<tabelle-cljs>
+	<table>
+		<thead>
+			<tr>
+				<th name="foo">Column 1</th>
+				<th name="bar">Column 2</th>
+				<th name="baz">Column 3</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each rows}}
+				<tr>
+				{{#each this}}
+					<td><a href="#">{{this}}</a></td>
+				{{/each}}
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</tabelle-cljs>
+```
