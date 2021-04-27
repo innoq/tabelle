@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.4.0] - 2021-04-27
 ### Added
 - `tabelle-cljs` component for client-side filtering and sorting
 - Added custom CSS properties for customizing `.tabelle-arrow`
@@ -149,7 +151,8 @@ hasn't changed. This also fixes a bug with Firefox which fires events both on
 ### Added
 - Initial CSS & JavaScript for Tabelle
 
-[Unreleased]: https://github.com/innoq/tabelle/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/innoq/tabelle/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/innoq/tabelle/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/innoq/tabelle/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/innoq/tabelle/compare/v0.2.2...v0.3.0
 [0.2.2]: https://github.com/innoq/tabelle/compare/v0.2.1...v0.2.2
