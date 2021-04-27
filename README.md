@@ -21,9 +21,10 @@ The CSS styles are available from:
 
 The JavaScript is available from:
 
-- https://unpkg.com/tabelle@{VERSION}/dist/tabelle.js
+- https://unpkg.com/tabelle@{VERSION}/dist/tabelle.js (for tables rendered on the server)
+- https://unpkg.com/tabelle@{VERSION}/dist/tabelle-cljs.js (for tables rendered on the client)
 
-## How to Use Tabelle
+## How to Use Tabelle with SSR
 
 Tabelle expects that you have an HTTP Resource which renders an HTML Table. In order to activate Tabelle, we can encapsulate our HTML Table in the `<ta-belle>` custom element which contains a link to the HTTP Resource:
 
@@ -77,7 +78,7 @@ To set the sort direction for a `<ta-belle>` you can set the `sort` attribute of
 
     <ta-belle sort="foo-asc">...</ta-belle>
 
-## Handling empty result sets
+### Handling empty result sets
 
 When you have made a search query and no results are found, it may be likely that you want to add some helpful message for the user letting them know that no search results are found. We want to allow maximum flexibility and allow you to translate and style your message however you would like.
 
@@ -98,15 +99,31 @@ To help you do this, just add the extra information in the `<ta-belle>` componen
 
 You can also use this feature in order to embed a pagination component in your `<ta-belle>` which will be replaced after each round-trip with the server.
 
+### How to Use Tabelle with CSR
+
+As of v0.4.0, Tabelle also offers a custom element which will do the filtering
+and sorting of tables on the client as a progressive enhancement. This custom
+element is named `<tabelle-cljs>` and has a very similar API to that of
+`<ta-belle>`. The JavaScript for this component is bundled separately because
+it is a larger bundle (ca. 54KB) and you will probably only want to add the
+JavaScript dependency if you actually have a sortable table in the HTML which
+you are serving to the client.
+
+It should be possible to use both `<ta-belle>` and `<tabelle-cljs>` in your
+application if for some of your tables you need to do sorting and filtering on
+the server and for other tables, the progressively enhanced version is
+sufficient. The CSS and HTML Markup for both is compatible, so any styling or
+customization that you do will work for both.
+
 ## Options
 
-In `<ta-belle>` you can add the following properties to activate the following behavior
+In `<ta-belle>` or `<tabelle-cljs>` you can add the following properties to activate the following behavior
 
-|Property  |Behavior|
-|----------|--------|
-|change-uri|Modifies the browser history so that by forward/back you can restore the searches that have been made|
-|sort      |Value of the current sort direction. If either 'asc' or 'desc' is set, the ascending or descending arrow will be automatically selected'
-|debounce  |Number in milliseconds to debounce before sending an input field to the server (Default 300)|
+|Property                      |Behavior|
+|------------------------------|--------|
+|change-uri (`<ta-belle>` only)|Modifies the browser history so that by forward/back you can restore the searches that have been made|
+|sort                          |Value of the current sort direction. If either 'asc' or 'desc' is set, the ascending or descending arrow will be automatically selected'
+|debounce                      |Number in milliseconds to debounce before sending an input field to the server (Default 300)|
 
 In the `<th>` headers, you can add the following properties to activate the following behavior
 

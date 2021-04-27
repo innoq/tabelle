@@ -14,6 +14,14 @@ the sorting and filtering with JavaScript?
 Turns out that we can use the same exact frontend components and hook
 up client-side filtering and sorting with JavaScript!
 
+**Note:** Internally, Tabelle uses [List.js](https://listjs.com/) to sort and
+filter the table, so Tabelle will add classes to your `tbody` and `td` elements
+at runtime in order for the sorting and filtering to work. In order to ensure
+that these classes do not clash with your own CSS classes, we prefix all
+generated classes with a `ta-`. This is an implementation detail and is subject
+to change in the future if we move over to using a different engine for
+performing the searching and filtering.
+
 ```handlebars
 <tabelle-cljs>
 	<table>
@@ -37,7 +45,10 @@ up client-side filtering and sorting with JavaScript!
 </tabelle-cljs>
 ```
 
-## When cells do not only contain text
+## Filtering cells which contain structured HTML elements
+
+When you add structured HTML elements within a table cell, Tabelle will filter
+over the `textContent` of the element of each cell.
 
 ```handlebars
 <tabelle-cljs>
@@ -54,6 +65,121 @@ up client-side filtering and sorting with JavaScript!
 				<tr>
 				{{#each this}}
 					<td><a href="#">{{this}}</a></td>
+				{{/each}}
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</tabelle-cljs>
+```
+
+## `colspan` attribute support
+
+In order for sorting and filtering to work, please make sure that
+your tables use correct _semantic_ HTML. When you use the `colspan`
+attribute for your table cells, Tabelle will match them up to the
+correct column for sorting and filtering.
+
+```handlebars
+<tabelle-cljs>
+	<table>
+		<thead>
+			<tr>
+				<th name="c1">Column 1</th>
+				<th name="c2">Column 2</th>
+				<th name="c3">Column 3</th>
+				<th name="c4">Column 4</th>
+				<th name="c5">Column 5</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr><td>Column 1</td><td colspan="2">Column 2</td><td colspan="2">Column 4</td></tr>
+			<tr><td colspan="5">Column 1</td></tr>
+			<tr><td colspan="3">Column 1</td><td colspan="2">Column 4</td></tr>
+			<tr><td>Column 1</td><td colspan="3">Column 2</td><td>Column 5</td></tr>
+		</tbody>
+	</table>
+</tabelle-cljs>
+```
+
+## Disable sorting and filtering for specific columns
+
+You can disable sorting and filtering of a column by adding the `nosort` and/or
+`nofilter` attributes to the `th` element in the header.
+
+```handlebars
+<tabelle-cljs>
+	<table>
+		<thead>
+			<tr>
+				<th name="foo">Column 1</th>
+				<th name="bar" nosort>Column 2</th>
+				<th name="baz" nofilter>Column 3</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each rows}}
+				<tr>
+				{{#each this}}
+					<td>{{this}}</td>
+				{{/each}}
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</tabelle-cljs>
+```
+
+## Specifying existing filter
+
+You can set a `value` element on an `th` header in order to activate filtering
+on a column.
+
+```handlebars
+<tabelle-cljs>
+	<table>
+		<thead>
+			<tr>
+				<th name="foo" value="e">Column 1</th>
+				<th name="bar">Column 2</th>
+				<th name="baz">Column 3</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each rows}}
+				<tr>
+				{{#each this}}
+					<td>{{this}}</td>
+				{{/each}}
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</tabelle-cljs>
+```
+
+## Specifying existing sort direction
+
+You can specify an existing sort direction with the `sort` attribute
+on the `tabelle-cljs` to the `${name}-${direction}` where the `name` is the
+name of the column and `direction` is the direction for the sort (either `asc`
+or `desc`).
+
+```handlebars
+<tabelle-cljs sort="foo-desc">
+	<table>
+		<thead>
+			<tr>
+				<th name="foo">Column 1</th>
+				<th name="bar">Column 2</th>
+				<th name="baz">Column 3</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each rows}}
+				<tr>
+				{{#each this}}
+					<td>{{this}}</td>
 				{{/each}}
 				</tr>
 			{{/each}}
