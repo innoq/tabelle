@@ -99,7 +99,7 @@ To help you do this, just add the extra information in the `<ta-belle>` componen
 
 You can also use this feature in order to embed a pagination component in your `<ta-belle>` which will be replaced after each round-trip with the server.
 
-### How to Use Tabelle with CSR
+## How to Use Tabelle with CSR
 
 As of v0.4.0, Tabelle also offers a custom element which will do the filtering
 and sorting of tables on the client as a progressive enhancement. This custom
