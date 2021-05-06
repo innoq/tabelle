@@ -14,13 +14,37 @@ the sorting and filtering with JavaScript?
 Turns out that we can use the same exact frontend components and hook
 up client-side filtering and sorting with JavaScript!
 
+```handlebars
+<tabelle-cljs>
+	<table>
+		<thead>
+			<tr>
+				<th>Column 1</th>
+				<th>Column 2</th>
+				<th>Column 3</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each rows}}
+				<tr>
+				{{#each this}}
+					<td>{{this}}</td>
+				{{/each}}
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</tabelle-cljs>
+```
+
+## Customizing filter classes
+
 **Note:** Internally, Tabelle uses [List.js](https://listjs.com/) to sort and
 filter the table, so Tabelle will add classes to your `tbody` and `td` elements
-at runtime in order for the sorting and filtering to work. In order to ensure
-that these classes do not clash with your own CSS classes, we prefix all
-generated classes with a `ta-`. This is an implementation detail and is subject
-to change in the future if we move over to using a different engine for
-performing the searching and filtering.
+at runtime in order for the sorting and filtering to work. By default, Tabelle
+will generate a unique class for each column starting with the `ta-` prefix.
+If you want to customize this class name, you can do this by setting the
+`name` Attribute on the `th` element. Then this class will be used.
 
 ```handlebars
 <tabelle-cljs>
@@ -45,6 +69,7 @@ performing the searching and filtering.
 </tabelle-cljs>
 ```
 
+
 ## Filtering cells which contain structured HTML elements
 
 When you add structured HTML elements within a table cell, Tabelle will filter
@@ -55,9 +80,9 @@ over the `textContent` of the element of each cell.
 	<table>
 		<thead>
 			<tr>
-				<th name="foo">Column 1</th>
-				<th name="bar">Column 2</th>
-				<th name="baz">Column 3</th>
+				<th>Column 1</th>
+				<th>Column 2</th>
+				<th>Column 3</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -85,11 +110,11 @@ correct column for sorting and filtering.
 	<table>
 		<thead>
 			<tr>
-				<th name="c1">Column 1</th>
-				<th name="c2">Column 2</th>
-				<th name="c3">Column 3</th>
-				<th name="c4">Column 4</th>
-				<th name="c5">Column 5</th>
+				<th>Column 1</th>
+				<th>Column 2</th>
+				<th>Column 3</th>
+				<th>Column 4</th>
+				<th>Column 5</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -112,9 +137,9 @@ You can disable sorting and filtering of a column by adding the `nosort` and/or
 	<table>
 		<thead>
 			<tr>
-				<th name="foo">Column 1</th>
-				<th name="bar" nosort>Column 2</th>
-				<th name="baz" nofilter>Column 3</th>
+				<th>Column 1</th>
+				<th nosort>Column 2</th>
+				<th nofilter>Column 3</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -140,9 +165,9 @@ on a column.
 	<table>
 		<thead>
 			<tr>
-				<th name="foo" value="e">Column 1</th>
-				<th name="bar">Column 2</th>
-				<th name="baz">Column 3</th>
+				<th value="e">Column 1</th>
+				<th>Column 2</th>
+				<th>Column 3</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -170,9 +195,9 @@ or `desc`).
 	<table>
 		<thead>
 			<tr>
-				<th name="foo">Column 1</th>
-				<th name="bar">Column 2</th>
-				<th name="baz">Column 3</th>
+				<th>Column 1</th>
+				<th>Column 2</th>
+				<th>Column 3</th>
 			</tr>
 		</thead>
 		<tbody>
