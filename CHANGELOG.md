@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Changed - 2021-05-06
+
+## [0.5.0] - 2021-05-06
+### Changed
 - made `name` optional for `th` header of `tabelle-cljs`
 - added `nofilter` attribute to `ta-belle` and `tabelle-cljs` to deactivate
   automatic generation of filter fields for the whole table
@@ -155,7 +157,8 @@ hasn't changed. This also fixes a bug with Firefox which fires events both on
 ### Added
 - Initial CSS & JavaScript for Tabelle
 
-[Unreleased]: https://github.com/innoq/tabelle/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/innoq/tabelle/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/innoq/tabelle/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/innoq/tabelle/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/innoq/tabelle/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/innoq/tabelle/compare/v0.2.2...v0.3.0
