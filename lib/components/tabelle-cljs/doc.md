@@ -212,3 +212,34 @@ or `desc`).
 	</table>
 </tabelle-cljs>
 ```
+
+### Deactivating filter-fields for a Tabelle
+
+When you set the `nofilter` attribute on a `tabelle-cljs`, no
+filter fields will be generated within the table headers. This
+is useful if you only want to implementing sorting for a table,
+or if you are implementing a separate unified search somewhere
+else on the page.
+
+```handlebars
+<tabelle-cljs nofilter>
+	<table>
+		<thead>
+			<tr>
+				<th>Column 1</th>
+				<th>Column 2</th>
+				<th>Column 3</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each rows}}
+				<tr>
+				{{#each this}}
+					<td>{{this}}</td>
+				{{/each}}
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</ta-belle>
+```

@@ -122,7 +122,8 @@ In `<ta-belle>` or `<tabelle-cljs>` you can add the following properties to acti
 |Property                      |Behavior|
 |------------------------------|--------|
 |change-uri (`<ta-belle>` only)|Modifies the browser history so that by forward/back you can restore the searches that have been made|
-|sort                          |Value of the current sort direction. If either 'asc' or 'desc' is set, the ascending or descending arrow will be automatically selected
+|sort                          |Value of the current sort direction. If either 'asc' or 'desc' is set, the ascending or descending arrow will be automatically selected|
+|nofilter                      |Deactivates automatic generation of filter fields for whole table|
 |debounce                      |Number in milliseconds to debounce before sending an input field to the server (Default 300)|
 
 In the `<th>` headers, you can add the following properties to activate the following behavior

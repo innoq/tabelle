@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed - 2021-05-06
 - made `name` optional for `th` header of `tabelle-cljs`
-
+- added `nofilter` attribute to `ta-belle` and `tabelle-cljs` to deactivate
+  automatic generation of filter fields for the whole table
 
 ## [0.4.0] - 2021-04-27
 ### Added

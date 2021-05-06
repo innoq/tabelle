@@ -434,3 +434,36 @@ table headers.
 	</table>
 </ta-belle>
 ```
+
+### Deactivating filter for a Tabelle
+
+When you set the `nofilter` attribute on a `ta-belle`, no
+filter fields will be generated within the table headers. This
+is useful if you only want to implementing sorting for a table,
+or if you are implementing a separate unified search somewhere
+else on the page.
+
+```handlebars
+<ta-belle id="tabelle" search-src="/tabelle/11.html" nofilter>
+	<table>
+		<thead>
+			<tr>
+				<th name="foo">Column 1</th>
+				<th name="bar">Column 2</th>
+				<th name="baz">Column 3</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tbody>
+				{{#each rows}}
+					<tr>
+					{{#each this}}
+						<td>{{this}}</td>
+					{{/each}}
+					</tr>
+				{{/each}}
+			</tbody>
+		</tbody>
+	</table>
+</ta-belle>
+```
