@@ -8,8 +8,8 @@
     "test": "eslint --cache --ext .js *.js lib && echo ✓",
     "compile": "faucet --no-fingerprint",
     "compile:watch": "npm run compile -- --watch",
-    "aiur": "aiur -t ./docs",
-    "aiur:watch": "aiur -t ./docs --watch --liveserve 0.0.0.0:4001"
+    "aiur": "aiur -t ./dist",
+    "aiur:watch": "aiur -t ./dist --watch --liveserve 0.0.0.0:4001"
   },
   "author": "joy.heron@innoq.com",
   "license": "Apache-2.0",
