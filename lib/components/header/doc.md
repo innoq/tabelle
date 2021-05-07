@@ -17,15 +17,18 @@ You can customize the layout with the following CSS Properties.
 ```handlebars
 <div class="tabelle-header" role="group" aria-labelledby="{{name}}_group">
 	<span class="header" id="{{name}}_group">{{label}}</span>
-	<input class="tabelle-arrow" id="{{name}}_asc" type="radio" name="sort" value="{{name}}-asc"/>
-	<label class="tabelle-arrow--asc" for="{{name}}_asc">
-		<span class="visually-hidden">Sort {{label}} Ascending</span>
-	</label>
+	<fieldset class="tabelle-arrows">
+		<legend>Sort {{label}}</legend>
+		<input class="tabelle-arrow" id="{{name}}_asc" type="radio" name="sort" value="{{name}}-asc"/>
+		<label class="tabelle-arrow--asc" for="{{name}}_asc">
+			<span class="visually-hidden">Ascending</span>
+		</label>
 
-	<input class="tabelle-arrow" id="{{name}}_desc" type="radio" name="sort" value="{{name}}-desc" />
-	<label class="tabelle-arrow--desc" for="{{name}}_desc">
-		<span class="visually-hidden">Sort {{label}} Descending</span>
-	</label>
+		<input class="tabelle-arrow" id="{{name}}_desc" type="radio" name="sort" value="{{name}}-desc" />
+		<label class="tabelle-arrow--desc" for="{{name}}_desc">
+			<span class="visually-hidden">Descending</span>
+		</label>
+	</fieldset>
 
 	<input
 		class="tabelle-input"
@@ -40,15 +43,19 @@ You can customize the layout with the following CSS Properties.
 ```handlebars
 <div class="tabelle-header" role="group" aria-labelledby="{{name}}_group">
 	<span class="header" id="{{name}}_group">{{label}}</span>
-	<input class="tabelle-arrow" id="{{name}}_asc" type="radio" name="sort" value="{{name}}-asc"/>
-	<label class="tabelle-arrow--asc" for="{{name}}_asc">
-		<span class="visually-hidden">Sort {{label}} Ascending</span>
-	</label>
 
-	<input class="tabelle-arrow" id="{{name}}_desc" type="radio" name="sort" value="{{name}}-desc" />
-	<label class="tabelle-arrow--desc" for="{{name}}_desc">
-		<span class="visually-hidden">Sort {{label}} Descending</span>
-	</label>
+	<fieldset class="tabelle-arrows">
+		<legend>Sort {{label}}</legend>
+		<input class="tabelle-arrow" id="{{name}}_asc" type="radio" name="sort" value="{{name}}-asc"/>
+		<label class="tabelle-arrow--asc" for="{{name}}_asc">
+			<span class="visually-hidden">Ascending</span>
+		</label>
+
+		<input class="tabelle-arrow" id="{{name}}_desc" type="radio" name="sort" value="{{name}}-desc" />
+		<label class="tabelle-arrow--desc" for="{{name}}_desc">
+			<span class="visually-hidden">Descending</span>
+		</label>
+	</fieldset>
 
 	<select class="tabelle-input"
 		name="{{name}}"
@@ -79,14 +86,17 @@ You can customize the layout with the following CSS Properties.
 ```handlebars
 <div class="tabelle-header" role="group" aria-labelledby="{{name}}_group">
 	<span class="header" id="{{name}}_group">{{label}}</span>
-	<input class="tabelle-arrow" id="{{name}}_asc" type="radio" name="sort" value="{{name}}-asc"/>
-	<label class="tabelle-arrow--asc" for="{{name}}_asc">
-		<span class="visually-hidden">Sort {{label}} Ascending</span>
-	</label>
+	<fieldset class="tabelle-arrows">
+		<legend>Sort {{label}}</legend>
+		<input class="tabelle-arrow" id="{{name}}_asc" type="radio" name="sort" value="{{name}}-asc"/>
+		<label class="tabelle-arrow--asc" for="{{name}}_asc">
+			<span class="visually-hidden">Ascending</span>
+		</label>
 
-	<input class="tabelle-arrow" id="{{name}}_desc" type="radio" name="sort" value="{{name}}-desc" />
-	<label class="tabelle-arrow--desc" for="{{name}}_desc">
-		<span class="visually-hidden">Sort {{label}} Descending</span>
-	</label>
+		<input class="tabelle-arrow" id="{{name}}_desc" type="radio" name="sort" value="{{name}}-desc" />
+		<label class="tabelle-arrow--desc" for="{{name}}_desc">
+			<span class="visually-hidden">Descending</span>
+		</label>
+	</fieldset>
 </div>
 ```

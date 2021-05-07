@@ -2,30 +2,34 @@
 	display: grid;
 	grid-template-columns: 1fr auto;
 	grid-template-rows:
-		var(--tabelle-arrow-height, 1rem)
-		var(--tabelle-arrow-height, 1rem)
+		var(--tabelle-header-height, 1.5em)
 		var(--tabelle-filter-height, auto);
 	column-gap: var(--tabelle-column-gap, 0.125rem);
 	grid-template-areas:
-		"header arrow-asc"
-		"header arrow-desc"
+		"header arrows"
 		"search search";
 	align-items: start;
+	position: relative;
 
 	.header {
 		grid-area: header;
 		align-self: center;
 	}
 
-	.tabelle-arrow--asc {
-		grid-area: arrow-asc;
-	}
-
-	.tabelle-arrow--desc {
-		grid-area: arrow-desc;
+	.tabelle-arrows {
+		grid-area: arrows;
+		align-self: center;
+		position: static;
 	}
 
 	input, select, .tabelle-input {
 		grid-area: search;
+	}
+
+	/* DEPRECATED: wrap arrows in .tabelle-arrows fieldset */
+	.tabelle-arrow--asc,
+	.tabelle-arrow--desc {
+		grid-area: arrows;
+		align-self: center;
 	}
 }
