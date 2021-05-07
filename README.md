@@ -142,3 +142,7 @@ We have made the styling as minimal as possible in order to allow you to customi
 ## Resources
 
 * [Example Rails App](https://tabelle-rails-example.herokuapp.com/)
+
+## Icon Attribution
+
+Tabelle uses icons which are licensed under the [Font Awesome Free License](https://fontawesome.com/license/free).

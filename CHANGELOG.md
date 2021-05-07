@@ -5,9 +5,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- modified the implementation of the `.tabelle-arrows` component. Inserting the
+  arrows directly into the DOM is now deprecated: we recommend wrapping them
+  in a `<fieldset class="tabelle-arrows>`.
+  All changes should be backwards compatible, even though the component behaves
+  a bit differently now. However, if for some reason the `.tabelle-arrow--asc`
+  or `.tabelle-arrow--desc` labels are not wrapped in a `.tabelle-header` class,
+  this could cause bugs because the new version uses absolute positioning to
+  position the `::after` element of the `.tabelle-arrow--asc` and
+  `.tabelle-arrow--desc` in over the nearest parent with `position: relative;`
+
 ### Fixed
 - Fixed focus for `tabelle-arrows` so it is retained on a `ta-belle` submit
 - Fixed `tabelle-cljs` bug when using a custom field for filtering
+
 
 ## [0.5.0] - 2021-05-06
 ### Changed
@@ -15,14 +27,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `nofilter` attribute to `ta-belle` and `tabelle-cljs` to deactivate
   automatic generation of filter fields for the whole table
 
+
 ## [0.4.0] - 2021-04-27
 ### Added
 - `tabelle-cljs` component for client-side filtering and sorting
 - Added custom CSS properties for customizing `.tabelle-arrow`
 
+
 ## [0.3.1] - 2021-04-16
 ### Changed
 - Clean-up files for deployment
+
 
 ## [0.3.0] - 2021-04-16
 ### Changed
@@ -30,13 +45,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved from image URLs for the icons to inline SVG data URLs
 - Restructured project internals
 
+
 ## [0.2.2] - 2021-04-16
 ### Changed
 - Updated Dependencies
 
+
 ## [0.2.1] - 2021-01-05
 ### Changed
 - Updated Dependencies
+
 
 ## [0.2.0] - 2020-07-03
 ### Changed
@@ -48,13 +66,16 @@ themselves, then this is still supported by Tabelle.
 hasn't changed. This also fixes a bug with Firefox which fires events both on
 'keyup' and 'change' and deduplicates them.
 
+
 ## [0.1.2] - 2019-02-13
 ### Added
 - Animated GIF
 
+
 ## [0.1.1] - 2019-02-13
 ### Added
 - Make it possible to customize the length of the debounce
+
 
 ## [0.1.0] - 2019-02-08
 ### Added
@@ -73,16 +94,19 @@ hasn't changed. This also fixes a bug with Firefox which fires events both on
 ### Deprecated
 - `.hide` CSS class. Use `.visually-hidden` instead.
 
+
 ## [0.1.17] - 2019-02-08
 ### Changed
 - Update dependencies
 - reference lib/index.js to make it easier to import
 - Update README
 
+
 ## [0.1.16] - 2018-11-05
 ### Changed
 - fix npm build command
 - replace duplicate arrow functions with one submitForm function
+
 
 ## [0.1.15] - 2018-11-05
 ### Added
@@ -95,58 +119,71 @@ hasn't changed. This also fixes a bug with Firefox which fires events both on
 - Simplify linter configuration
 - Restructure and refactor JavaScript
 
+
 ## [0.1.14] - 2018-10-26
 ### Changed
 - Added way to encode the current sort direction of the Tabelle
 - Restructured and improved JavaScript
+
 
 ## [0.1.13] - 2018-10-24
 ### Changed
 - Fixed focus to move cursor to right spot
 - Move preventDefault to end of overriding form submit
 
+
 ## [0.1.12] - 2018-10-24
 ### Changed
 - Preserve focus when replacing whole `<ta-belle>`
 - Fix linter
 
+
 ## [0.0.11] - 2018-10-24
 ### Changed
 - switched to hijax-forms for form handing
+
 
 ## [0.0.10] - 2018-10-19
 ### Changed
 - Added flexibility to display a response: replace whole `<ta-belle>` element
 - Fix pushState
 
+
 ## [0.0.9] - 2018-10-12
 ### Added
 - Linting
+
 
 ## [0.0.8] - 2018-10-12
 ### Added
 - base.css
 
+
 ## [0.0.7] - 2018-10-12
 ### Changed
 - Use relative URIs for icon images
 
+
 ## [0.0.6] - 2018-10-12
 ### Added
 - Customization options for the table sort
+
 
 ## [0.0.5] - 2018-10-11
 ### Changed
 - Consider exisiting value attribute
 - Define only one sort for table
 
+
 ## [0.0.4] - 2018-10-11
 ### Changed
 - Fixed CSS Path
 
+
 ## [0.0.3] - 2018-10-11
 ### Added
 - Documentation in README
+
 
 ## [0.0.2] - 2018-10-11
 ### Added
@@ -155,6 +192,7 @@ hasn't changed. This also fixes a bug with Firefox which fires events both on
 
 ### Changed
 - CSS Structure
+
 
 ## 0.0.1 - 2018-10-10
 ### Added

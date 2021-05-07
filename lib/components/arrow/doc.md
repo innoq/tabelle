@@ -1,5 +1,5 @@
 title: Sort Arrows
-description: Style radio buttons to look like sortable arrows
+description: Style radio buttons as a sorting component
 
 Our sort options are actually radio buttons which are styled using CSS to look
 like arrows. By default, Tabelle expects that the `name` for the sort option is
@@ -27,36 +27,64 @@ You can customize the styles with the following CSS Properties.
 --tabelle-arrow-color-focus: ; /* Default: #6882cb */
 ```
 
-
-## Sort Ascending
-
-```handlebars
-<input class="tabelle-arrow" id="{{name}}_asc" type="radio" name="sort" value="{{name}}-asc"/>
-<label class="tabelle-arrow--asc" for="{{name}}_asc">
-	<span class="visually-hidden">Sort {{label}} Ascending</span>
-</label>
-```
-
-## Sort Descending
+Wrap the radio buttons in a `fieldset` with the `.tabelle-arrows` class.
 
 ```handlebars
-<input class="tabelle-arrow" id="{{name}}_desc" type="radio" name="sort" value="{{name}}-desc" />
-<label class="tabelle-arrow--desc" for="{{name}}_desc">
-	<span class="visually-hidden">Sort {{label}} Descending</span>
-</label>
+<fieldset class="tabelle-arrows">
+	<legend>Sort {{label}}</legend>
+	<input class="tabelle-arrow" id="{{name}}_asc" type="radio" name="sort" value="{{name}}-asc"/>
+	<label class="tabelle-arrow--asc" for="{{name}}_asc">
+		<span class="visually-hidden">Ascending</span>
+	</label>
+
+	<input class="tabelle-arrow" id="{{name}}_desc" type="radio" name="sort" value="{{name}}-desc" />
+	<label class="tabelle-arrow--desc" for="{{name}}_desc">
+		<span class="visually-hidden">Descending</span>
+	</label>
+</fieldset>
 ```
 
-## Arrow that is already checked
+## Arrow that is already checked (ascending)
 
 ```handlebars
-<input class="tabelle-arrow" id="{{name}}_asc" type="radio" name="sort" value="{{name}}-asc" checked />
-<label class="tabelle-arrow--asc" for="{{name}}_asc">
-	<span class="visually-hidden">Sort {{label}} Ascending</span>
-</label>
+<fieldset class="tabelle-arrows">
+	<legend>Sort {{label}}</legend>
+	<input class="tabelle-arrow" id="{{name}}_asc" type="radio" name="sort" value="{{name}}-asc" checked />
+	<label class="tabelle-arrow--asc" for="{{name}}_asc">
+		<span class="visually-hidden">Ascending</span>
+	</label>
+
+	<input class="tabelle-arrow" id="{{name}}_desc" type="radio" name="sort" value="{{name}}-desc" />
+	<label class="tabelle-arrow--desc" for="{{name}}_desc">
+		<span class="visually-hidden">Descending</span>
+	</label>
+</fieldset>
 ```
 
+## Arrow that is already checked (descending)
 
-## Multiple Arrows -- Can only select one sort option
+```handlebars
+<fieldset class="tabelle-arrows">
+	<legend>Sort {{label}}</legend>
+	<input class="tabelle-arrow" id="{{name}}_asc" type="radio" name="sort" value="{{name}}-asc" />
+	<label class="tabelle-arrow--asc" for="{{name}}_asc">
+		<span class="visually-hidden">Ascending</span>
+	</label>
+
+	<input class="tabelle-arrow" id="{{name}}_desc" type="radio" name="sort" value="{{name}}-desc" checked />
+	<label class="tabelle-arrow--desc" for="{{name}}_desc">
+		<span class="visually-hidden">Descending</span>
+	</label>
+</fieldset>
+```
+
+## Using sort arrows without a wrapping fieldset (DEPRECATED)
+
+You can also insert the arrows directly into the DOM without wrapping
+them in a `fieldset`.
+
+This is intended mainly to maintain backwards compatiblity, because previous
+versions of Tabelle did not wrap them in a `fieldset`.
 
 ```handlebars
 <input class="tabelle-arrow" id="{{name}}_asc" type="radio" name="sort" value="{{name}}-asc"/>
