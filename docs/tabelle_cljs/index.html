@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Tabelle + Client-Side JavaScript | Tabelle</title>
+		<meta name="description" content="Combining Tabelle with client-side sorting and Filtering">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link href="/style-aiur.css" rel="stylesheet">
+	</head>
+	<body id="aiur">
+		<nav id="aiur-nav">
+			<resize-handle id="aiur-nav-resize-handle" for="aiur-nav" direction="x" remember></resize-handle>
+			<ul><li><a href="/">Tabelle</a></li><li><a href="/input/">Input Field</a></li><li><a href="/select/">Select Field</a></li><li><a href="/arrow/">Sort Arrows</a></li><li><a href="/header/">Tabelle Header</a></li><li><a href="/tabelle/">Tabelle Element</a></li><li><a href="/tabelle_cljs/">Tabelle + Client-Side JavaScript</a></li></ul>
+		</nav>
+		<main id="aiur-doc"><div class="aiur-doc-meta">tabelle_cljs</div>
+		<h1>Tabelle + Client-Side JavaScript</h1>
+		<p>Tabelle was developed from the start to work primarily with server-side
+rendered tables. This is particularly necessary when we need pagination
+of some sort (e.g. all the data I need is not already listed in our table,
+so I'm forced to do a server round trip anyway).</p>
+<p>But what about when I <em>do</em> have all the data in my table already?
+Is it worth it to do a server round trip when we could
+<a href="https://adactio.com/journal/959">progressively enhance</a> our table to do
+the sorting and filtering with JavaScript?</p>
+<p>Turns out that we can use the same exact frontend components and hook
+up client-side filtering and sorting with JavaScript!</p>
+<tabs-control role="tablist">
+	<button role="tab" aria-selected="true" aria-controls="_0-html-frame">
+		Preview
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_0-html-pre">
+		Source
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_0-html-post">
+		HTML
+	</button>
+</tabs-control>
+<component-preview preview="rendered" class="component-preview" >
+	<iframe id="_0-html-frame" class="component-preview-frame rendered" src="0.html"></iframe>
+	<pre hidden id="_0-html-pre" class="component-preview-pre-code"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tabelle-cljs</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thead</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thead</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tbody</span><span class="token punctuation">></span></span>
+			<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">#each</span> <span class="token variable">rows</span><span class="token delimiter punctuation">}}</span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">#each</span> <span class="token variable">this</span><span class="token delimiter punctuation">}}</span></span>
+					<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">this</span><span class="token delimiter punctuation">}}</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+				<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">/each</span><span class="token delimiter punctuation">}}</span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+			<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">/each</span><span class="token delimiter punctuation">}}</span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tbody</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tabelle-cljs</span><span class="token punctuation">></span></span>
+</pre>
+	<external-text hidden id="_0-html-post" class="component-preview-post-code" src="0.html" wrap="pre"></external-text>
+</component-preview>
+<h2>Customizing filter classes</h2>
+<p><strong>Note:</strong> Internally, Tabelle uses <a href="https://listjs.com/">List.js</a> to sort and
+filter the table, so Tabelle will add classes to your <code>tbody</code> and <code>td</code> elements
+at runtime in order for the sorting and filtering to work. By default, Tabelle
+will generate a unique class for each column starting with the <code>ta-</code> prefix.
+If you want to customize this class name, you can do this by setting the
+<code>name</code> Attribute on the <code>th</code> element. Then this class will be used.</p>
+<tabs-control role="tablist">
+	<button role="tab" aria-selected="true" aria-controls="_1-html-frame">
+		Preview
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_1-html-pre">
+		Source
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_1-html-post">
+		HTML
+	</button>
+</tabs-control>
+<component-preview preview="rendered" class="component-preview" >
+	<iframe id="_1-html-frame" class="component-preview-frame rendered" src="1.html"></iframe>
+	<pre hidden id="_1-html-pre" class="component-preview-pre-code"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tabelle-cljs</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thead</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>foo<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Column 1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>bar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Column 2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>baz<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Column 3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thead</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tbody</span><span class="token punctuation">></span></span>
+			<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">#each</span> <span class="token variable">rows</span><span class="token delimiter punctuation">}}</span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">#each</span> <span class="token variable">this</span><span class="token delimiter punctuation">}}</span></span>
+					<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">this</span><span class="token delimiter punctuation">}}</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+				<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">/each</span><span class="token delimiter punctuation">}}</span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+			<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">/each</span><span class="token delimiter punctuation">}}</span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tbody</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tabelle-cljs</span><span class="token punctuation">></span></span>
+</pre>
+	<external-text hidden id="_1-html-post" class="component-preview-post-code" src="1.html" wrap="pre"></external-text>
+</component-preview>
+<h2>Filtering cells which contain structured HTML elements</h2>
+<p>When you add structured HTML elements within a table cell, Tabelle will filter
+over the <code>textContent</code> of the element of each cell.</p>
+<tabs-control role="tablist">
+	<button role="tab" aria-selected="true" aria-controls="_2-html-frame">
+		Preview
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_2-html-pre">
+		Source
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_2-html-post">
+		HTML
+	</button>
+</tabs-control>
+<component-preview preview="rendered" class="component-preview" >
+	<iframe id="_2-html-frame" class="component-preview-frame rendered" src="2.html"></iframe>
+	<pre hidden id="_2-html-pre" class="component-preview-pre-code"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tabelle-cljs</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thead</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thead</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tbody</span><span class="token punctuation">></span></span>
+			<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">#each</span> <span class="token variable">rows</span><span class="token delimiter punctuation">}}</span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">#each</span> <span class="token variable">this</span><span class="token delimiter punctuation">}}</span></span>
+					<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">this</span><span class="token delimiter punctuation">}}</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+				<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">/each</span><span class="token delimiter punctuation">}}</span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+			<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">/each</span><span class="token delimiter punctuation">}}</span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tbody</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tabelle-cljs</span><span class="token punctuation">></span></span>
+</pre>
+	<external-text hidden id="_2-html-post" class="component-preview-post-code" src="2.html" wrap="pre"></external-text>
+</component-preview>
+<h2><code>colspan</code> attribute support</h2>
+<p>In order for sorting and filtering to work, please make sure that
+your tables use correct <em>semantic</em> HTML. When you use the <code>colspan</code>
+attribute for your table cells, Tabelle will match them up to the
+correct column for sorting and filtering.</p>
+<tabs-control role="tablist">
+	<button role="tab" aria-selected="true" aria-controls="_3-html-frame">
+		Preview
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_3-html-pre">
+		Source
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_3-html-post">
+		HTML
+	</button>
+</tabs-control>
+<component-preview preview="rendered" class="component-preview" >
+	<iframe id="_3-html-frame" class="component-preview-frame rendered" src="3.html"></iframe>
+	<pre hidden id="_3-html-pre" class="component-preview-pre-code"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tabelle-cljs</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thead</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 5<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thead</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tbody</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>Column 1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">colspan</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Column 2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">colspan</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Column 4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">colspan</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>5<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Column 1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">colspan</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Column 1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">colspan</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Column 4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>Column 1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">colspan</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Column 2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>Column 5<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tbody</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tabelle-cljs</span><span class="token punctuation">></span></span>
+</pre>
+	<external-text hidden id="_3-html-post" class="component-preview-post-code" src="3.html" wrap="pre"></external-text>
+</component-preview>
+<h2>Disable sorting and filtering for specific columns</h2>
+<p>You can disable sorting and filtering of a column by adding the <code>nosort</code> and/or
+<code>nofilter</code> attributes to the <code>th</code> element in the header.</p>
+<tabs-control role="tablist">
+	<button role="tab" aria-selected="true" aria-controls="_4-html-frame">
+		Preview
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_4-html-pre">
+		Source
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_4-html-post">
+		HTML
+	</button>
+</tabs-control>
+<component-preview preview="rendered" class="component-preview" >
+	<iframe id="_4-html-frame" class="component-preview-frame rendered" src="4.html"></iframe>
+	<pre hidden id="_4-html-pre" class="component-preview-pre-code"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tabelle-cljs</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thead</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">nosort</span><span class="token punctuation">></span></span>Column 2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">nofilter</span><span class="token punctuation">></span></span>Column 3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thead</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tbody</span><span class="token punctuation">></span></span>
+			<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">#each</span> <span class="token variable">rows</span><span class="token delimiter punctuation">}}</span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">#each</span> <span class="token variable">this</span><span class="token delimiter punctuation">}}</span></span>
+					<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">this</span><span class="token delimiter punctuation">}}</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+				<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">/each</span><span class="token delimiter punctuation">}}</span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+			<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">/each</span><span class="token delimiter punctuation">}}</span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tbody</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tabelle-cljs</span><span class="token punctuation">></span></span>
+</pre>
+	<external-text hidden id="_4-html-post" class="component-preview-post-code" src="4.html" wrap="pre"></external-text>
+</component-preview>
+<h2>Specifying existing filter</h2>
+<p>You can set a <code>value</code> element on an <code>th</code> header in order to activate filtering
+on a column.</p>
+<tabs-control role="tablist">
+	<button role="tab" aria-selected="true" aria-controls="_5-html-frame">
+		Preview
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_5-html-pre">
+		Source
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_5-html-post">
+		HTML
+	</button>
+</tabs-control>
+<component-preview preview="rendered" class="component-preview" >
+	<iframe id="_5-html-frame" class="component-preview-frame rendered" src="5.html"></iframe>
+	<pre hidden id="_5-html-pre" class="component-preview-pre-code"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tabelle-cljs</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thead</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>e<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Column 1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thead</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tbody</span><span class="token punctuation">></span></span>
+			<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">#each</span> <span class="token variable">rows</span><span class="token delimiter punctuation">}}</span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">#each</span> <span class="token variable">this</span><span class="token delimiter punctuation">}}</span></span>
+					<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">this</span><span class="token delimiter punctuation">}}</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+				<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">/each</span><span class="token delimiter punctuation">}}</span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+			<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">/each</span><span class="token delimiter punctuation">}}</span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tbody</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tabelle-cljs</span><span class="token punctuation">></span></span>
+</pre>
+	<external-text hidden id="_5-html-post" class="component-preview-post-code" src="5.html" wrap="pre"></external-text>
+</component-preview>
+<h2>Specifying existing sort direction</h2>
+<p>You can specify an existing sort direction with the <code>sort</code> attribute
+on the <code>tabelle-cljs</code> to the <code>${name}-${direction}</code> where the <code>name</code> is the
+name of the column and <code>direction</code> is the direction for the sort (either <code>asc</code>
+or <code>desc</code>).</p>
+<tabs-control role="tablist">
+	<button role="tab" aria-selected="true" aria-controls="_6-html-frame">
+		Preview
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_6-html-pre">
+		Source
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_6-html-post">
+		HTML
+	</button>
+</tabs-control>
+<component-preview preview="rendered" class="component-preview" >
+	<iframe id="_6-html-frame" class="component-preview-frame rendered" src="6.html"></iframe>
+	<pre hidden id="_6-html-pre" class="component-preview-pre-code"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tabelle-cljs</span> <span class="token attr-name">sort</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>foo-desc<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thead</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thead</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tbody</span><span class="token punctuation">></span></span>
+			<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">#each</span> <span class="token variable">rows</span><span class="token delimiter punctuation">}}</span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">#each</span> <span class="token variable">this</span><span class="token delimiter punctuation">}}</span></span>
+					<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">this</span><span class="token delimiter punctuation">}}</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+				<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">/each</span><span class="token delimiter punctuation">}}</span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+			<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">/each</span><span class="token delimiter punctuation">}}</span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tbody</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tabelle-cljs</span><span class="token punctuation">></span></span>
+</pre>
+	<external-text hidden id="_6-html-post" class="component-preview-post-code" src="6.html" wrap="pre"></external-text>
+</component-preview>
+<h3>Deactivating filter-fields for a Tabelle</h3>
+<p>When you set the <code>nofilter</code> attribute on a <code>tabelle-cljs</code>, no
+filter fields will be generated within the table headers. This
+is useful if you only want to implementing sorting for a table,
+or if you are implementing a separate unified search somewhere
+else on the page.</p>
+<tabs-control role="tablist">
+	<button role="tab" aria-selected="true" aria-controls="_7-html-frame">
+		Preview
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_7-html-pre">
+		Source
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_7-html-post">
+		HTML
+	</button>
+</tabs-control>
+<component-preview preview="rendered" class="component-preview" >
+	<iframe id="_7-html-frame" class="component-preview-frame rendered" src="7.html"></iframe>
+	<pre hidden id="_7-html-pre" class="component-preview-pre-code"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tabelle-cljs</span> <span class="token attr-name">nofilter</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thead</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">></span></span>Column 3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thead</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tbody</span><span class="token punctuation">></span></span>
+			<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">#each</span> <span class="token variable">rows</span><span class="token delimiter punctuation">}}</span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span>
+				<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">#each</span> <span class="token variable">this</span><span class="token delimiter punctuation">}}</span></span>
+					<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">this</span><span class="token delimiter punctuation">}}</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span>
+				<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">/each</span><span class="token delimiter punctuation">}}</span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+			<span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token block keyword">/each</span><span class="token delimiter punctuation">}}</span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tbody</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ta-belle</span><span class="token punctuation">></span></span>
+</pre>
+	<external-text hidden id="_7-html-post" class="component-preview-post-code" src="7.html" wrap="pre"></external-text>
+</component-preview>
+		</main>
+		<script src="/script-aiur.js"></script>
+	</body>
+</html>

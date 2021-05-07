@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Sort Arrows | Tabelle</title>
+		<meta name="description" content="Style radio buttons to look like sortable arrows">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link href="/style-aiur.css" rel="stylesheet">
+	</head>
+	<body id="aiur">
+		<nav id="aiur-nav">
+			<resize-handle id="aiur-nav-resize-handle" for="aiur-nav" direction="x" remember></resize-handle>
+			<ul><li><a href="/">Tabelle</a></li><li><a href="/input/">Input Field</a></li><li><a href="/select/">Select Field</a></li><li><a href="/arrow/">Sort Arrows</a></li><li><a href="/header/">Tabelle Header</a></li><li><a href="/tabelle/">Tabelle Element</a></li><li><a href="/tabelle_cljs/">Tabelle + Client-Side JavaScript</a></li></ul>
+		</nav>
+		<main id="aiur-doc"><div class="aiur-doc-meta">arrow</div>
+		<h1>Sort Arrows</h1>
+		<p>Our sort options are actually radio buttons which are styled using CSS to look
+like arrows. By default, Tabelle expects that the <code>name</code> for the sort option is
+<code>sort</code> for all sort options which occur in the table. This is inline with the
+<a href="https://www.w3.org/TR/2017/REC-wai-aria-1.1-20171214/#aria-sort">recommendation for the <code>aria-sort</code></a> attribute for table headers,
+that authors should only apply <code>aria-sort</code> to one header at a time.</p>
+<p>Because browsers take care of selecting only one radio button with the same
+<code>name</code> at any given time, the browser takes care that only one column is sorted.
+The server should expect that an HTTP Request with the query parameter
+<code>?sort=</code> and the values <code>{{name}}-asc</code> or <code>{{name}}-desc</code> to be sent to the
+server whenever the user selects one of the sort arrows. The server is then
+expected to perform the sort and return HTML content with a new table that
+has sorted the table.</p>
+<p>You can customize the styles with the following CSS Properties.</p>
+<pre><code>--tabelle-arrow-height: ; /* Default: 1rem */
+--tabelle-arrow-color: ; /* Default: #acacac */
+--tabelle-arrow-color-checked: ; /* Default: #535353 */
+--tabelle-arrow-color-hover: ; /* Default: #6882cb */
+--tabelle-arrow-color-focus: ; /* Default: #6882cb or --tabelle-arrow-color-hover if set */
+</code></pre>
+<h2>Sort Ascending</h2>
+<tabs-control role="tablist">
+	<button role="tab" aria-selected="true" aria-controls="_0-html-frame">
+		Preview
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_0-html-pre">
+		Source
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_0-html-post">
+		HTML
+	</button>
+</tabs-control>
+<component-preview preview="rendered" class="component-preview" >
+	<iframe id="_0-html-frame" class="component-preview-frame rendered" src="0.html"></iframe>
+	<pre hidden id="_0-html-pre" class="component-preview-pre-code"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tabelle-arrow<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>_asc<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>radio<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sort<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>-asc<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tabelle-arrow--asc<span class="token punctuation">"</span></span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>_asc<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>visually-hidden<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Sort <span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">label</span><span class="token delimiter punctuation">}}</span></span> Ascending<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+</pre>
+	<external-text hidden id="_0-html-post" class="component-preview-post-code" src="0.html" wrap="pre"></external-text>
+</component-preview>
+<h2>Sort Descending</h2>
+<tabs-control role="tablist">
+	<button role="tab" aria-selected="true" aria-controls="_1-html-frame">
+		Preview
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_1-html-pre">
+		Source
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_1-html-post">
+		HTML
+	</button>
+</tabs-control>
+<component-preview preview="rendered" class="component-preview" >
+	<iframe id="_1-html-frame" class="component-preview-frame rendered" src="1.html"></iframe>
+	<pre hidden id="_1-html-pre" class="component-preview-pre-code"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tabelle-arrow<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>_desc<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>radio<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sort<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>-desc<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tabelle-arrow--desc<span class="token punctuation">"</span></span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>_desc<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>visually-hidden<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Sort <span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">label</span><span class="token delimiter punctuation">}}</span></span> Descending<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+</pre>
+	<external-text hidden id="_1-html-post" class="component-preview-post-code" src="1.html" wrap="pre"></external-text>
+</component-preview>
+<h2>Arrow that is already checked</h2>
+<tabs-control role="tablist">
+	<button role="tab" aria-selected="true" aria-controls="_2-html-frame">
+		Preview
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_2-html-pre">
+		Source
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_2-html-post">
+		HTML
+	</button>
+</tabs-control>
+<component-preview preview="rendered" class="component-preview" >
+	<iframe id="_2-html-frame" class="component-preview-frame rendered" src="2.html"></iframe>
+	<pre hidden id="_2-html-pre" class="component-preview-pre-code"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tabelle-arrow<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>_asc<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>radio<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sort<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>-asc<span class="token punctuation">"</span></span> <span class="token attr-name">checked</span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tabelle-arrow--asc<span class="token punctuation">"</span></span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>_asc<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>visually-hidden<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Sort <span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">label</span><span class="token delimiter punctuation">}}</span></span> Ascending<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+</pre>
+	<external-text hidden id="_2-html-post" class="component-preview-post-code" src="2.html" wrap="pre"></external-text>
+</component-preview>
+<h2>Multiple Arrows -- Can only select one sort option</h2>
+<tabs-control role="tablist">
+	<button role="tab" aria-selected="true" aria-controls="_3-html-frame">
+		Preview
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_3-html-pre">
+		Source
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_3-html-post">
+		HTML
+	</button>
+</tabs-control>
+<component-preview preview="rendered" class="component-preview" >
+	<iframe id="_3-html-frame" class="component-preview-frame rendered" src="3.html"></iframe>
+	<pre hidden id="_3-html-pre" class="component-preview-pre-code"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tabelle-arrow<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>_asc<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>radio<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sort<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>-asc<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tabelle-arrow--asc<span class="token punctuation">"</span></span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>_asc<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>visually-hidden<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Sort <span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">label</span><span class="token delimiter punctuation">}}</span></span> Ascending<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tabelle-arrow<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>_desc<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>radio<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sort<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>-desc<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tabelle-arrow--desc<span class="token punctuation">"</span></span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span>_desc<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>visually-hidden<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Sort <span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">label</span><span class="token delimiter punctuation">}}</span></span> Descending<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+</pre>
+	<external-text hidden id="_3-html-post" class="component-preview-post-code" src="3.html" wrap="pre"></external-text>
+</component-preview>
+		</main>
+		<script src="/script-aiur.js"></script>
+	</body>
+</html>

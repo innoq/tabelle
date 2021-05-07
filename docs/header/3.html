@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="/snippet/application.css">
+</head>
+<body>
+<div class="tabelle-header" role="group" aria-labelledby="column_group">
+	<span class="header" id="column_group">Column A</span>
+	<input class="tabelle-arrow" id="column_asc" type="radio" name="sort" value="column-asc"/>
+	<label class="tabelle-arrow--asc" for="column_asc">
+		<span class="visually-hidden">Sort Column A Ascending</span>
+	</label>
+
+	<input class="tabelle-arrow" id="column_desc" type="radio" name="sort" value="column-desc" />
+	<label class="tabelle-arrow--desc" for="column_desc">
+		<span class="visually-hidden">Sort Column A Descending</span>
+	</label>
+</div>
+
+<script src="/snippet/application-cljs.js"></script>
+<script src="/snippet/application.js"></script>
+</body>
+</html>

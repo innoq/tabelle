@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Input Field | Tabelle</title>
+		<meta name="description" content="Use default input fields to filter a column">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link href="/style-aiur.css" rel="stylesheet">
+	</head>
+	<body id="aiur">
+		<nav id="aiur-nav">
+			<resize-handle id="aiur-nav-resize-handle" for="aiur-nav" direction="x" remember></resize-handle>
+			<ul><li><a href="/">Tabelle</a></li><li><a href="/input/">Input Field</a></li><li><a href="/select/">Select Field</a></li><li><a href="/arrow/">Sort Arrows</a></li><li><a href="/header/">Tabelle Header</a></li><li><a href="/tabelle/">Tabelle Element</a></li><li><a href="/tabelle_cljs/">Tabelle + Client-Side JavaScript</a></li></ul>
+		</nav>
+		<main id="aiur-doc"><div class="aiur-doc-meta">input</div>
+		<h1>Input Field</h1>
+		<p>For this type of filter field we really use the default input with no styling
+so it is as easy as possible for you to style the input fields yourself.</p>
+<p>The only requirement for the component is that you set the <code>.tabelle-input</code>
+class (if you want to use the styling for the header layout).</p>
+<p>Also: <strong>remember to set an <code>aria-label</code> for your input field!!</strong>
+Otherwise, there will not be any context for screenreader users to let them
+know what the input field does.</p>
+<p>By default, you should <em>always</em> set the <code>name</code> and <code>label</code> for the input
+field.</p>
+<tabs-control role="tablist">
+	<button role="tab" aria-selected="true" aria-controls="_0-html-frame">
+		Preview
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_0-html-pre">
+		Source
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_0-html-post">
+		HTML
+	</button>
+</tabs-control>
+<component-preview preview="rendered" class="component-preview" >
+	<iframe id="_0-html-frame" class="component-preview-frame rendered" src="0.html"></iframe>
+	<pre hidden id="_0-html-pre" class="component-preview-pre-code"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span>
+	<span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tabelle-input<span class="token punctuation">"</span></span>
+	<span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span><span class="token punctuation">"</span></span>
+	<span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span>
+	<span class="token attr-name">aria-label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Filter <span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">label</span><span class="token delimiter punctuation">}}</span></span><span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+</pre>
+	<external-text hidden id="_0-html-post" class="component-preview-post-code" src="0.html" wrap="pre"></external-text>
+</component-preview>
+<p>You can optionally set the value field for the input field.</p>
+<tabs-control role="tablist">
+	<button role="tab" aria-selected="true" aria-controls="_1-html-frame">
+		Preview
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_1-html-pre">
+		Source
+	</button>
+	<button role="tab" aria-selected="false" aria-controls="_1-html-post">
+		HTML
+	</button>
+</tabs-control>
+<component-preview preview="rendered" class="component-preview" >
+	<iframe id="_1-html-frame" class="component-preview-frame rendered" src="1.html"></iframe>
+	<pre hidden id="_1-html-pre" class="component-preview-pre-code"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span>
+	<span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tabelle-input<span class="token punctuation">"</span></span>
+	<span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">name</span><span class="token delimiter punctuation">}}</span></span><span class="token punctuation">"</span></span>
+	<span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span>
+	<span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">value</span><span class="token delimiter punctuation">}}</span></span><span class="token punctuation">"</span></span>
+	<span class="token attr-name">aria-label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Filter <span class="token handlebars language-handlebars"><span class="token delimiter punctuation">{{</span><span class="token variable">label</span><span class="token delimiter punctuation">}}</span></span><span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+</pre>
+	<external-text hidden id="_1-html-post" class="component-preview-post-code" src="1.html" wrap="pre"></external-text>
+</component-preview>
+		</main>
+		<script src="/script-aiur.js"></script>
+	</body>
+</html>
