@@ -1,6 +1,6 @@
-$sort-svg: 'data:image/svg+xml;utf8,<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort" class="svg-inline--fa fa-sort fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"></path></svg>';
-$sort-up-svg: 'data:image/svg+xml;utf8,<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort-up" class="svg-inline--fa fa-sort-up fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M279 224H41c-21.4 0-32.1-25.9-17-41L143 64c9.4-9.4 24.6-9.4 33.9 0l119 119c15.2 15.1 4.5 41-16.9 41z"></path></svg>';
-$sort-down-svg: 'data:image/svg+xml;utf8,<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort-down" class="svg-inline--fa fa-sort-down fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z"></path></svg>';
+$sort-svg: url('data:image/svg+xml;utf8,<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort" class="svg-inline--fa fa-sort fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"></path></svg>');
+$sort-up-svg: url('data:image/svg+xml;utf8,<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort-up" class="svg-inline--fa fa-sort-up fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M279 224H41c-21.4 0-32.1-25.9-17-41L143 64c9.4-9.4 24.6-9.4 33.9 0l119 119c15.2 15.1 4.5 41-16.9 41z"></path></svg>');
+$sort-down-svg: url('data:image/svg+xml;utf8,<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort-down" class="svg-inline--fa fa-sort-down fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z"></path></svg>');
 
 .tabelle-arrow {
 	& {
@@ -20,26 +20,33 @@ $sort-down-svg: 'data:image/svg+xml;utf8,<svg aria-hidden="true" focusable="fals
 		cursor: pointer;
 	}
 
-	:not(:checked) + &--asc + :not(:checked) + &--desc {
-		@include icon-before($sort-svg, var(--tabelle-arrow-color, $tabelle-gray));
+	&--desc::before {
+		width: 1em;
+		height: 1em;
+		background-color: var(--tabelle-arrow-color, $tabelle-gray);
+		display: block;
+		content: ' ';
+		mask-image: var(--tabelle-arrow-sort-image, $sort-svg);
+		mask-repeat: no-repeat;
+		mask-position: center;
 	}
 
-	:checked + &--asc + :not(:checked) + &--desc {
-		@include icon-before($sort-up-svg, var(--tabelle-arrow-color, $tabelle-gray));
+	:checked + &--asc + :not(:checked) + &--desc::before {
+		mask-image: var(--tabelle-arrow-sort-up-image, $sort-up-svg);
 	}
 
-	:not(:checked) + &--asc + :checked + &--desc {
-		@include icon-before($sort-down-svg, var(--tabelle-arrow-color, $tabelle-gray));
+	:not(:checked) + &--asc + :checked + &--desc::before {
+		mask-image: var(--tabelle-arrow-sort-down-image, $sort-down-svg);
 	}
 
-	:focus + &--asc + :not(:checked) + &--desc,
-	:focus + &--asc + :checked + &--desc {
-		@include icon-before($sort-up-svg, var(--tabelle-arrow-color, $tabelle-gray));
+	:focus + &--asc + :not(:checked) + &--desc::before,
+	:focus + &--asc + :checked + &--desc::before {
+		mask-image: var(--tabelle-sort-up-svg, $sort-up-svg);
 	}
 
-	:not(:checked) + &--asc + :focus + &--desc,
-	:checked + &--asc + :focus + &--desc {
-		@include icon-before($sort-down-svg, var(--tabelle-arrow-color, $tabelle-gray));
+	:not(:checked) + &--asc + :focus + &--desc::before,
+	:checked + &--asc + :focus + &--desc::before {
+		mask-image: var(--tabelle-sort-down-svg, $sort-down-svg);
 	}
 
 	:hover ~ &--desc {
