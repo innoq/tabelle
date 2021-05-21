@@ -5,11 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Fixed focus for `tabelle-arrows` so it is retained on a `ta-belle` submit
 
 ## [0.5.0] - 2021-05-06
 ### Changed
-- made `name` optional for `th` header of `tabelle-cljs`
-- added `nofilter` attribute to `ta-belle` and `tabelle-cljs` to deactivate
+- Made `name` optional for `th` header of `tabelle-cljs`
+- Added `nofilter` attribute to `ta-belle` and `tabelle-cljs` to deactivate
   automatic generation of filter fields for the whole table
 
 ## [0.4.0] - 2021-04-27

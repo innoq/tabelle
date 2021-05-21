@@ -22,7 +22,7 @@
 	}
 
 	&:focus + &--asc::before, &:focus + &--desc::before {
-		background-color:  var(--tabelle-arrow-color-focus, --tabelle-arrow-color-hover, $tabelle-blue);
+		background-color:  var(--tabelle-arrow-color-focus, $tabelle-blue);
 	}
 
 	&:checked + &--asc::before, &:checked + &--desc::before {

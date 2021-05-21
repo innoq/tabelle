@@ -24,7 +24,7 @@ You can customize the styles with the following CSS Properties.
 --tabelle-arrow-color: ; /* Default: #acacac */
 --tabelle-arrow-color-checked: ; /* Default: #535353 */
 --tabelle-arrow-color-hover: ; /* Default: #6882cb */
---tabelle-arrow-color-focus: ; /* Default: #6882cb or --tabelle-arrow-color-hover if set */
+--tabelle-arrow-color-focus: ; /* Default: #6882cb */
 ```
 
 
