@@ -1,6 +1,14 @@
 @import 'mixins';
 @import 'colors';
 
+:root {
+	--tabelle-focus-style: 3px solid #7fb2f8;
+
+	@supports(outline: 3px auto -webkit-focus-ring-color) {
+		--tabelle-focus-style: 3px auto -webkit-focus-ring-color;
+	}
+}
+
 @import '../components/arrow/';
 @import '../components/header/';
 @import '../components/tabelle/tabelle';
