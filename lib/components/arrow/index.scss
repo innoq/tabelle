@@ -55,6 +55,7 @@ $sort-down-svg: url('data:image/svg+xml;utf8,<svg aria-hidden="true" focusable="
 
 	:focus ~ &--desc {
 		outline: var(--tabelle-focus-style);
+		--tabelle-arrow-color: var(--tabelle-arrow-color-focus, #{$tabelle-light-gray});
 	}
 	// Remove focus styles for mouse interaction where supported
 	:focus:not(:focus-visible) ~ &--desc {
