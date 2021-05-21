@@ -1,16 +1,3 @@
-@mixin icon-before($svg-path, $color) {
-	&::before {
-		width: 1em;
-		height: 1em;
-		background-color: $color;
-		display: block;
-		content: ' ';
-		mask-image: url($svg-path);
-		mask-repeat: no-repeat;
-		mask-position: center;
-	}
-}
-
 @mixin visually-hidden() { /* https://snook.ca/archives/html_and_css/hiding-content-for-accessibility */
 	position: absolute !important;
 	height: 1px; width: 1px;

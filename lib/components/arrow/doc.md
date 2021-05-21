@@ -20,11 +20,12 @@ has sorted the table.
 You can customize the styles with the following CSS Properties.
 
 ```
---tabelle-arrow-height: ; /* Default: 1rem */
+--tabelle-arrow-height: ; /* Default: 1.5em */
 --tabelle-arrow-color: ; /* Default: #acacac */
---tabelle-arrow-color-checked: ; /* Default: #535353 */
---tabelle-arrow-color-hover: ; /* Default: #6882cb */
---tabelle-arrow-color-focus: ; /* Default: #6882cb */
+--tabelle-arrow-color-hover: ; /* Default: #757575 */
+--tabelle-arrow-sort-image: url(...); /* A valid image URL to use as a mask when unsorted */
+--tabelle-arrow-sort-up-image: url(...); /* A valid image URL to use as a mask when sorted up */
+--tabelle-arrow-sort-down-image: url(...); /* A valid image URL to use as a mask when sorted down */
 ```
 
 You can also override the focus style for the arrows using the
