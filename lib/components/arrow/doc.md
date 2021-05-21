@@ -27,6 +27,14 @@ You can customize the styles with the following CSS Properties.
 --tabelle-arrow-color-focus: ; /* Default: #6882cb */
 ```
 
+You can also override the focus style for the arrows using the
+following CSS property:
+
+```
+/* Default `3px solid #7fb2f8` or `3px solid -webkit-focus-ring-color` */
+--tabelle-focus-style: ;
+```
+
 Wrap the radio buttons in a `fieldset` with the `.tabelle-arrows` class.
 
 ```handlebars

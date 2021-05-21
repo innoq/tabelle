@@ -32,8 +32,26 @@ $sort-down-svg: 'data:image/svg+xml;utf8,<svg aria-hidden="true" focusable="fals
 		@include icon-before($sort-down-svg, var(--tabelle-arrow-color, $tabelle-gray));
 	}
 
+	:focus + &--asc + :not(:checked) + &--desc,
+	:focus + &--asc + :checked + &--desc {
+		@include icon-before($sort-up-svg, var(--tabelle-arrow-color, $tabelle-gray));
+	}
+
+	:not(:checked) + &--asc + :focus + &--desc,
+	:checked + &--asc + :focus + &--desc {
+		@include icon-before($sort-down-svg, var(--tabelle-arrow-color, $tabelle-gray));
+	}
+
 	:hover ~ &--desc {
 		--tabelle-arrow-color: var(--tabelle-arrow-color-hover, #{$tabelle-light-gray});
+	}
+
+	:focus ~ &--desc {
+		outline: var(--tabelle-focus-style);
+	}
+	// Remove focus styles for mouse interaction where supported
+	:focus:not(:focus-visible) ~ &--desc {
+		outline: none;
 	}
 }
 

@@ -110,8 +110,15 @@ you are replacing more than one table on a page). You also need to specify
 a `search-src` attribute which will tell the `ta-belle` the endpoint for the
 search resource which will return a new filtered or sorted HTML table.
 
-The `ta-belle` also implements an auto submit so that the filtering and sorting
-will occur whenever the user changes the filter/sort fields.
+The `ta-belle` also implements extra features which are nice for users. This
+includes an auto submit so that the filtering and sorting will occur whenever
+the user changes the filter/sort fields.
+
+Additionally, the custom element also improves the keyboard usability of the
+table by ensuring that the focus will move through all of the controls in
+the Tabelle sequentially (the default focus behavior of radio buttons is
+maybe not exactly what a user would expect because browsers expect users
+to iterate through radio buttons using arrows instead of the Tab key).
 
 ```handlebars
 <ta-belle id="tabelle" search-src="/tabelle/1.html">

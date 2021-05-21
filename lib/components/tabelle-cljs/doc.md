@@ -37,6 +37,12 @@ up client-side filtering and sorting with JavaScript!
 </tabelle-cljs>
 ```
 
+Additionally, the component also implements keyboard usability within the
+table by ensuring that the focus will move through all of the controls in
+the Tabelle sequentially (the default focus behavior of radio buttons is
+maybe not exactly what a user would expect because browsers expect users
+to iterate through radio buttons using arrows instead of the Tab key).
+
 ## Customizing filter classes
 
 **Note:** Internally, Tabelle uses [List.js](https://listjs.com/) to sort and
