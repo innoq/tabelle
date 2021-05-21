@@ -233,13 +233,51 @@ can set the `nosort` or `nofilter` attribute on the `th` column header.
 </ta-belle>
 ```
 
+## Adding custom filter fields for specific columns
+
+You can add a custom filter field to a column by adding an input
+field or select field with the class "tabelle-input". Then this
+field will be used instead of the filter field which would have
+been automatically generated.
+
+```handlebars
+<ta-belle id="tabelle" search-src="/tabelle/5.html">
+	<table>
+		<thead>
+			<tr>
+				<th name="foo">Column 1</th>
+				<th name="bar" nosort>Column 2</th>
+				<th name="baz">
+					<select class="tabelle-input"
+						name="{{name}}"
+						aria-label="Filter {{label}}">
+						<option>A</option>
+						<option>B</option>
+						<option>C</option>
+					</select>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each rows}}
+				<tr>
+				{{#each this}}
+					<td>{{this}}</td>
+				{{/each}}
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</ta-belle>
+```
+
 ### Existing Value
 
 If you have an existing filter for a column, you can set this with the `value`
 attribute on the `th` column header.
 
 ```handlebars
-<ta-belle id="tabelle" search-src="/tabelle/5.html">
+<ta-belle id="tabelle" search-src="/tabelle/6.html">
 	<table>
 		<thead>
 			<tr>
@@ -269,7 +307,7 @@ as a child of the `th` column header and ensure that it has the
 `.tabelle-input` class.
 
 ```handlebars
-<ta-belle id="tabelle" search-src="/tabelle/6.html">
+<ta-belle id="tabelle" search-src="/tabelle/7.html">
 	<table>
 		<thead>
 			<tr>
@@ -307,7 +345,7 @@ You can customize the length of the debounce interval by setting the
 `debounce` parameter on the custom element.
 
 ```handlebars
-<ta-belle id="tabelle" debounce="1000" search-src="/tabelle/7.html">
+<ta-belle id="tabelle" debounce="1000" search-src="/tabelle/8.html">
 	<table>
 		<thead>
 			<tr>
@@ -338,7 +376,7 @@ requests that are being made, and you can access previous sort/filter
 combinations by navigating with the Browser Back button.
 
 ```handlebars
-<ta-belle id="tabelle" search-src="/tabelle/8.html" change-uri>
+<ta-belle id="tabelle" search-src="/tabelle/9.html" change-uri>
 	<table>
 		<thead>
 			<tr>
@@ -370,7 +408,7 @@ next to the `table` and this will be included in what the user sees when
 Tabelle replaces the content.
 
 ```handlebars
-<ta-belle id="tabelle" search-src="/tabelle/9.html" change-uri>
+<ta-belle id="tabelle" search-src="/tabelle/10.html" change-uri>
 	<table>
 		<thead>
 			<tr>
@@ -392,7 +430,7 @@ You can add the `.tabelle--sticky` class to your table to activate sticky
 table headers.
 
 ```handlebars height=300
-<ta-belle id="tabelle" search-src="/tabelle/10.html" change-uri>
+<ta-belle id="tabelle" search-src="/tabelle/11.html" change-uri>
 	<table class="tabelle--sticky">
 		<thead>
 			<tr>
@@ -444,7 +482,7 @@ or if you are implementing a separate unified search somewhere
 else on the page.
 
 ```handlebars
-<ta-belle id="tabelle" search-src="/tabelle/11.html" nofilter>
+<ta-belle id="tabelle" search-src="/tabelle/12.html" nofilter>
 	<table>
 		<thead>
 			<tr>

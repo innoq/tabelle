@@ -69,6 +69,47 @@ If you want to customize this class name, you can do this by setting the
 </tabelle-cljs>
 ```
 
+## Adding custom filter fields for specific columns
+
+You can add a custom filter field to a column by adding an input
+field or select field with the class "tabelle-input". Then this
+field will be used instead of the filter field which would have
+been automatically generated.
+
+```handlebars
+<tabelle-cljs>
+	<table>
+		<thead>
+			<tr>
+				<th>
+					Column 1
+				</th>
+				<th>Column 2</th>
+				<th>
+					Column 3
+					<select class="tabelle-input"
+						name="baz"
+						aria-label="Filter Column 3">
+						<option>A</option>
+						<option>B</option>
+						<option>C</option>
+					</select>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each rows}}
+				<tr>
+				{{#each this}}
+					<td>{{this}}</td>
+				{{/each}}
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</tabelle-cljs>
+```
+
 
 ## Filtering cells which contain structured HTML elements
 

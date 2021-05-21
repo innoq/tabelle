@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Fixed
 - Fixed focus for `tabelle-arrows` so it is retained on a `ta-belle` submit
+- Fixed `tabelle-cljs` bug when using a custom field for filtering
 
 ## [0.5.0] - 2021-05-06
 ### Changed
