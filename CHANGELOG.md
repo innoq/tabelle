@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- css properties used for focus should be the same as for checked
+
 ## [1.0.0] - 2021-05-21
 ### Changed
 - modified the implementation of the `.tabelle-arrows` component. Inserting the
