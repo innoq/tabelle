@@ -46,7 +46,7 @@ $sort-down-svg: url('data:image/svg+xml;utf8,<svg aria-hidden="true" focusable="
 
 	:not(:checked) + &--asc + :focus + &--desc::before,
 	:checked + &--asc + :focus + &--desc::before {
-		mask-image: var(--tabelle-arrow-sort-up-image, $sort-down-svg);
+		mask-image: var(--tabelle-arrow-sort-down-image, $sort-down-svg);
 	}
 
 	:hover ~ &--desc {
