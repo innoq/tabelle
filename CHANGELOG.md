@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- use `data-sort` attribute on `td` to specify custom sort value for `tabelle-cljs`
+
 ## [1.0.2] - 2021-05-27
 ### Fixed
 - used correct CSS property when showing the sort down property

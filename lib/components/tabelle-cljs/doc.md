@@ -145,6 +145,44 @@ over the `textContent` of the element of each cell.
 </tabelle-cljs>
 ```
 
+
+## Sorting cells via a custom sort value
+
+For certain use cases, you want to sort a column not alphabetically by the text
+which appears in a cell, but by a different value. This will often be the case
+if you are sorting dates or times which are formatted in a way where their
+alphabetical sort will differ from sorting based on the timestamp itself.
+
+In order to customize how the column is sorted, add a `data-sort` attribute to
+each cell containing the value which should be used for the comparison.
+
+```handlebars
+<tabelle-cljs>
+	<table>
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Time</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td data-sort="2021-31-09">09/31/2021</td>
+				<td data-sort="09:00">9:00 AM</td>
+			</tr>
+			<tr>
+				<td data-sort="2021-02-01">02/01/2021</td>
+				<td data-sort="21:00">9:00 PM</td>
+			</tr>
+			<tr>
+				<td data-sort="2025-08-11">08/11/2025</td>
+				<td data-sort="16:00">4:00 PM</td>
+			</tr>
+		</tbody>
+	</table>
+</tabelle-cljs>
+```
+
 ## `colspan` attribute support
 
 In order for sorting and filtering to work, please make sure that
@@ -242,7 +280,7 @@ or `desc`).
 	<table>
 		<thead>
 			<tr>
-				<th>Column 1</th>
+				<th name="foo">Column 1</th>
 				<th>Column 2</th>
 				<th>Column 3</th>
 			</tr>
