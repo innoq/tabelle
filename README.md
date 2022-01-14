@@ -119,6 +119,15 @@ the server and for other tables, the progressively enhanced version is
 sufficient. The CSS and HTML Markup for both is compatible, so any styling or
 customization that you do will work for both.
 
+## Tabelle Search
+
+It is also possible to add a `<tabelle-search>` component which connects to a
+Tabelle and provides the Tabelle with a search over all columns within the
+table. The `<tabelle-search>` component communicates with the Tabelle by
+sending an Event to the Tabelle implementation while the user is typing in
+an input field contained in the component. This works with either the
+`<ta-belle>` or `<tabelle-cljs>` components.
+
 ## Options
 
 In `<ta-belle>` or `<tabelle-cljs>` you can add the following properties to activate the following behavior
@@ -138,6 +147,15 @@ In the `<th>` headers, you can add the following properties to activate the foll
 |value     |specifies value which will be set for the generated input field|
 |nosort    |if no sorting functions should be generated for the column|
 |nofilter  |if not filtering functions are generated for the column|
+
+If the `<tabelle-search>` is positioned within either a `<ta-belle>`
+or `<tabelle-cljs>` no further configuration is needed. If the
+`<tabelle-search>` is positioned outside of the Tabelle, it can be configured
+as follows:
+
+|Property|Behavior|
+|--------|--------|
+|tabelleId|Indicates the HTML ID of the Tabelle with which the `<tabelle-search>` should communicate|
 
 ## Styling
 

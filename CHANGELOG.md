@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 Unreleased
 ----------
 
-- TBD
+- [minor] added `tabelle-search` component for searching over multiple columns
 
 
 1.2.0 - 2022-01-19
