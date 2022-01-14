@@ -353,7 +353,7 @@ or `desc`).
 </tabelle-cljs>
 ```
 
-### Deactivating filter-fields for a Tabelle
+## Deactivating filter-fields for a Tabelle
 
 When you set the `nofilter` attribute on a `tabelle-cljs`, no
 filter fields will be generated within the table headers. This
