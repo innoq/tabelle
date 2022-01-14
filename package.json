@@ -19,11 +19,11 @@
     "uitil": "^2.8.0"
   },
   "devDependencies": {
-    "aiur": "^0.6.0",
-    "eslint": "^7.26.0",
+    "aiur": "^0.8.0",
+    "eslint": "^8.6.0",
     "eslint-config-fnd": "^1.12.0",
     "faucet-pipeline-js": "^2.1.7",
-    "faucet-pipeline-sass": "^1.5.0",
+    "faucet-pipeline-sass": "^1.7.0",
     "npm-run-all": "^4.1.5"
   }
 }
