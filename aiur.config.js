@@ -21,6 +21,9 @@ module.exports = {
 			file: "./lib/components/header/doc.md",
 			data: "./lib/components/header/header.data.js"
 		},
+		tabelle_search: {
+			file: "./lib/components/tabelle-search/doc.md"
+		},
 		tabelle: {
 			file: "./lib/components/tabelle/doc.md",
 			data: "./lib/components/tabelle/tabelle.data.js"

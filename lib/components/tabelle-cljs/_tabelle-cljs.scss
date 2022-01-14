@@ -1,0 +1,9 @@
+tabelle-cljs {
+	display: inline-grid;
+	gap: 1rem;
+
+	> tabelle-search {
+		align-self: end;
+		justify-self: end;
+	}
+}
