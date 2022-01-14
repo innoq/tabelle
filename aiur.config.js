@@ -26,11 +26,23 @@ module.exports = {
 		},
 		tabelle: {
 			file: "./lib/components/tabelle/doc.md",
-			data: "./lib/components/tabelle/tabelle.data.js"
+			data: "./lib/components/tabelle/tabelle.data.js",
+			children: {
+				tabelle_search: {
+					file: "./lib/components/tabelle/search-doc.md",
+					data: "./lib/components/tabelle/tabelle.data.js"
+				}
+			}
 		},
 		tabelle_cljs: {
 			file: "./lib/components/tabelle-cljs/doc.md",
-			data: "./lib/components/tabelle-cljs/tabelle-cljs.data.js"
+			data: "./lib/components/tabelle-cljs/tabelle-cljs.data.js",
+			children: {
+				tabelle_search: {
+					file: "./lib/components/tabelle-cljs/search-doc.md",
+					data: "./lib/components/tabelle-cljs/tabelle-cljs.data.js"
+				}
+			}
 		}
 	},
 

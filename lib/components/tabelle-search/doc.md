@@ -11,7 +11,9 @@ to the `tabelle-search` component referencing the HTML ID of the Tabelle
 element so that the `tabelle-search` component can interact with the
 Tabelle in question. The `tabelleId` attribute will make the most sense
 when the search field needs to be placed outside of the Tabelle element
-for layout reasons. See more documentation TODO and TODO.
+for layout reasons. See more documentation and examples of how the component
+works within the [`ta-belle` element](/tabelle/tabelle_search/) and within
+the [`tabelle-cljs` element](/tabelle_cljs/tabelle_search/).
 
 The `tabelle-search` element expects an `input` element to be placed inside
 of the component. The element does not generate its own input fields because
@@ -20,6 +22,31 @@ are styled according to their corporate design.
 
 ```handlebars
 <tabelle-search>
+	<label for="tabelle-search">Filter Table</label>
+	<input id="tabelle-search" type="search">
+</tabelle-search>
+```
+
+The `tabelle-search` component communicates with the Tabelle element by
+sending a custom `"tabelle-search"` Event. The `detail` of this Event will
+be an object containing the `name` and current `value` of the input field.
+If the `tabelle-search` has a `tabelleId`, the Event will be dispatched
+directly to the element referenced by that ID. Otherwise, the Event is
+dispatched on the `tabelle-search` element and bubbles up to any parent nodes.
+The assumption is then that the `tabelle-search` is contained within a Tabelle,
+and the Tabelle will intercept this event and perform the search.
+
+## Progressive Enhancement
+
+The `tabelle-search` component works well with progressive enhancement because
+the input element can be nested within a form which performs the filtering of
+the table. However, if the `tabelle-search` is intended to be used
+_exclusively_ with client-side JavaScript, the element should be rendered with
+a `hidden` attribute. The `tabelle-search` element is smart enough to know how
+to unhide itself once JavaScript is available.
+
+```handlebars
+<tabelle-search hidden>
 	<label for="tabelle-search">Filter Table</label>
 	<input id="tabelle-search" type="search">
 </tabelle-search>
@@ -82,6 +109,10 @@ senses and add a label.
 
 ### Valid input field which adds a label using the `aria-labelledby` attribute
 
+**Note:** The fact that the component supports this attribute does not mean
+that it is the best way to add a label to an input field. If in doubt, use the
+actual `label` element.
+
 ```handlebars
 <span id="filter-table">Filter Table</span>
 <tabelle-search>
@@ -89,35 +120,16 @@ senses and add a label.
 </tabelle-search>
 ```
 
-**Note:** If the search element is used exclusively for filtering the table
-when JavaScript is activated, add a `hidden` Attribute to the element so
-that it is only shown when JavaScript is available. The `tabelle-search`
-element is smart and knows how to unhide itself when it is safe to do so!
-Additionally, the `tabelle-search` element will also only unhide itself if
-the element contains a valid input element which can be used for the search.
-The input element must have a reference to a valid `label` or specify a
-valid `aria-label` / `aria-labelledby` attribute, or the element will be
-embarrassed and decide not to show its face!
+## Debouncing
 
-It you want to activate a filter field to filter all of the entries in the
-table in addition to (or instead of) the column filters. In this case, you
-can add a `tabelle-search` element surrounding the input fields that will
-be used to filter the input field. Here we do not generate our own input
-fields, because we assume that users of this library want their own input
-fields that are styled according to their corporate design.
+The `tabelle-search` element will not send an event upon every keystroke, but
+will instead debounce the input for a number of milliseconds (default 300)
+before sending the event. This number can be customized with the `debounce`
+attribute.
 
-
-
-[server-side]
-[client-side rendered JavaScript Tabelle](/tabelle_cljs/). The purpose of
-the component is to provide a search field which can be used to filter the
-whole table instead of (or in addition to) multiple columns.
-
-It is possible to use the input field within the `tabelle-search` component
-inside of an HTML form in order to provide filtering of the table on the
-server. In this context, the element would be compatible with the
-[server-side variant of the Tabelle component](/tabelle/).
-
-However, in many contexts we want to add the search field within (or referenced by)
-the `tabelle-cljs`
-
+```handlebars
+<tabelle-search hidden debounce="400">
+	<label for="tabelle-search">Filter Table</label>
+	<input id="tabelle-search" type="search">
+</tabelle-search>
+```

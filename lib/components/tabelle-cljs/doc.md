@@ -298,7 +298,7 @@ or `desc`).
 </tabelle-cljs>
 ```
 
-### Deactivating filter-fields for a Tabelle
+## Deactivating filter-fields for a Tabelle
 
 When you set the `nofilter` attribute on a `tabelle-cljs`, no
 filter fields will be generated within the table headers. This
@@ -327,88 +327,4 @@ else on the page.
 		</tbody>
 	</table>
 </ta-belle>
-```
-
-### Adding filter field outside of table to filter all columns in the table
-
-It you want to activate a filter field to filter all of the entries in the
-table in addition to (or instead of) the column filters. In this case, you
-can add a `tabelle-search` element surrounding the input fields that will
-be used to filter the input field. Here we do not generate our own input
-fields, because we assume that users of this library want their own input
-fields that are styled according to their corporate design.
-
-**Note:** If the search element is used exclusively for filtering the table
-when JavaScript is activated, add a `hidden` Attribute to the element so
-that it is only shown when JavaScript is available. The `tabelle-search`
-element is smart and knows how to unhide itself when it is safe to do so!
-Additionally, the `tabelle-search` element will also only unhide itself if
-the element contains a valid input element which can be used for the search.
-The input element must have a reference to a valid `label` or specify a
-valid `aria-label` / `aria-labelledby` attribute, or the element will be
-embarrassed and decide not to show its face!
-
-This `tabelle-search` element can be either added as a direct child of the
-`tabelle-cljs`, or the `tabelle-cljs` can reference the `tabelle-search`
-element via the `searchId` attribute referencing the HTML ID of the
-`tabelle-search` element.
-
-#### Example with tabelle-search as a direct child of tabelle-cljs
-
-```handlebars
-<tabelle-cljs>
-	<tabelle-search hidden>
-		<label for="table-filter">Filter Table:</label>
-		<input id="table-filter" type="search">
-		<button>Search</button>
-	</tabelle-search>
-	<table>
-		<thead>
-			<tr>
-				<th>Column 1</th>
-				<th>Column 2</th>
-				<th>Column 3</th>
-			</tr>
-		</thead>
-		<tbody>
-			{{#each rows}}
-				<tr>
-				{{#each this}}
-					<td>{{this}}</td>
-				{{/each}}
-				</tr>
-			{{/each}}
-		</tbody>
-	</table>
-</tabelle-cljs>
-```
-
-#### Example with tabelle-cljs referencing search via id
-
-```handlebars
-<tabelle-search hidden id="">
-	<label for="table-filter">Filter Table:</label>
-	<input id="table-filter" type="search">
-	<button>Search</button>
-</tabelle-search>
-<tabelle-cljs searchId="">
-	<table>
-		<thead>
-			<tr>
-				<th>Column 1</th>
-				<th>Column 2</th>
-				<th>Column 3</th>
-			</tr>
-		</thead>
-		<tbody>
-			{{#each rows}}
-				<tr>
-				{{#each this}}
-					<td>{{this}}</td>
-				{{/each}}
-				</tr>
-			{{/each}}
-		</tbody>
-	</table>
-</tabelle-cljs>
 ```
