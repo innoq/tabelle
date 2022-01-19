@@ -9,6 +9,7 @@ Unreleased
 ----------
 - [minor] allow custom elements to enhance a filter field a column header
 - [patch] preserve attributes of `th` elements when transforming them
+- [patch] fixed undefined value landing in the `valueCache` of a Tabelle
 
 
 1.1.0 - 2021-07-21
