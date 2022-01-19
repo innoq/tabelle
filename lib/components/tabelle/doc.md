@@ -255,6 +255,7 @@ been automatically generated.
 				<th name="foo">Column 1</th>
 				<th name="bar" nosort>Column 2</th>
 				<th name="baz">
+					Column 3
 					<select class="tabelle-input"
 						name="{{name}}"
 						aria-label="Filter {{label}}">
