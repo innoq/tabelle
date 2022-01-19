@@ -116,6 +116,61 @@ been automatically generated.
 </tabelle-cljs>
 ```
 
+## Adding custom element wrapper to enhance input element
+
+If you need to enhance a custom filter, it is possible to wrap
+the `.tabelle-input` element inside of a custom element which
+you can use to add behavior to the component.
+
+```handlebars
+<style>
+	custom-input,
+	custom-select {
+		grid-area: search;
+	}
+	custom-select select {
+		width: 100%;
+	}
+</style>
+<tabelle-cljs>
+	<table>
+		<thead>
+			<tr>
+				<th>
+					Column 1
+				</th>
+				<th>
+					Column 2
+					<custom-input>
+						<input class="tabelle-input" aria-label="Filter Column 2">
+					</custom-input>
+				</th>
+				<th class="foo" data-attr="bar">
+					Column 3
+					<custom-select>
+						<select class="tabelle-input"
+							name="baz"
+							aria-label="Filter Column 3">
+							<option>A</option>
+							<option>B</option>
+							<option>C</option>
+						</select>
+					</custom-select>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each rows}}
+				<tr>
+				{{#each this}}
+					<td>{{this}}</td>
+				{{/each}}
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</tabelle-cljs>
+```
 
 ## Filtering cells which contain structured HTML elements
 

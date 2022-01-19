@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 Unreleased
 ----------
+- [minor] allow custom elements to enhance a filter field a column header
 - [patch] preserve attributes of `th` elements when transforming them
 
 
