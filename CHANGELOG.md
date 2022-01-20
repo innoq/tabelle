@@ -13,7 +13,6 @@ Unreleased
 
 1.3.0 - 2022-01-20
 ------------------
-
 - [minor] added `tabelle-search` component for searching over multiple columns
 
 
