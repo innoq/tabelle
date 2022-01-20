@@ -4,7 +4,7 @@ module.exports = {
 	description: "Components for pretty filterable and sortable tables",
 
 	pages: {
-		"": "./lib/components/doc.md",
+		"": "./README.md",
 		input: {
 			file: "./lib/components/input/doc.md",
 			data: "./lib/components/input/input.data.js"

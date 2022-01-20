@@ -1,3 +1,5 @@
+title: Tabelle
+
 # tabelle
 
 [![npm](https://img.shields.io/npm/v/tabelle.svg)](https://www.npmjs.com/package/tabelle)
@@ -6,7 +8,9 @@ A library for generating pretty filterable and sortable tables that use your bac
 
 This library uses custom elements. In order for this to work, you need to use a browser which support it or use a polyfill.
 
-![Animated Tabelle Example](https://res.cloudinary.com/innoq-deutschland-gmbh/image/upload/v1621606137/tabelle-1.0.0_sfrfhw.gif)
+<img src="https://res.cloudinary.com/innoq-deutschland-gmbh/image/upload/v1621606137/tabelle-1.0.0_sfrfhw.gif"
+    alt="Animated Tabelle Example"
+    width="600">
 
 ## Install
 
