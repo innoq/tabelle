@@ -1,13 +1,28 @@
 # How to Release
 
-1. Update CHANGELOG with new version
-2. Increase version of library
+1. update dependencies (`ncu -i`)
 
-    npm version patch|minor|major
+2. Increase version number in `package.json` and run `npm install` to update
+   `package-lock.json`
 
-3. Publish
+3. Update CHANGELOG with new version number
 
-    rm -rf dist/
-    npm test
-    npm run compile
-    npm publish
+4. commit as "v#.#.#"
+
+        $ git commit -m "v`node -p -e 'require("./package.json").version'`"
+
+3. tag as "v#.#.#"
+
+        $ git tag -am "v`node -p -e 'require("./package.json").version'`" \
+                "v`node -p -e 'require("./package.json").version'`"
+
+4. publish
+
+        rm -rf dist/
+        npm test
+        npm run compile
+        npm publish
+
+5. push to git
+
+        $ git push --follow-tags
