@@ -12,6 +12,7 @@
     "aiur:watch": "aiur -t ./dist --watch --liveserve 0.0.0.0:4001"
   },
   "author": "joy.heron@innoq.com",
+	"homepage": "https://github.com/innoq/tabelle",
   "license": "Apache-2.0",
   "dependencies": {
     "document-register-element": "^1.14.10",
