@@ -26,7 +26,7 @@ up client-side filtering and sorting with JavaScript!
 			</tr>
 		</thead>
 		<tbody>
-		{{#each rows}}
+			{{#each rows}}
 			<tr>
 				{{#each this}}
 					{{#if this.value}}
@@ -424,3 +424,28 @@ else on the page.
 	</table>
 </ta-belle>
 ```
+
+## Updating the table by adding or deleting rows from the table
+
+_This feature is experimental._
+_Please [report any bugs] so that they can be fixed as soon as possible._
+
+[report any bugs]: https://github.com/innoq/tabelle/issues
+
+What about if you want to update the table by adding new rows or by removing
+existing rows from the table? The `tabelle-cljs` provides basic support for
+this by listening for any changes to the DOM of the table. The `tabelle-cljs`
+will index any `tr` element which is added to the `tbody` of the table, and
+will remove any `tr` element from the index when it is removed from the table.
+If the HTML content within any row is modified, the `tabelle-cljs` will also
+update the index to reflect the new data in the row.
+
+### Limitations
+
+#### Limitation with Row Removal
+
+The `tabelle-cljs` currently only will recognize that a node has been removed
+from the table when the node is currently visible in the filtered table. If
+a filter is currently set which hides that row within the table, the
+`tabelle-cljs` will not recognize that the row has been deleted and will not
+update the index to remove the element from the table.
