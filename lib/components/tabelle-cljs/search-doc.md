@@ -24,16 +24,21 @@ the page, their filter values will continually override each other.
 	<table>
 		<thead>
 			<tr>
-				<th>Column 1</th>
-				<th>Column 2</th>
-				<th>Column 3</th>
+				<th>Animal</th>
+				<th>Food</th>
+				<th>Color</th>
+				<th>Date</th>
 			</tr>
 		</thead>
 		<tbody>
 			{{#each rows}}
 				<tr>
 				{{#each this}}
-					<td>{{this}}</td>
+					{{#if this.value}}
+						<td data-sort="{{this.value}}">{{this.formatted}}</td>
+					{{else}}
+						<td>{{this}}</td>
+					{{/if}}
 				{{/each}}
 				</tr>
 			{{/each}}
@@ -54,16 +59,21 @@ the page, their filter values will continually override each other.
 	<table>
 		<thead>
 			<tr>
-				<th>Column 1</th>
-				<th>Column 2</th>
-				<th>Column 3</th>
+				<th>Animal</th>
+				<th>Food</th>
+				<th>Color</th>
+				<th>Date</th>
 			</tr>
 		</thead>
 		<tbody>
 			{{#each rows}}
 				<tr>
 				{{#each this}}
-					<td>{{this}}</td>
+					{{#if this.value}}
+						<td data-sort="{{this.value}}">{{this.formatted}}</td>
+					{{else}}
+						<td>{{this}}</td>
+					{{/if}}
 				{{/each}}
 				</tr>
 			{{/each}}
