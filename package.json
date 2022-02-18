@@ -21,7 +21,7 @@
 	},
 	"devDependencies": {
 		"aiur": "^0.8.0",
-		"eslint": "^8.7.0",
+		"eslint": "^8.9.0",
 		"eslint-config-fnd": "^1.12.0",
 		"eslint-plugin-import": "^2.25.4",
 		"eslint-plugin-promise": "^6.0.0",
