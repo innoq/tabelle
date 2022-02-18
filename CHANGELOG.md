@@ -8,7 +8,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 Unreleased
 ----------
 
-- TBD
+- [patch] fixed bug with `tabelle-search` and `tabelle-cljs` so that search
+  string including `.` returns the correct search results
 
 
 1.3.0 - 2022-01-20
