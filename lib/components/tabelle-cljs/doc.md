@@ -19,18 +19,23 @@ up client-side filtering and sorting with JavaScript!
 	<table>
 		<thead>
 			<tr>
-				<th>Column 1</th>
-				<th>Column 2</th>
-				<th>Column 3</th>
+				<th>Animal</th>
+				<th>Food</th>
+				<th>Color</th>
+				<th>Date</th>
 			</tr>
 		</thead>
 		<tbody>
-			{{#each rows}}
-				<tr>
+		{{#each rows}}
+			<tr>
 				{{#each this}}
-					<td>{{this}}</td>
+					{{#if this.value}}
+						<td data-sort="{{this.value}}">{{this.formatted}}</td>
+					{{else}}
+						<td>{{this}}</td>
+					{{/if}}
 				{{/each}}
-				</tr>
+			</tr>
 			{{/each}}
 		</tbody>
 	</table>
@@ -57,18 +62,23 @@ If you want to customize this class name, you can do this by setting the
 	<table>
 		<thead>
 			<tr>
-				<th name="foo">Column 1</th>
-				<th name="bar">Column 2</th>
-				<th name="baz">Column 3</th>
+				<th name="animal">Animal</th>
+				<th name="food">Food</th>
+				<th name="color">Color</th>
+				<th name="date">Date</th>
 			</tr>
 		</thead>
 		<tbody>
 			{{#each rows}}
-				<tr>
+			<tr>
 				{{#each this}}
-					<td>{{this}}</td>
+					{{#if this.value}}
+						<td data-sort="{{this.value}}">{{this.formatted}}</td>
+					{{else}}
+						<td>{{this}}</td>
+					{{/if}}
 				{{/each}}
-				</tr>
+			</tr>
 			{{/each}}
 		</tbody>
 	</table>
@@ -87,12 +97,10 @@ been automatically generated.
 	<table>
 		<thead>
 			<tr>
+				<th>Animal</th>
+				<th>Food</th>
 				<th>
-					Column 1
-				</th>
-				<th>Column 2</th>
-				<th>
-					Column 3
+					Color
 					<select class="tabelle-input"
 						name="baz"
 						aria-label="Filter Column 3">
@@ -101,13 +109,18 @@ been automatically generated.
 						<option>C</option>
 					</select>
 				</th>
+				<th>Date</th>
 			</tr>
 		</thead>
 		<tbody>
 			{{#each rows}}
 				<tr>
 				{{#each this}}
-					<td>{{this}}</td>
+					{{#if this.value}}
+						<td data-sort="{{this.value}}">{{this.formatted}}</td>
+					{{else}}
+						<td>{{this}}</td>
+					{{/if}}
 				{{/each}}
 				</tr>
 			{{/each}}
@@ -136,17 +149,15 @@ you can use to add behavior to the component.
 	<table>
 		<thead>
 			<tr>
+				<th>Animal</th>
 				<th>
-					Column 1
-				</th>
-				<th>
-					Column 2
+					Food
 					<custom-input>
 						<input class="tabelle-input" aria-label="Filter Column 2">
 					</custom-input>
 				</th>
 				<th class="foo" data-attr="bar">
-					Column 3
+					Color
 					<custom-select>
 						<select class="tabelle-input"
 							name="baz"
@@ -157,13 +168,18 @@ you can use to add behavior to the component.
 						</select>
 					</custom-select>
 				</th>
+				<th>Date</th>
 			</tr>
 		</thead>
 		<tbody>
 			{{#each rows}}
 				<tr>
 				{{#each this}}
-					<td>{{this}}</td>
+					{{#if this.value}}
+						<td data-sort="{{this.value}}">{{this.formatted}}</td>
+					{{else}}
+						<td>{{this}}</td>
+					{{/if}}
 				{{/each}}
 				</tr>
 			{{/each}}
@@ -182,16 +198,21 @@ over the `textContent` of the element of each cell.
 	<table>
 		<thead>
 			<tr>
-				<th>Column 1</th>
-				<th>Column 2</th>
-				<th>Column 3</th>
+				<th>Animal</th>
+				<th>Food</th>
+				<th>Color</th>
+				<th>Date</th>
 			</tr>
 		</thead>
 		<tbody>
 			{{#each rows}}
 				<tr>
 				{{#each this}}
-					<td><a href="#">{{this}}</a></td>
+					{{#if this.value}}
+						<td data-sort="{{this.value}}">{{this.formatted}}</td>
+					{{else}}
+						<td>{{this}}</td>
+					{{/if}}
 				{{/each}}
 				</tr>
 			{{/each}}
@@ -277,16 +298,21 @@ You can disable sorting and filtering of a column by adding the `nosort` and/or
 	<table>
 		<thead>
 			<tr>
-				<th>Column 1</th>
-				<th nosort>Column 2</th>
-				<th nofilter>Column 3</th>
+				<th>Animal</th>
+				<th nosort>Food</th>
+				<th nofilter>Color</th>
+				<th>Date</th>
 			</tr>
 		</thead>
 		<tbody>
 			{{#each rows}}
 				<tr>
 				{{#each this}}
-					<td>{{this}}</td>
+					{{#if this.value}}
+						<td data-sort="{{this.value}}">{{this.formatted}}</td>
+					{{else}}
+						<td>{{this}}</td>
+					{{/if}}
 				{{/each}}
 				</tr>
 			{{/each}}
@@ -305,16 +331,21 @@ on a column.
 	<table>
 		<thead>
 			<tr>
-				<th value="e">Column 1</th>
-				<th>Column 2</th>
-				<th>Column 3</th>
+				<th value="e">Animal</th>
+				<th>Food</th>
+				<th>Color</th>
+				<th>Date</th>
 			</tr>
 		</thead>
 		<tbody>
 			{{#each rows}}
 				<tr>
 				{{#each this}}
-					<td>{{this}}</td>
+					{{#if this.value}}
+						<td data-sort="{{this.value}}">{{this.formatted}}</td>
+					{{else}}
+						<td>{{this}}</td>
+					{{/if}}
 				{{/each}}
 				</tr>
 			{{/each}}
@@ -335,16 +366,21 @@ or `desc`).
 	<table>
 		<thead>
 			<tr>
-				<th name="foo">Column 1</th>
-				<th>Column 2</th>
-				<th>Column 3</th>
+				<th name="foo">Animal</th>
+				<th>Food</th>
+				<th>Color</th>
+				<th>Date</th>
 			</tr>
 		</thead>
 		<tbody>
 			{{#each rows}}
 				<tr>
 				{{#each this}}
-					<td>{{this}}</td>
+					{{#if this.value}}
+						<td data-sort="{{this.value}}">{{this.formatted}}</td>
+					{{else}}
+						<td>{{this}}</td>
+					{{/if}}
 				{{/each}}
 				</tr>
 			{{/each}}
@@ -366,16 +402,21 @@ else on the page.
 	<table>
 		<thead>
 			<tr>
-				<th>Column 1</th>
-				<th>Column 2</th>
-				<th>Column 3</th>
+				<th>Animal</th>
+				<th>Food</th>
+				<th>Color</th>
+				<th>Date</th>
 			</tr>
 		</thead>
 		<tbody>
 			{{#each rows}}
 				<tr>
 				{{#each this}}
-					<td>{{this}}</td>
+					{{#if this.value}}
+						<td data-sort="{{this.value}}">{{this.formatted}}</td>
+					{{else}}
+						<td>{{this}}</td>
+					{{/if}}
 				{{/each}}
 				</tr>
 			{{/each}}
