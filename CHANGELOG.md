@@ -8,6 +8,12 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 Unreleased
 ----------
 
+- TBD
+
+
+1.4.0 - 2022-02-25
+------------------
+
 - [minor] implemented mutation observer for `tabelle-cljs` to update the search
   index when rows are added, deleted, or updated. Listening to row deletion is
   limited by the List.js implementation which means that the component will only
