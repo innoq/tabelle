@@ -15,6 +15,7 @@ Unreleased
   currently visible in the table.
 - [patch] fixed bug with `tabelle-search` and `tabelle-cljs` so that search
   string including `.` returns the correct search results
+- [patch] fixed bug with sorting and filtering columns with `colspan` on `td`s
 
 
 1.3.0 - 2022-01-20
