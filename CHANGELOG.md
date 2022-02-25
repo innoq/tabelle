@@ -8,6 +8,12 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 Unreleased
 ----------
 
+- TBD
+
+
+1.4.1 - 2022-02-25
+------------------
+
 - [patch] fixed bug with `tabelle-cljs` and `tabelle-search` which did not allow
   capitalization of search queries
 
