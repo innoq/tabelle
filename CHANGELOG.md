@@ -8,6 +8,12 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 Unreleased
 ----------
 
+- TBD
+
+
+1.4.2 - 2023-03-15
+------------------
+
 - [patch] fixed bug transforming a header already containing a `.tabelle-header`
 
 
