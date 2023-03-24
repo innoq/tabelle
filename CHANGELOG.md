@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 Unreleased
 ----------
 
-- TBD
+- [patch] normalize whitespace when filtering rows in `tabelle-cljs`
 
 
 1.4.2 - 2023-03-15
