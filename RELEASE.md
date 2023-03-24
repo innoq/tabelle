@@ -2,8 +2,7 @@
 
 1. update dependencies (`ncu -i`)
 
-2. Increase version number in `package.json` and run `npm install` to update
-   `package-lock.json`
+2. Increase version number in `package.json`
 
 3. Update CHANGELOG with new version number
 
