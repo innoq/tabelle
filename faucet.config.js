@@ -5,9 +5,6 @@ module.exports = {
 		"./lib"
 	],
 	js: [{
-		source: "./lib/polyfills.js",
-		target: "./dist/polyfills.js"
-	}, {
 		source: "./lib/index.js",
 		target: "./dist/tabelle.js"
 	}, {
