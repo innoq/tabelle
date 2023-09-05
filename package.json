@@ -15,7 +15,6 @@
 	"homepage": "https://github.com/innoq/tabelle",
 	"license": "Apache-2.0",
 	"dependencies": {
-		"document-register-element": "^1.14.10",
 		"list.js": "^2.3.1",
 		"uitil": "^2.8.0"
 	},
