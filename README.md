@@ -2,7 +2,7 @@ title: Tabelle
 
 # tabelle
 
-[![npm](https://img.shields.io/npm/v/tabelle.svg)](https://www.npmjs.com/package/tabelle)
+[![npm](https://img.shields.io/npm/v/%40innoq%2Ftabelle.svg)](https://www.npmjs.com/package/@innoq/tabelle)
 
 A library for generating pretty filterable and sortable tables that use your backend of choice
 
