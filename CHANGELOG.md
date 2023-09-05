@@ -8,6 +8,12 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 Unreleased
 ----------
 
+- tbd
+
+
+2.0.0 - 2023-09-05
+------------------
+
 - [major] changed package name from `tabelle` to `@innoq/tabelle`
   - modify package name in `package.json` to `@innoq/tabelle`
   - update imports to import from  `"@innoq/tabelle/..."` instead of `"tabelle/.."`
