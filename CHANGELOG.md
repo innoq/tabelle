@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 Unreleased
 ----------
 
-- tbd
+- [patch] updated documentation in README
 
 
 2.0.0 - 2023-09-05

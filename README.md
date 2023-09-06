@@ -14,19 +14,19 @@ This library uses custom elements. In order for this to work, you need to use a 
 
 ## Install
 
-    npm install tabelle
+    npm install @innoq/tabelle
 
 OR you can install tabelle from the unpkg cdn
 
 The CSS styles are available from:
 
-- https://unpkg.com/tabelle@{VERSION}/dist/tabelle.css (with minimal styling for the table element)
-- https://unpkg.com/tabelle@{VERSION}/dist/tabelle-base.css (provides only base css for the structure of the components)
+- https://unpkg.com/@innoq/tabelle@{VERSION}/dist/tabelle.css (with minimal styling for the table element)
+- https://unpkg.com/@innoq/tabelle@{VERSION}/dist/tabelle-base.css (provides only base css for the structure of the components)
 
 The JavaScript is available from:
 
-- https://unpkg.com/tabelle@{VERSION}/dist/tabelle.js (for tables rendered on the server)
-- https://unpkg.com/tabelle@{VERSION}/dist/tabelle-cljs.js (for tables rendered on the client)
+- https://unpkg.com/@innoq/tabelle@{VERSION}/dist/tabelle.js (for tables rendered on the server)
+- https://unpkg.com/@innoq/tabelle@{VERSION}/dist/tabelle-cljs.js (for tables rendered on the client)
 
 ## How to Use Tabelle with SSR
 
@@ -163,7 +163,8 @@ We have made the styling as minimal as possible in order to allow you to customi
 
 ## Resources
 
-* [Example Rails App](https://tabelle-rails-example.herokuapp.com/)
+* [Example Rails App](https://github.com/innoq/tabelle_rails_example)
+* [Example Express App](https://github.com/innoq/tabelle-express-example)
 
 ## Icon Attribution
 
