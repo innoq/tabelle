@@ -10,6 +10,7 @@ Unreleased
 
 - [patch] `tabelle-cljs` ignores mutations inside `[data-embeddable]`
   to prevent unnecessary reindexing (e.g., transcluded content)
+- [patch] updated dependencies
 
 
 2.0.1 - 2023-09-06
