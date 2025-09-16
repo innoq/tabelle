@@ -8,7 +8,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 Unreleased
 ----------
 
-- tbd
+- [patch] `tabelle-cljs` ignores mutations inside `[data-embeddable]`
+  to prevent unnecessary reindexing (e.g., transcluded content)
 
 
 2.0.1 - 2023-09-06
