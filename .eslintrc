@@ -1,7 +1,0 @@
-root: true
-
-extends: fnd
-
-rules:
-    space-before-function-paren: off
-    keyword-spacing: off
