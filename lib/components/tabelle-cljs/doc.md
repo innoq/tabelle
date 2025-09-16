@@ -440,6 +440,19 @@ will remove any `tr` element from the index when it is removed from the table.
 If the HTML content within any row is modified, the `tabelle-cljs` will also
 update the index to reflect the new data in the row.
 
+### Ignoring updates from embedded/transcluded content
+
+If a table cell contains embedded or transcluded content that updates its own
+internal DOM (for example, a client-side frame that fetches and renders
+content), you can mark that subtree as opaque to Tabelle by adding the
+`data-embeddable` attribute to the element wrapping the embedded content.
+Internal updates within elements marked with `data-embeddable` are ignored by
+the mutation observer and will not trigger reindexing, preventing unnecessary
+resorts or refilters.
+
+This is useful when the embedded content appears in columns that are not used
+for sorting or filtering.
+
 ### Limitations
 
 #### Limitation with Row Removal
