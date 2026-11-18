@@ -15,19 +15,17 @@
 	"homepage": "https://github.com/innoq/tabelle",
 	"license": "Apache-2.0",
 	"dependencies": {
-		"list.js": "^2.3.1",
+		"list.js": "2.3.1",
 		"uitil": "^2.8.0"
 	},
 	"devDependencies": {
 		"aiur": "^0.11.0",
-		"eslint": "^9.35.0",
-		"eslint-plugin-import": "^2.32.0",
-		"eslint-plugin-node": "^11.1.0",
-		"eslint-plugin-promise": "^7.2.1",
-		"faucet-pipeline-core": "^3.0.0",
-		"faucet-pipeline-js": "^3.0.1",
-		"faucet-pipeline-sass": "^1.9.2",
-		"five-server": "^0.4.4",
+		"eslint": "^10.15.0",
+		"eslint-plugin-promise": "^7.3.0",
+		"faucet-pipeline-core": "^4.0.3",
+		"faucet-pipeline-js": "^3.1.0",
+		"faucet-pipeline-sass": "^1.13.0",
+		"five-server": "^0.6.0",
 		"npm-run-all": "^4.1.5"
 	}
 }
