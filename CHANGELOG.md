@@ -8,6 +8,12 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 Unreleased
 ----------
 
+- TBD
+
+
+3.0.0 - 2026-11-18
+------------------
+
 - [major] `tabelle-cljs` hides rows which do not match the current filter with
   the `hidden` attribute instead of removing them from the DOM. Rows which are
   removed or replaced while filtered out are now recognized, and updating the
