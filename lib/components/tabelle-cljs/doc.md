@@ -453,12 +453,15 @@ resorts or refilters.
 This is useful when the embedded content appears in columns that are not used
 for sorting or filtering.
 
-### Limitations
+### Rows hidden by a filter stay in the DOM
 
-#### Limitation with Row Removal
+Rows which do not match the current filter or search are not removed from the
+`tbody`. They stay in place, in sort order, with the `hidden` attribute set.
+That way, any code which looks up a row by its ID (e.g. `getElementById`, or
+server-sent updates that replace or remove a row) also finds rows which are
+currently filtered out, and the `tabelle-cljs` recognizes when such a row is
+removed or replaced.
 
-The `tabelle-cljs` currently only will recognize that a node has been removed
-from the table when the node is currently visible in the filtered table. If
-a filter is currently set which hides that row within the table, the
-`tabelle-cljs` will not recognize that the row has been deleted and will not
-update the index to remove the element from the table.
+Keep in mind that `tbody tr` therefore also selects hidden rows. Use
+`tbody tr:not([hidden])` to select only the rows which are currently shown.
+Make sure that your own CSS does not override `display` for hidden rows.

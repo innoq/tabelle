@@ -8,7 +8,11 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 Unreleased
 ----------
 
-- tbd
+- [minor] `tabelle-cljs` hides rows which do not match the current filter with
+  the `hidden` attribute instead of removing them from the DOM. Rows which are
+  removed or replaced while filtered out are now recognized, and updating the
+  table no longer shows all rows in between. Note that `tbody tr` now also
+  selects hidden rows.
 
 
 2.0.2 - 2025-09-16
