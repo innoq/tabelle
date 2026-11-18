@@ -8,11 +8,13 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 Unreleased
 ----------
 
-- [minor] `tabelle-cljs` hides rows which do not match the current filter with
+- [major] `tabelle-cljs` hides rows which do not match the current filter with
   the `hidden` attribute instead of removing them from the DOM. Rows which are
   removed or replaced while filtered out are now recognized, and updating the
-  table no longer shows all rows in between. Note that `tbody tr` now also
-  selects hidden rows.
+  table no longer shows all rows in between. This is a **major change** because
+  CSS which targets rows without referencing the hidden attribute will no longer
+  work as expected (hint: relace `tbody tr` rules with `tbody tr:not([hidden])`).
+  HTML rows will no longer be hidden in the table by using the `hidden` attribute.
 
 
 2.0.2 - 2025-09-16
